@@ -51,7 +51,7 @@ customCSS = ["css/custom.css"]
 customSCSS = []
 
 # Custom JS
-customJS = []
+customJS = ["js/notes.js"]
 
 # Custom remote JS files
 customRemoteJS = []
@@ -160,7 +160,7 @@ weight = 1
 url = "about/"
 
 [[languages.zh-cn.menu.main]]
-name = "学习新的"
+name = "学习心得"
 weight = 2
 url = "posts/"
 
@@ -169,7 +169,3 @@ name = "项目笔记"
 weight = 3
 url = "projects/"
 
-[[languages.zh-cn.menu.main]]
-name = "联系"
-weight = 5
-url = "contact/"

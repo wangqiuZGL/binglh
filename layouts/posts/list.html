@@ -1,0 +1,98 @@
+{{ define "title" }}
+  {{ .Title }} · {{ .Site.Title }}
+{{ end }}
+
+{{ define "content" }}
+  {{ $tagTerms := .Site.Taxonomies.tags.ByCount }}
+
+  <section class="container notes-layout">
+    <aside class="notes-sidebar" aria-label="学习专栏导航">
+      <div class="notes-sidebar-card">
+        <p class="notes-sidebar-title">学习专栏</p>
+        <div class="notes-sidebar-tools">
+          <input class="notes-search-input" id="notes-topic-search" type="search" placeholder="搜索专栏或笔记" aria-label="搜索专栏或笔记">
+          <button class="notes-reset-button is-active" type="button" data-notes-reset>查看全部</button>
+        </div>
+        {{ if gt (len $tagTerms) 0 }}
+          <ul class="notes-topic-list">
+            {{ range $index, $term := $tagTerms }}
+              {{ $tagPages := where $term.Pages "Section" "posts" }}
+              {{ if gt (len $tagPages) 0 }}
+                <li class="notes-topic-item" data-topic-item data-topic="{{ lower $term.Page.Title }}" data-topic-label="{{ $term.Page.Title }}">
+                  <details class="notes-topic-panel" {{ if lt $index 2 }}open{{ end }}>
+                    <summary class="notes-topic-summary" data-topic-trigger data-topic="{{ lower $term.Page.Title }}" data-topic-label="{{ $term.Page.Title }}">
+                      <span class="notes-topic-link">{{ $term.Page.Title }}</span>
+                      <span class="notes-topic-count">{{ len $tagPages }}</span>
+                    </summary>
+                    <ul class="notes-topic-notes">
+                      {{ range sort $tagPages "Date" "desc" }}
+                        <li data-topic-note="{{ lower .Title }} {{ lower (plainify (.Summary | default "")) }}">
+                          <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                        </li>
+                      {{ end }}
+                    </ul>
+                  </details>
+                </li>
+              {{ end }}
+            {{ end }}
+          </ul>
+        {{ else }}
+          <p class="notes-empty">暂时还没有专栏标签，先给文章加上 tags 即可自动出现。</p>
+        {{ end }}
+      </div>
+    </aside>
+
+    <div class="notes-main">
+      <header>
+        <h1 class="title">
+          <a class="title-link" href="{{ .Permalink | safeURL }}">{{ .Title }}</a>
+        </h1>
+      </header>
+
+      {{ .Content }}
+
+      <div class="notes-main-tools">
+        <input class="notes-search-input notes-card-search" id="notes-card-search" type="search" placeholder="搜索笔记标题、摘要、标签" aria-label="搜索笔记卡片">
+        <p class="notes-filter-status" data-notes-filter-status>当前显示全部笔记</p>
+      </div>
+
+      <section class="notes-grid" aria-label="学习笔记卡片列表">
+        {{ range .Paginator.Pages }}
+          {{ $tags := .Params.tags | default (slice) }}
+          <article class="note-card" data-note-card data-tags="{{ lower (delimit $tags "||") }}" data-search="{{ lower (printf "%s %s %s" .Title (.Summary | plainify) (delimit $tags " ")) }}">
+            <a class="note-card-cover" href="{{ .Params.externalLink | default .RelPermalink }}">
+              {{ $cover := .Params.cover | default .Params.image }}
+              {{ if $cover }}
+                {{ if or (hasPrefix $cover "http://") (hasPrefix $cover "https://") }}
+                  <img src="{{ $cover }}" alt="{{ .Title }}" loading="lazy">
+                {{ else }}
+                  <img src="{{ $cover | relURL }}" alt="{{ .Title }}" loading="lazy">
+                {{ end }}
+              {{ else }}
+                <span class="note-card-fallback">学习笔记</span>
+              {{ end }}
+            </a>
+
+            <div class="note-card-body">
+              <a class="note-card-title" href="{{ .Params.externalLink | default .RelPermalink }}">{{ .Title }}</a>
+              <p class="note-card-meta">{{ .Date | time.Format (.Site.Params.dateFormat | default "January 2, 2006") }}</p>
+              <p class="note-card-summary">{{ .Summary | plainify | truncate 96 }}</p>
+              {{ with .Params.tags }}
+                <div class="note-card-tags">
+                  {{ range . }}
+                    <span class="note-card-tag">{{ . }}</span>
+                  {{ end }}
+                </div>
+              {{ end }}
+            </div>
+          </article>
+        {{ else }}
+          <p class="notes-empty">还没有学习笔记，创建 content/posts/xxx.md 后这里会自动显示卡片。</p>
+        {{ end }}
+        <p class="notes-grid-empty" data-notes-empty hidden>没有找到符合条件的笔记。</p>
+      </section>
+
+      {{ partial "pagination.html" . }}
+    </div>
+  </section>
+{{ end }}

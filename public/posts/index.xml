@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>学习心得 on 首页</title>
+    <link>http://localhost:1314/posts/</link>
+    <description>Recent content in 学习心得 on 首页</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <atom:link href="http://localhost:1314/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CDN的作用及部署办法</title>
+      <link>http://localhost:1314/posts/cdn/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1314/posts/cdn/</guid>
+      <description>CDN的相关知识</description>
+    </item>
+    <item>
+      <title>Vue的路由管理你知道几个</title>
+      <link>http://localhost:1314/posts/vue%E7%9A%84%E8%B7%AF%E7%94%B1%E7%AE%A1%E7%90%86/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1314/posts/vue%E7%9A%84%E8%B7%AF%E7%94%B1%E7%AE%A1%E7%90%86/</guid>
+      <description>Vue的路由管理</description>
+    </item>
+  </channel>
+</rss>

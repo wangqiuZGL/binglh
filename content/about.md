@@ -38,6 +38,8 @@ draft = false
 
 ![远洋渔船保障系统演示图](https://ttpz-ec.oss-cn-shanghai.aliyuncs.com/document/%E9%A1%B9%E7%9B%AE%E4%BA%8C-%E5%85%B6%E4%BB%96%E5%8A%9F%E8%83%BD.png)
 
+![文件上传](/images/demo2_img.png)
+
 ---
 
 ### 中国铁塔篡改检测系统（前端开发/算法服务协作）
