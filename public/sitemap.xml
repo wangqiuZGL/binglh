@@ -12,8 +12,6 @@
   </url><url>
     <loc>http://localhost:1314/categories/</loc>
   </url><url>
-    <loc>http://localhost:1314/tags/cdn/</loc>
-  </url><url>
     <loc>http://localhost:1314/posts/cdn/</loc>
   </url><url>
     <loc>http://localhost:1314/series/</loc>
@@ -25,8 +23,6 @@
     <loc>http://localhost:1314/posts/vue%E7%9A%84%E8%B7%AF%E7%94%B1%E7%AE%A1%E7%90%86/</loc>
   </url><url>
     <loc>http://localhost:1314/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/</loc>
-  </url><url>
-    <loc>http://localhost:1314/tags/%E8%B7%AF%E7%94%B1%E7%AE%A1%E7%90%86/</loc>
   </url><url>
     <loc>http://localhost:1314/posts/</loc>
   </url>
