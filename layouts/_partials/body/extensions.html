@@ -1,0 +1,13 @@
+{{ if and .IsPage .File (eq .File.Ext "md") (gt (len .Fragments.Headings) 0) }}
+<aside class="left-sidebar-nav" aria-label="本文目录">
+  <div class="left-sidebar-card">
+    <p class="left-sidebar-title">本文目录</p>
+    <nav class="left-sidebar-toc">
+      {{ .TableOfContents }}
+    </nav>
+  </div>
+</aside>
+<script>
+  document.body.classList.add("has-left-toc");
+</script>
+{{ end }}
