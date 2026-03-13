@@ -1,4 +1,4 @@
-baseURL = "http://www.example.com"
+baseURL = "https://binglh.xyz"
 title = "首页"
 theme = "hugo-coder"
 languageCode = "zh-cn"
