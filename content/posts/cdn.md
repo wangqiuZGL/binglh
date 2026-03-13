@@ -2,6 +2,7 @@
 title = "CDN介绍"
 tags = ["计算机网络"]
 cover = "/images/covers/index.jpg"
+date = 2025-03-13T10:00:00+08:00
 summary = "CDN的相关知识"
 +++
 
@@ -54,3 +55,4 @@ CDN全局负载均衡设备根据用户IP地址，以及用户请求的内容URL
 > 如果这台缓存服务器上并没有用户想要的内容，而区域均衡设备依然将它分配给了用户，那么这台服务器就要向它的上一级缓存服务器请求内容，直至追溯到网站的源服务器将内容拉到本地。
 
 
+参考博客：https://cloud.tencent.com/developer/article/2298074

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
 
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1314&amp;path=livereload" data-no-instant defer></script>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  学习心得 · 首页
+  知识库 · 首页
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,12 +19,12 @@
 
 
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="学习心得">
+  <meta name="twitter:title" content="知识库">
   <meta name="twitter:description" content="按专栏整理的学习笔记与实践记录。">
 
-<meta property="og:url" content="http://localhost:1314/posts/">
+<meta property="og:url" content="http://localhost:1313/posts/">
   <meta property="og:site_name" content="首页">
-  <meta property="og:title" content="学习心得">
+  <meta property="og:title" content="知识库">
   <meta property="og:description" content="按专栏整理的学习笔记与实践记录。">
   <meta property="og:locale" content="zh_cn">
   <meta property="og:type" content="website">
@@ -32,7 +32,7 @@
 
 
 
-<link rel="canonical" href="http://localhost:1314/posts/">
+<link rel="canonical" href="http://localhost:1313/posts/">
 
 
 <link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
@@ -107,7 +107,7 @@
     <nav class="navigation">
   <section class="container">
     
-    <a class="navigation-title" href="http://localhost:1314/">
+    <a class="navigation-title" href="http://localhost:1313/">
       首页
     </a>
     
@@ -124,11 +124,11 @@
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link " href="/posts/">学习心得</a>
+              <a class="navigation-link " href="/posts/">学习记录</a>
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link " href="/projects/">项目笔记</a>
+              <a class="navigation-link " href="/projects/">问题记录</a>
             </li>
           
         
@@ -146,13 +146,36 @@
   <section class="container notes-layout">
     <aside class="notes-sidebar" aria-label="学习专栏导航">
       <div class="notes-sidebar-card">
-        <p class="notes-sidebar-title">学习专栏</p>
+        <p class="notes-sidebar-title">搜索栏目</p>
         <div class="notes-sidebar-tools">
           <input class="notes-search-input" id="notes-topic-search" type="search" placeholder="搜索专栏或笔记" aria-label="搜索专栏或笔记">
           <button class="notes-reset-button is-active" type="button" data-notes-reset>查看全部</button>
         </div>
         
           <ul class="notes-topic-list">
+            
+              
+              
+                <li class="notes-topic-item" data-topic-item data-topic="node" data-topic-label="Node">
+                  <details class="notes-topic-panel" open>
+                    <summary class="notes-topic-summary" data-topic-trigger data-topic="node" data-topic-label="Node">
+                      <span class="notes-topic-link">Node</span>
+                      <span class="notes-topic-count">2</span>
+                    </summary>
+                    <ul class="notes-topic-notes">
+                      
+                        <li data-topic-note="koa and express 介绍二者的区别">
+                          <a href="/posts/koa/">koa and express</a>
+                        </li>
+                      
+                        <li data-topic-note="npm vs pnpm 介绍二者的区别">
+                          <a href="/posts/npmpnpm/">npm vs pnpm</a>
+                        </li>
+                      
+                    </ul>
+                  </details>
+                </li>
+              
             
               
               
@@ -164,8 +187,8 @@
                     </summary>
                     <ul class="notes-topic-notes">
                       
-                        <li data-topic-note="vue的路由管理你知道几个 vue的路由管理">
-                          <a href="/posts/vue%E7%9A%84%E8%B7%AF%E7%94%B1%E7%AE%A1%E7%90%86/">Vue的路由管理你知道几个</a>
+                        <li data-topic-note="vue的路由守卫 vue的路由管理">
+                          <a href="/posts/vue%E7%9A%84%E8%B7%AF%E7%94%B1%E7%AE%A1%E7%90%86/">Vue的路由守卫</a>
                         </li>
                       
                     </ul>
@@ -176,7 +199,7 @@
               
               
                 <li class="notes-topic-item" data-topic-item data-topic="计算机网络" data-topic-label="计算机网络">
-                  <details class="notes-topic-panel" open>
+                  <details class="notes-topic-panel" >
                     <summary class="notes-topic-summary" data-topic-trigger data-topic="计算机网络" data-topic-label="计算机网络">
                       <span class="notes-topic-link">计算机网络</span>
                       <span class="notes-topic-count">1</span>
@@ -200,7 +223,7 @@
     <div class="notes-main">
       <header>
         <h1 class="title">
-          <a class="title-link" href="http://localhost:1314/posts/">学习心得</a>
+          <a class="title-link" href="http://localhost:1313/posts/">知识库</a>
         </h1>
       </header>
 
@@ -226,7 +249,7 @@
 
             <div class="note-card-body">
               <a class="note-card-title" href="/posts/cdn/">CDN介绍</a>
-              <p class="note-card-meta">January 1, 0001</p>
+              <p class="note-card-meta">March 13, 2025</p>
               <p class="note-card-summary">CDN的相关知识</p>
               
                 <div class="note-card-tags">
@@ -239,19 +262,69 @@
           </article>
         
           
-          <article class="note-card" data-note-card data-tags="vue" data-search="vue的路由管理你知道几个 vue的路由管理 vue">
-            <a class="note-card-cover" href="/posts/vue%E7%9A%84%E8%B7%AF%E7%94%B1%E7%AE%A1%E7%90%86/">
+          <article class="note-card" data-note-card data-tags="node" data-search="koa and express 介绍二者的区别 node">
+            <a class="note-card-cover" href="/posts/koa/">
               
               
                 
-                  <img src="/images/covers/index.jpg" alt="Vue的路由管理你知道几个" loading="lazy">
+                  <img src="/images/assets/image-20260313202442978.png" alt="koa and express" loading="lazy">
                 
               
             </a>
 
             <div class="note-card-body">
-              <a class="note-card-title" href="/posts/vue%E7%9A%84%E8%B7%AF%E7%94%B1%E7%AE%A1%E7%90%86/">Vue的路由管理你知道几个</a>
-              <p class="note-card-meta">January 1, 0001</p>
+              <a class="note-card-title" href="/posts/koa/">koa and express</a>
+              <p class="note-card-meta">March 13, 2025</p>
+              <p class="note-card-summary">介绍二者的区别</p>
+              
+                <div class="note-card-tags">
+                  
+                    <span class="note-card-tag">node</span>
+                  
+                </div>
+              
+            </div>
+          </article>
+        
+          
+          <article class="note-card" data-note-card data-tags="node" data-search="npm vs pnpm 介绍二者的区别 node">
+            <a class="note-card-cover" href="/posts/npmpnpm/">
+              
+              
+                
+                  <img src="/images/covers/index.jpg" alt="npm vs pnpm" loading="lazy">
+                
+              
+            </a>
+
+            <div class="note-card-body">
+              <a class="note-card-title" href="/posts/npmpnpm/">npm vs pnpm</a>
+              <p class="note-card-meta">March 13, 2025</p>
+              <p class="note-card-summary">介绍二者的区别</p>
+              
+                <div class="note-card-tags">
+                  
+                    <span class="note-card-tag">node</span>
+                  
+                </div>
+              
+            </div>
+          </article>
+        
+          
+          <article class="note-card" data-note-card data-tags="vue" data-search="vue的路由守卫 vue的路由管理 vue">
+            <a class="note-card-cover" href="/posts/vue%E7%9A%84%E8%B7%AF%E7%94%B1%E7%AE%A1%E7%90%86/">
+              
+              
+                
+                  <img src="/images/covers/index.jpg" alt="Vue的路由守卫" loading="lazy">
+                
+              
+            </a>
+
+            <div class="note-card-body">
+              <a class="note-card-title" href="/posts/vue%E7%9A%84%E8%B7%AF%E7%94%B1%E7%AE%A1%E7%90%86/">Vue的路由守卫</a>
+              <p class="note-card-meta">September 13, 2024</p>
               <p class="note-card-summary">Vue的路由管理</p>
               
                 <div class="note-card-tags">

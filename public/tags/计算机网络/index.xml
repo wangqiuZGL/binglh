@@ -2,16 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>计算机网络 on 首页</title>
-    <link>http://localhost:1314/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/</link>
+    <link>http://localhost:1313/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/</link>
     <description>Recent content in 计算机网络 on 首页</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
-    <atom:link href="http://localhost:1314/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 13 Mar 2025 10:00:00 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>CDN介绍</title>
-      <link>http://localhost:1314/posts/cdn/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1314/posts/cdn/</guid>
+      <link>http://localhost:1313/posts/cdn/</link>
+      <pubDate>Thu, 13 Mar 2025 10:00:00 +0800</pubDate>
+      <guid>http://localhost:1313/posts/cdn/</guid>
       <description>CDN的相关知识</description>
     </item>
   </channel>

@@ -66,12 +66,13 @@ draft = false
 
 ![中国铁塔篡改检测系统演示图](https://ttpz-ec.oss-cn-shanghai.aliyuncs.com/document/%E7%94%B5%E8%A1%A8%E7%BB%93%E6%9E%9C.png)
 
+
 演示视频：
 
 <video controls preload="metadata" style="width: 100%; max-width: 860px; border-radius: 8px;">
-	<source src="https://ttpz-ec.oss-cn-shanghai.aliyuncs.com/document/%E6%88%BF%E4%BA%A7%E8%AF%81%E6%B5%8B%E8%AF%95.mp4" type="video/mp4">
+	<source src="https://ttpz-ec.oss-cn-shanghai.aliyuncs.com/%E7%94%B5%E8%A1%A8%E6%B5%8B%E8%AF%95.mp4" type="video/mp4">
 	当前浏览器不支持视频播放，请直接打开视频链接：
-	<a href="https://ttpz-ec.oss-cn-shanghai.aliyuncs.com/document/%E6%88%BF%E4%BA%A7%E8%AF%81%E6%B5%8B%E8%AF%95.mp4">查看视频</a>
+	<a href="https://ttpz-ec.oss-cn-shanghai.aliyuncs.com/%E7%94%B5%E8%A1%A8%E6%B5%8B%E8%AF%95.mp4">查看视频</a>
 </video>
 
 
