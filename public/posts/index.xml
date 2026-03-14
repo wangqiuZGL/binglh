@@ -6,8 +6,15 @@
     <description>Recent content in 知识库 on 首页</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 13 Mar 2025 10:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 13 Sep 2025 10:00:00 +0800</lastBuildDate>
     <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>keep-alive的妙用</title>
+      <link>http://localhost:1313/posts/keep-alive/</link>
+      <pubDate>Sat, 13 Sep 2025 10:00:00 +0800</pubDate>
+      <guid>http://localhost:1313/posts/keep-alive/</guid>
+      <description>新增钩子和component</description>
+    </item>
     <item>
       <title>CDN介绍</title>
       <link>http://localhost:1313/posts/cdn/</link>
@@ -30,11 +37,11 @@
       <description>介绍二者的区别</description>
     </item>
     <item>
-      <title>Vue的路由守卫</title>
-      <link>http://localhost:1313/posts/vue%E7%9A%84%E8%B7%AF%E7%94%B1%E7%AE%A1%E7%90%86/</link>
-      <pubDate>Fri, 13 Sep 2024 10:00:00 +0800</pubDate>
-      <guid>http://localhost:1313/posts/vue%E7%9A%84%E8%B7%AF%E7%94%B1%E7%AE%A1%E7%90%86/</guid>
-      <description>Vue的路由管理</description>
+      <title>路由守卫</title>
+      <link>http://localhost:1313/posts/%E8%B7%AF%E7%94%B1%E5%AE%88%E5%8D%AB/</link>
+      <pubDate>Thu, 13 Feb 2025 10:00:00 +0800</pubDate>
+      <guid>http://localhost:1313/posts/%E8%B7%AF%E7%94%B1%E5%AE%88%E5%8D%AB/</guid>
+      <description>路由的细节</description>
     </item>
   </channel>
 </rss>

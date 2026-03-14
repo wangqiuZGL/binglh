@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  路由守卫 · 首页
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="李航">
+<meta name="description" content="路由的细节">
+<meta name="keywords" content="blog,developer,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="路由守卫">
+  <meta name="twitter:description" content="路由的细节">
+
+<meta property="og:url" content="http://localhost:1313/posts/%E8%B7%AF%E7%94%B1%E5%AE%88%E5%8D%AB/">
+  <meta property="og:site_name" content="首页">
+  <meta property="og:title" content="路由守卫">
+  <meta property="og:description" content="路由的细节">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-02-13T10:00:00+08:00">
+    <meta property="article:modified_time" content="2025-02-13T10:00:00+08:00">
+    <meta property="article:tag" content="VUE">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/%E8%B7%AF%E7%94%B1%E5%AE%88%E5%8D%AB/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+  
+    
+    <link rel="stylesheet" href="/css/custom.css" media="screen">
+  
+
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      首页
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about/">过来看看</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">学习记录</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/projects/">问题记录</a>
+            </li>
+          
+        
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/%E8%B7%AF%E7%94%B1%E5%AE%88%E5%8D%AB/">
+              路由守卫
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2025-02-13T10:00:00&#43;08:00">
+                February 13, 2025
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              阅读时间：4 分钟
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/vue/">VUE</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      
+
+
+      <div class="post-content">
+        
+        <p>路由守卫的核心作用是在路由跳转过程中执行特定的逻辑（如权限校验、数据预取）</p>
+<h2 id="路由">
+  路由
+  <a class="heading-link" href="#%e8%b7%af%e7%94%b1">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h2>
+<p>​	一个路由（route）就是一组映射关系（key - value），多个路由需要路由器（router）进行管理</p>
+<p>​	key是路径，value是组件</p>
+<p>​	安装vue-router，命令：<code>npm i vue-router</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">router</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">VueRouter</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">routes</span><span class="o">:</span><span class="p">[</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">path</span><span class="o">:</span><span class="s1">&#39;/about&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">component</span><span class="o">:</span><span class="nx">About</span>
+</span></span><span class="line"><span class="cl">		<span class="p">},</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">path</span><span class="o">:</span><span class="s1">&#39;/home&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">component</span><span class="o">:</span><span class="nx">Home</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//暴露router
+</span></span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="k">default</span> <span class="nx">router</span>
+</span></span></code></pre></div><p>​	路由组件通常存放在<code>pages</code>文件夹，一般组件通常存放在<code>components</code>文件夹</p>
+<p>​	通过切换，“隐藏”了的路由组件，默认是<strong>被销毁掉</strong>的，需要的时候再去挂载</p>
+<p>​	每个组件都有自己的<code>$route</code>属性，里面存储着自己的路由信息</p>
+<p>​	<router-link>  标签实现路由的切换     <router-view>指定组件的呈现位置</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">router</span><span class="o">-</span><span class="nx">link</span> <span class="kr">class</span><span class="o">=</span><span class="s2">&#34;list-group-item&#34;</span> <span class="nx">active</span><span class="o">-</span><span class="kr">class</span><span class="o">=</span><span class="s2">&#34;active&#34;</span> <span class="nx">to</span><span class="o">=</span><span class="s2">&#34;/about&#34;</span><span class="o">&gt;</span><span class="nx">About</span><span class="o">&lt;</span><span class="err">/router-link&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">router</span><span class="o">-</span><span class="nx">link</span> <span class="kr">class</span><span class="o">=</span><span class="s2">&#34;list-group-item&#34;</span> <span class="nx">active</span><span class="o">-</span><span class="kr">class</span><span class="o">=</span><span class="s2">&#34;active&#34;</span> <span class="nx">to</span><span class="o">=</span><span class="s2">&#34;/home&#34;</span><span class="o">&gt;</span><span class="nx">Home</span><span class="o">&lt;</span><span class="err">/router-link&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">div</span> <span class="kr">class</span><span class="o">=</span><span class="s2">&#34;panel&#34;</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">&lt;</span><span class="nx">div</span> <span class="kr">class</span><span class="o">=</span><span class="s2">&#34;panel-body&#34;</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="c">&lt;!--</span> <span class="nx">指定组件的呈现位置</span> <span class="o">--&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;</span><span class="nx">router</span><span class="o">-</span><span class="nx">view</span><span class="o">&gt;&lt;</span><span class="err">/router-view&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">&lt;</span><span class="err">/div&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">/div&gt;</span>
+</span></span></code></pre></div><p>默认模式：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="c">&lt;!--</span> <span class="nx">点击后</span><span class="err">，</span><span class="nx">浏览器历史记录新增一条</span><span class="err">，</span><span class="nx">可通过</span><span class="err">「</span><span class="nx">后退</span><span class="err">」</span><span class="nx">回到上一页</span> <span class="o">--&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">router</span><span class="o">-</span><span class="nx">link</span> <span class="nx">to</span><span class="o">=</span><span class="s2">&#34;/detail&#34;</span><span class="o">&gt;</span><span class="nx">默认跳转</span><span class="o">&lt;</span><span class="err">/router-link&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="c">&lt;!--</span> <span class="nx">点击后</span><span class="err">，</span><span class="nx">替换当前历史记录</span><span class="err">，</span><span class="nx">无法通过</span><span class="err">「</span><span class="nx">后退</span><span class="err">」</span><span class="nx">回到上一页</span> <span class="o">--&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">router</span><span class="o">-</span><span class="nx">link</span> <span class="nx">to</span><span class="o">=</span><span class="s2">&#34;/detail&#34;</span> <span class="nx">replace</span><span class="o">&gt;</span><span class="nx">replace</span> <span class="nx">跳转</span><span class="o">&lt;</span><span class="err">/router-link&gt;</span>
+</span></span></code></pre></div><h3 id="多级路由">
+  多级路由
+  <a class="heading-link" href="#%e5%a4%9a%e7%ba%a7%e8%b7%af%e7%94%b1">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">routes</span><span class="o">:</span><span class="p">[</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">path</span><span class="o">:</span><span class="s1">&#39;/about&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">component</span><span class="o">:</span><span class="nx">About</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="p">},</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">path</span><span class="o">:</span><span class="s1">&#39;/home&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">component</span><span class="o">:</span><span class="nx">Home</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">children</span><span class="o">:</span><span class="p">[</span> <span class="c1">//通过children配置子级路由
+</span></span></span><span class="line"><span class="cl">			<span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">path</span><span class="o">:</span><span class="s1">&#39;news&#39;</span><span class="p">,</span> <span class="c1">//此处一定不要写：/news
+</span></span></span><span class="line"><span class="cl">				<span class="nx">component</span><span class="o">:</span><span class="nx">News</span>
+</span></span><span class="line"><span class="cl">			<span class="p">},</span>
+</span></span><span class="line"><span class="cl">			<span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="nx">path</span><span class="o">:</span><span class="s1">&#39;message&#39;</span><span class="p">,</span><span class="c1">//此处一定不要写：/message
+</span></span></span><span class="line"><span class="cl">				<span class="nx">component</span><span class="o">:</span><span class="nx">Message</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="p">]</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//跳转（要写完整路径）
+</span></span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">router</span><span class="o">-</span><span class="nx">link</span> <span class="nx">to</span><span class="o">=</span><span class="s2">&#34;/home/news&#34;</span><span class="o">&gt;</span><span class="nx">News</span><span class="o">&lt;</span><span class="err">/router-link&gt;</span>
+</span></span></code></pre></div><h3 id="路由传参query参数">
+  路由传参&mdash;query参数
+  <a class="heading-link" href="#%e8%b7%af%e7%94%b1%e4%bc%a0%e5%8f%82query%e5%8f%82%e6%95%b0">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h3>
+<p>​	两种方法：</p>
+<p>​	第一种，to变成 <code>:to</code> , 然后参数写在 <code>?</code> 后面 。  <code>a=${ data.x }</code>  或者传 常量</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">router</span><span class="o">-</span><span class="nx">link</span> <span class="o">:</span><span class="nx">to</span><span class="o">=</span><span class="s2">&#34;`/home/message/detail?id=${m.id}&amp;title=${m.title}`&#34;</span><span class="o">&gt;</span><span class="p">{{</span><span class="nx">m</span><span class="p">.</span><span class="nx">title</span><span class="p">}}</span><span class="o">&lt;</span><span class="err">/router-link&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">router</span><span class="o">-</span><span class="nx">link</span> <span class="o">:</span><span class="nx">to</span><span class="o">=</span><span class="s2">&#34;/home/message/detail?id=666&amp;title=你好&#34;</span><span class="o">&gt;</span><span class="nx">跳转</span><span class="o">&lt;</span><span class="err">/router-link&gt;</span>
+</span></span></code></pre></div><p>​	第二种，to的对象写法 ， 写 <code>path</code> 和 <code>query</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">router</span><span class="o">-</span><span class="nx">link</span> 
+</span></span><span class="line"><span class="cl">	<span class="o">:</span><span class="nx">to</span><span class="o">=</span><span class="s2">&#34;{
+</span></span></span><span class="line"><span class="cl"><span class="s2">		path:&#39;/home/message/detail&#39;,
+</span></span></span><span class="line"><span class="cl"><span class="s2">		query:{
+</span></span></span><span class="line"><span class="cl"><span class="s2">		   id:666,
+</span></span></span><span class="line"><span class="cl"><span class="s2">           title:&#39;你好&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">		}
+</span></span></span><span class="line"><span class="cl"><span class="s2">	}&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;</span><span class="nx">跳转</span><span class="o">&lt;</span><span class="err">/router-link&gt;</span>
+</span></span></code></pre></div><h3 id="路由传参params参数">
+  路由传参&mdash;params参数
+  <a class="heading-link" href="#%e8%b7%af%e7%94%b1%e4%bc%a0%e5%8f%82params%e5%8f%82%e6%95%b0">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h3>
+<p>这个第一步需要先配置路由，使用<strong>占位符</strong>来接收参数</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">path</span><span class="o">:</span><span class="s1">&#39;/home&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">component</span><span class="o">:</span><span class="nx">Home</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">children</span><span class="o">:</span><span class="p">[</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">path</span><span class="o">:</span><span class="s1">&#39;news&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">component</span><span class="o">:</span><span class="nx">News</span>
+</span></span><span class="line"><span class="cl">		<span class="p">},</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">component</span><span class="o">:</span><span class="nx">Message</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">children</span><span class="o">:</span><span class="p">[</span>
+</span></span><span class="line"><span class="cl">				<span class="p">{</span>
+</span></span><span class="line"><span class="cl">					<span class="nx">name</span><span class="o">:</span><span class="s1">&#39;xiangqing&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">					<span class="nx">path</span><span class="o">:</span><span class="s1">&#39;detail/:id/:title&#39;</span><span class="p">,</span> <span class="c1">//使用占位符声明接收params参数
+</span></span></span><span class="line"><span class="cl">					<span class="nx">component</span><span class="o">:</span><span class="nx">Detail</span>
+</span></span><span class="line"><span class="cl">				<span class="p">}</span>
+</span></span><span class="line"><span class="cl">			<span class="p">]</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>​	同样也有两种方法发送：</p>
+<p>​	第一种， 第一种，to变成 <code>:to</code> ,这个不需要❓        <code>a=${ data.x }</code>  或者传 常量</p>
+<p>​</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">router</span><span class="o">-</span><span class="nx">link</span> <span class="o">:</span><span class="nx">to</span><span class="o">=</span><span class="s2">&#34;/home/message/detail/666/你好&#34;</span><span class="o">&gt;</span><span class="nx">跳转</span><span class="o">&lt;</span><span class="err">/router-link&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">router</span><span class="o">-</span><span class="nx">link</span> <span class="o">:</span><span class="nx">to</span><span class="o">=</span><span class="s2">&#34;`/home/message/detail/${m.id}/${m.title}`&#34;</span><span class="o">&gt;</span><span class="p">{{</span><span class="nx">m</span><span class="p">.</span><span class="nx">title</span><span class="p">}}</span><span class="o">&lt;</span><span class="err">/router-link&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">&lt;!--</span> <span class="nx">跳转并携带params参数</span><span class="err">，</span><span class="nx">to的对象写法</span><span class="err">，</span> <span class="nx">这里千万不能有path</span> <span class="o">--&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">router</span><span class="o">-</span><span class="nx">link</span> 
+</span></span><span class="line"><span class="cl">	<span class="o">:</span><span class="nx">to</span><span class="o">=</span><span class="s2">&#34;{
+</span></span></span><span class="line"><span class="cl"><span class="s2">		name:&#39;xiangqing&#39;,
+</span></span></span><span class="line"><span class="cl"><span class="s2">		params:{
+</span></span></span><span class="line"><span class="cl"><span class="s2">		   id:666,
+</span></span></span><span class="line"><span class="cl"><span class="s2">            title:&#39;你好&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">		}
+</span></span></span><span class="line"><span class="cl"><span class="s2">	}&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;</span><span class="nx">跳转</span><span class="o">&lt;</span><span class="err">/router-link&gt;</span>
+</span></span></code></pre></div><h3 id="路由接收参数--两个方法都一样">
+  路由接收参数 &mdash; 两个方法都一样
+  <a class="heading-link" href="#%e8%b7%af%e7%94%b1%e6%8e%a5%e6%94%b6%e5%8f%82%e6%95%b0--%e4%b8%a4%e4%b8%aa%e6%96%b9%e6%b3%95%e9%83%bd%e4%b8%80%e6%a0%b7">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">$route</span><span class="p">.</span><span class="nx">query</span><span class="p">.</span><span class="nx">id</span>
+</span></span><span class="line"><span class="cl"><span class="nx">$route</span><span class="p">.</span><span class="nx">query</span><span class="p">.</span><span class="nx">title</span>
+</span></span></code></pre></div><img src="/images/assets/image-20260313215758075.png" alt="image-20260313215758075" style="zoom: 67%;" />
+<h3 id="命名路由用于简化路由跳转">
+  命名路由&ndash;用于简化路由跳转
+  <a class="heading-link" href="#%e5%91%bd%e5%90%8d%e8%b7%af%e7%94%b1%e7%94%a8%e4%ba%8e%e7%ae%80%e5%8c%96%e8%b7%af%e7%94%b1%e8%b7%b3%e8%bd%ac">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h3>
+<p>①给路由命名</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">path</span><span class="o">:</span><span class="s1">&#39;/demo&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">component</span><span class="o">:</span><span class="nx">Demo</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">children</span><span class="o">:</span><span class="p">[</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">path</span><span class="o">:</span><span class="s1">&#39;test&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">component</span><span class="o">:</span><span class="nx">Test</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">children</span><span class="o">:</span><span class="p">[</span>
+</span></span><span class="line"><span class="cl">				<span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="nx">name</span><span class="o">:</span><span class="s1">&#39;hello&#39;</span> <span class="c1">//给路由命名
+</span></span></span><span class="line"><span class="cl">					<span class="nx">path</span><span class="o">:</span><span class="s1">&#39;welcome&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">					<span class="nx">component</span><span class="o">:</span><span class="nx">Hello</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">				<span class="p">}</span>
+</span></span><span class="line"><span class="cl">			<span class="p">]</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>②简化跳转</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="c">&lt;!--</span><span class="nx">简化前</span><span class="err">，</span><span class="nx">需要写完整的路径</span> <span class="o">--&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">router</span><span class="o">-</span><span class="nx">link</span> <span class="nx">to</span><span class="o">=</span><span class="s2">&#34;/demo/test/welcome&#34;</span><span class="o">&gt;</span><span class="nx">跳转</span><span class="o">&lt;</span><span class="err">/router-link&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">&lt;!--</span><span class="nx">简化后</span><span class="err">，</span><span class="nx">直接通过名字跳转</span> <span class="o">--&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">router</span><span class="o">-</span><span class="nx">link</span> <span class="o">:</span><span class="nx">to</span><span class="o">=</span><span class="s2">&#34;{name:&#39;hello&#39;}&#34;</span><span class="o">&gt;</span><span class="nx">跳转</span><span class="o">&lt;</span><span class="err">/router-link&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c">&lt;!--</span><span class="nx">简化写法配合传递参数</span> <span class="o">--&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">router</span><span class="o">-</span><span class="nx">link</span> 
+</span></span><span class="line"><span class="cl">	<span class="o">:</span><span class="nx">to</span><span class="o">=</span><span class="s2">&#34;{
+</span></span></span><span class="line"><span class="cl"><span class="s2">		name:&#39;hello&#39;,
+</span></span></span><span class="line"><span class="cl"><span class="s2">		query:{
+</span></span></span><span class="line"><span class="cl"><span class="s2">		   id:666,
+</span></span></span><span class="line"><span class="cl"><span class="s2">            title:&#39;你好&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s2">		}
+</span></span></span><span class="line"><span class="cl"><span class="s2">	}&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;</span><span class="nx">跳转</span><span class="o">&lt;</span><span class="err">/router-link&gt;</span>
+</span></span></code></pre></div><h2 id="路由的props配置方便收到参数">
+  路由的props配置&mdash;方便收到参数
+  <a class="heading-link" href="#%e8%b7%af%e7%94%b1%e7%9a%84props%e9%85%8d%e7%bd%ae%e6%96%b9%e4%be%bf%e6%94%b6%e5%88%b0%e5%8f%82%e6%95%b0">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h2>
+<p>​	方便体现在：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="c1">// 之前接收参数：  // Detail.vue
+</span></span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">template</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="o">&lt;</span><span class="nx">ul</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">		<span class="o">&lt;</span><span class="nx">li</span><span class="o">&gt;</span><span class="nx">消息编号</span><span class="err">：</span><span class="p">{{</span><span class="nx">$route</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">id</span><span class="p">}}</span><span class="o">&lt;</span><span class="err">/li&gt;</span>
+</span></span><span class="line"><span class="cl">		<span class="o">&lt;</span><span class="nx">li</span><span class="o">&gt;</span><span class="nx">消息标题</span><span class="err">：</span><span class="p">{{</span><span class="nx">$route</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">title</span><span class="p">}}</span><span class="o">&lt;</span><span class="err">/li&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="o">&lt;</span><span class="err">/ul&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">/template&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="kr">export</span> <span class="k">default</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Detail&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">mounted</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="c1">// console.log(this.$route)
+</span></span></span><span class="line"><span class="cl">		<span class="p">},</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">/script&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 使用propos配置 接收参数
+</span></span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">template</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="o">&lt;</span><span class="nx">ul</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">		<span class="o">&lt;</span><span class="nx">li</span><span class="o">&gt;</span><span class="nx">消息编号</span><span class="err">：</span><span class="p">{{</span><span class="nx">id</span><span class="p">}}</span><span class="o">&lt;</span><span class="err">/li&gt;</span>
+</span></span><span class="line"><span class="cl">		<span class="o">&lt;</span><span class="nx">li</span><span class="o">&gt;</span><span class="nx">消息标题</span><span class="err">：</span><span class="p">{{</span><span class="nx">title</span><span class="p">}}</span><span class="o">&lt;</span><span class="err">/li&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="o">&lt;</span><span class="err">/ul&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">/template&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="kr">export</span> <span class="k">default</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">name</span><span class="o">:</span><span class="s1">&#39;Detail&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">props</span><span class="o">:</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span><span class="s1">&#39;title&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">/script&gt;</span>
+</span></span></code></pre></div><p>配置propos有三种方法：</p>
+<p>​</p>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: left">写法类型</th>
+          <th style="text-align: center">语法示例</th>
+          <th>优点</th>
+          <th>缺点</th>
+          <th>适用场景</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left"><strong>对象写法</strong></td>
+          <td style="text-align: center"><code>props: {a:1, b:'hello'}</code></td>
+          <td>1. 写法最简单；2. 传固定值非常方便</td>
+          <td>1. 只能传静态值，无法获取路由参数；2. 灵活性极低</td>
+          <td>仅需要给路由组件传固定常量的场景</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>布尔写法</strong></td>
+          <td style="text-align: center"><code>props: true</code></td>
+          <td>1. 简洁，自动映射 params 参数；2. 组件解耦（不用写 <code>$route</code>）</td>
+          <td>1. 仅支持 <code>params</code> 参数（不支持 <code>query</code>）；2. 无法自定义参数名 / 新增额外参数</td>
+          <td>路由用 <code>params</code> 传参（如 <code>/detail/:id</code>），且参数名和组件 props 名一致的场景</td>
+      </tr>
+      <tr>
+          <td style="text-align: left"><strong>函数写法</strong></td>
+          <td style="text-align: center"><code>props($route) { return {id: $route.query.id} }</code></td>
+          <td>1. 支持 <code>params</code>/<code>query</code> 任意参数；2. 可自定义参数名、新增额外参数；3. 组件完全解耦</td>
+          <td>1. 写法比前两种稍复杂；2. 需要手动映射参数</td>
+          <td>绝大多数场景（尤其是用 <code>query</code> 传参、需要自定义参数、新增固定值的场景）</td>
+      </tr>
+  </tbody>
+</table>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">props</span><span class="p">(</span><span class="nx">$route</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">id</span><span class="o">:</span><span class="nx">$route</span><span class="p">.</span><span class="nx">query</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">title</span><span class="o">:</span><span class="nx">$route</span><span class="p">.</span><span class="nx">query</span><span class="p">.</span><span class="nx">title</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">a</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">b</span><span class="o">:</span><span class="s1">&#39;hello&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="缓存路由组件">
+  缓存路由组件
+  <a class="heading-link" href="#%e7%bc%93%e5%ad%98%e8%b7%af%e7%94%b1%e7%bb%84%e4%bb%b6">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h2>
+<pre tabindex="0"><code>&lt;keep-alive include=&#34;News&#34;&gt; 
+    &lt;router-view&gt;&lt;/router-view&gt;
+&lt;/keep-alive&gt;
+</code></pre><p>生命周期钩子:</p>
+<ol>
+<li>作用：路由组件所独有的两个钩子，用于捕获路由组件的激活状态。</li>
+<li>具体名字：
+<ol>
+<li><code>activated</code>路由组件被激活时触发。</li>
+<li><code>deactivated</code>路由组件失活时触发。</li>
+</ol>
+</li>
+</ol>
+<h2 id="编程式路由导航放弃router-link">
+  编程式路由导航&ndash;放弃router-link
+  <a class="heading-link" href="#%e7%bc%96%e7%a8%8b%e5%bc%8f%e8%b7%af%e7%94%b1%e5%af%bc%e8%88%aa%e6%94%be%e5%bc%83router-link">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h2>
+<p>不借助<code>&lt;router-link&gt; </code>实现路由跳转，使用router的两个API</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="c1">//$router的两个API，封装在一个函数里，通过调用函数触发路由跳转
+</span></span></span><span class="line"><span class="cl"><span class="kd">function</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">$router</span><span class="p">.</span><span class="nx">xxx</span><span class="p">(</span><span class="o">??</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">                     
+</span></span><span class="line"><span class="cl"><span class="c1">// 操作有                    
+</span></span></span><span class="line"><span class="cl"><span class="k">this</span><span class="p">.</span><span class="nx">$router</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">name</span><span class="o">:</span><span class="s1">&#39;xiangqing&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">params</span><span class="o">:</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">id</span><span class="o">:</span><span class="nx">xxx</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">title</span><span class="o">:</span><span class="nx">xxx</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">this</span><span class="p">.</span><span class="nx">$router</span><span class="p">.</span><span class="nx">replace</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">name</span><span class="o">:</span><span class="s1">&#39;xiangqing&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">params</span><span class="o">:</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">id</span><span class="o">:</span><span class="nx">xxx</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">title</span><span class="o">:</span><span class="nx">xxx</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="k">this</span><span class="p">.</span><span class="nx">$router</span><span class="p">.</span><span class="nx">forward</span><span class="p">()</span> <span class="c1">//前进
+</span></span></span><span class="line"><span class="cl"><span class="k">this</span><span class="p">.</span><span class="nx">$router</span><span class="p">.</span><span class="nx">back</span><span class="p">()</span> <span class="c1">//后退
+</span></span></span><span class="line"><span class="cl"><span class="k">this</span><span class="p">.</span><span class="nx">$router</span><span class="p">.</span><span class="nx">go</span><span class="p">()</span> <span class="c1">//可前进也可后退
+</span></span></span></code></pre></div><p>优点：</p>
+<p>​	可结合任意事件触发（点击、双击、定时器、接口回调等）； 前者只能点击</p>
+<p>​	跳转前可加复杂逻辑（表单验证、权限判断、参数加工）适配复杂业务场景；</p>
+<p>​	<strong>支持路由守卫</strong></p>
+<p>缺点：</p>
+<p>​	不能用activate-class激活样式</p>
+<p>​	不能重复push到一个路由里面，需要加个判断，不然报错</p>
+<h2 id="全局路由守卫">
+  全局路由守卫
+  <a class="heading-link" href="#%e5%85%a8%e5%b1%80%e8%b7%af%e7%94%b1%e5%ae%88%e5%8d%ab">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h2>
+<p>全局守卫直接挂载在 <code>router</code> 实例上，对<strong>所有路由</strong>跳转生效</p>
+<ul>
+<li><strong><code>beforeEach(to, from, next)</code></strong> ：<strong>最常用</strong>。在路由跳转前触发，常用于登录状态校验。</li>
+<li><strong><code>beforeResolve(to, from, next)</code></strong> ：在导航被确认之前，且组件内守卫和异步路由组件被解析之后调用。</li>
+<li><strong><code>afterEach(to, from)</code></strong> ：在路由跳转完成后触发。<strong>注意：</strong> 它不接受 <code>next</code> 函数，也不会改变导航。</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//全局前置守卫：初始化时执行、每次路由切换前执行
+</span></span></span><span class="line"><span class="cl"><span class="nx">router</span><span class="p">.</span><span class="nx">beforeEach</span><span class="p">((</span><span class="nx">to</span><span class="p">,</span><span class="nx">from</span><span class="p">,</span><span class="nx">next</span><span class="p">)=&gt;{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;beforeEach&#39;</span><span class="p">,</span><span class="nx">to</span><span class="p">,</span><span class="nx">from</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span><span class="p">(</span><span class="nx">to</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">isAuth</span><span class="p">){</span> <span class="c1">//判断当前路由是否需要进行权限控制
+</span></span></span><span class="line"><span class="cl">		<span class="k">if</span><span class="p">(</span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s1">&#39;school&#39;</span><span class="p">)</span> <span class="o">===</span> <span class="s1">&#39;atguigu&#39;</span><span class="p">){</span> <span class="c1">//权限控制的具体规则
+</span></span></span><span class="line"><span class="cl">			<span class="nx">next</span><span class="p">()</span> <span class="c1">//放行
+</span></span></span><span class="line"><span class="cl">		<span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;暂无权限查看&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">			<span class="c1">// next({name:&#39;guanyu&#39;})
+</span></span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nx">next</span><span class="p">()</span> <span class="c1">//放行
+</span></span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//全局后置守卫：初始化时执行、每次路由切换后执行
+</span></span></span><span class="line"><span class="cl"><span class="nx">router</span><span class="p">.</span><span class="nx">afterEach</span><span class="p">((</span><span class="nx">to</span><span class="p">,</span><span class="nx">from</span><span class="p">)=&gt;{</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;afterEach&#39;</span><span class="p">,</span><span class="nx">to</span><span class="p">,</span><span class="nx">from</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span><span class="p">(</span><span class="nx">to</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">title</span><span class="p">){</span> 
+</span></span><span class="line"><span class="cl">		<span class="nb">document</span><span class="p">.</span><span class="nx">title</span> <span class="o">=</span> <span class="nx">to</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">title</span> <span class="c1">//修改网页的title
+</span></span></span><span class="line"><span class="cl">	<span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nb">document</span><span class="p">.</span><span class="nx">title</span> <span class="o">=</span> <span class="s1">&#39;vue_test&#39;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span></code></pre></div><h3 id="路由独享守卫">
+  路由独享守卫
+  <a class="heading-link" href="#%e8%b7%af%e7%94%b1%e7%8b%ac%e4%ba%ab%e5%ae%88%e5%8d%ab">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h3>
+<p>如果你不想全局配置守卫的话，你可以为某些路由单独配置守卫：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">router</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">VueRouter</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">routes</span><span class="o">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">path</span><span class="o">:</span> <span class="s1">&#39;/foo&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">component</span><span class="o">:</span> <span class="nx">Foo</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">          <span class="nx">beforeEnter</span><span class="o">:</span> <span class="p">(</span><span class="nx">to</span><span class="p">,</span> <span class="nx">from</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span> 
+</span></span><span class="line"><span class="cl">            <span class="c1">// 参数用法什么的都一样,调用顺序在全局前置守卫后面，所以不会被全局守卫覆盖
+</span></span></span><span class="line"><span class="cl">            <span class="c1">// ...
+</span></span></span><span class="line"><span class="cl">          <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="p">})</span>
+</span></span></code></pre></div><h3 id="组件内的路由守卫">
+  组件内的路由守卫
+  <a class="heading-link" href="#%e7%bb%84%e4%bb%b6%e5%86%85%e7%9a%84%e8%b7%af%e7%94%b1%e5%ae%88%e5%8d%ab">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h3>
+<p>直接定义在 <code>.vue</code> 组件内部，针对特定组件生效。</p>
+<ul>
+<li><strong><code>beforeRouteEnter</code></strong>：路由进入该组件前调用。此时<strong>拿不到组件实例 <code>this</code></strong>，因为组件实例还没被创建。该钩子在全局守卫<code>beforeEach</code>之后，全局守卫<code>afterEach</code>之前调用。</li>
+<li><strong><code>beforeRouteUpdate</code></strong>：当前路由改变，且该组件被复用时调用（例如 <code>/user/1</code> 跳转到 <code>/user/2</code>）。</li>
+<li><strong><code>beforeRouteLeave</code></strong>：导航离开该组件时调用。常用于“离开前未保存”的选择提醒。</li>
+</ul>
+<pre tabindex="0"><code>//进入守卫：通过路由规则，进入该组件时被调用
+beforeRouteEnter (to, from, next) {
+},
+//离开守卫：通过路由规则，离开该组件时被调用
+beforeRouteLeave (to, from, next) {
+}
+</code></pre><h2 id="路由的hash和history模式的区别">
+  路由的hash和history模式的区别
+  <a class="heading-link" href="#%e8%b7%af%e7%94%b1%e7%9a%84hash%e5%92%8chistory%e6%a8%a1%e5%bc%8f%e7%9a%84%e5%8c%ba%e5%88%ab">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h2>
+<p>Vue-Router有两种模式：<strong>hash模式</strong>和<strong>history模式</strong>。默认的路由模式是hash模式。</p>
+<h3 id="1-hash模式">
+  1. hash模式
+  <a class="heading-link" href="#1-hash%e6%a8%a1%e5%bc%8f">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h3>
+<p><strong>简介：</strong> hash模式是开发中默认的模式，它的URL带着一个#，例如：http://www.abc.com/#/vue，它的hash值就是 <code>#/vue</code>。</p>
+<p><strong>特点</strong>：hash值会出现在URL里面，但是不会出现在HTTP请求中，对后端完全没有影响。所以改变hash值，不会重新加载页面。这种模式的浏览器支持度很好，低版本的IE浏览器也支持这种模式。hash路由被称为是前端路由，已经成为SPA（单页面应用）的标配。</p>
+<p><strong>原理：</strong> hash模式的主要原理就是<strong>onhashchange()事件</strong>：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nb">window</span><span class="p">.</span><span class="nx">onhashchange</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">event</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">oldURL</span><span class="p">,</span> <span class="nx">event</span><span class="p">.</span><span class="nx">newURL</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">let</span> <span class="nx">hash</span> <span class="o">=</span> <span class="nx">location</span><span class="p">.</span><span class="nx">hash</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>使用onhashchange()事件的好处就是，在页面的hash值发生变化时，无需向后端发起请求，window就可以监听事件的改变，并按规则加载相应的代码。除此之外，hash值变化对应的URL都会被浏览器记录下来，这样浏览器就能实现页面的前进和后退。虽然是没有请求后端服务器，但是页面的hash值和对应的URL关联起来了。</p>
+<h3 id="2-history模式">
+  2. history模式
+  <a class="heading-link" href="#2-history%e6%a8%a1%e5%bc%8f">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h3>
+<p><strong>简介：</strong> history模式的URL中没有#，它使用的是传统的路由分发模式，即用户在输入一个URL时，服务器会接收这个请求，并解析这个URL，然后做出相应的逻辑处理。</p>
+<p><strong>特点：</strong> 当使用history模式时，URL就像这样：http://abc.com/user/id。相比hash模式更加好看。但是，history模式需要后台配置支持。如果后台没有正确配置，访问时会返回404。</p>
+<p><strong>API：</strong> history api可以分为两大部分，切换历史状态和修改历史状态：</p>
+<ul>
+<li><strong>修改历史状态</strong>：包括了 HTML5 History Interface 中新增的 <code>pushState()</code> 和 <code>replaceState()</code> 方法，这两个方法应用于浏览器的历史记录栈，提供了对历史记录进行修改的功能。只是当他们进行修改时，虽然修改了url，但浏览器不会立即向后端发送请求。如果要做到改变url但又不刷新页面的效果，就需要前端用上这两个API。</li>
+<li><strong>切换历史状态</strong>： 包括 <code>forward()</code>、<code>back()</code>、<code>go()</code>三个方法，对应浏览器的前进，后退，跳转操作。</li>
+</ul>
+<p>虽然history模式丢弃了丑陋的#。但是，它也有自己的缺点，就是在刷新页面的时候，如果没有相应的路由或资源，就会刷出404来。</p>
+<p>如果想要切换到history模式，就要进行以下配置（后端也要进行配置）：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">router</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">VueRouter</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">mode</span><span class="o">:</span> <span class="s1">&#39;history&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">routes</span><span class="o">:</span> <span class="p">[...]</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span></code></pre></div><h3 id="3-两种模式对比">
+  3. 两种模式对比
+  <a class="heading-link" href="#3-%e4%b8%a4%e7%a7%8d%e6%a8%a1%e5%bc%8f%e5%af%b9%e6%af%94">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h3>
+<p>调用 history.pushState() 相比于直接修改 hash，存在以下优势:</p>
+<ul>
+<li>pushState() 设置的新 URL 可以是与当前 URL 同源的任意 URL；而 hash 只可修改 # 后面的部分，因此只能设置与当前 URL 同文档的 URL；</li>
+<li>pushState() 设置的新 URL 可以与当前 URL 一模一样，这样也会把记录添加到栈中；而 hash 设置的新值必须与原来不一样才会触发动作将记录添加到栈中；</li>
+<li>pushState() 通过 stateObject 参数可以添加任意类型的数据到记录中；而 hash 只可添加短字符串；</li>
+<li>pushState() 可额外设置 title 属性供后续使用。</li>
+<li>hash模式下，仅hash符号之前的url会被包含在请求中，后端如果没有做到对路由的全覆盖，也不会返回404错误；history模式下，前端的url必须和实际向后端发起请求的url一致，如果没有对用的路由处理，将返回404错误。</li>
+</ul>
+<p>hash模式和history模式都有各自的优势和缺陷，还是要根据实际情况选择性的使用。</p>
+<h2 id="如何获取页面的hash变化">
+  如何获取页面的hash变化
+  <a class="heading-link" href="#%e5%a6%82%e4%bd%95%e8%8e%b7%e5%8f%96%e9%a1%b5%e9%9d%a2%e7%9a%84hash%e5%8f%98%e5%8c%96">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h2>
+<p><strong>（1）监听$route的变化</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">// 监听,当路由发生变化的时候执行
+</span></span></span><span class="line"><span class="cl"><span class="nx">watch</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">$route</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">handler</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">val</span><span class="p">,</span> <span class="nx">oldVal</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">val</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 深度观察监听
+</span></span></span><span class="line"><span class="cl">    <span class="nx">deep</span><span class="o">:</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">},</span>
+</span></span></code></pre></div><p><strong>（2）window.location.hash读取#值</strong></p>
+<p>window.location.hash 的值可读可写，读取来判断状态是否改变，写入时可以在不重载网页的前提下，添加一条历史访问记录。</p>
+<h2 id="route-和router-的区别">
+  $route 和$router 的区别
+  <a class="heading-link" href="#route-%e5%92%8crouter-%e7%9a%84%e5%8c%ba%e5%88%ab">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h2>
+<ul>
+<li>$route 是“路由信息对象”，包括 path，params，hash，query，fullPath，matched，name 等路由信息参数</li>
+<li>$router 是“路由实例”对象包括了路由的跳转方法，钩子函数等</li>
+</ul>
+<h2 id="vue-router跳转和locationhref有什么区别">
+  Vue-router跳转和location.href有什么区别
+  <a class="heading-link" href="#vue-router%e8%b7%b3%e8%bd%ac%e5%92%8clocationhref%e6%9c%89%e4%bb%80%e4%b9%88%e5%8c%ba%e5%88%ab">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h2>
+<ul>
+<li>使用 <code>location.href= /url</code> 来跳转，简单方便，但是刷新了页面；</li>
+<li>使用 <code>history.pushState( /url )</code> ，无刷新页面，静态跳转；</li>
+<li>引进 router ，然后使用 <code>router.push( /url )</code> 来跳转，使用了 <code>diff </code>算法，实现了按需加载，减少了 dom 的消耗。其实使用 router 跳转和使用 <code>history.pushState()</code> 没什么差别的，因为vue-router就是用了 <code>history.pushState()</code> ，尤其是在history模式下。</li>
+</ul>
+<h2 id="params和query的区别">
+  params和query的区别
+  <a class="heading-link" href="#params%e5%92%8cquery%e7%9a%84%e5%8c%ba%e5%88%ab">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h2>
+<p><strong>用法</strong>：query要用path来引入，params要用name来引入，接收参数都是类似的，分别是 <code>this.$route.query.name</code> 和 <code>this.$route.params.name</code> 。</p>
+<p><strong>url地址显示</strong>：query更加类似于ajax中get传参，params则类似于post，说的再简单一点，前者在浏览器地址栏中显示参数，后者则不显示</p>
+<p><strong>注意</strong>：query刷新不会丢失query里面的数据     params刷新会丢失 params里面的数据。</p>
+
+      </div>
+
+
+      <footer>
+        
+
+
+        
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2024 -
+    
+    2026
+     李航 
+    ·
+    
+    技术支持 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+  
+  
+  <script src="/js/notes.js"></script>
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<aside class="left-sidebar-nav" aria-label="本文目录">
+  <div class="left-sidebar-card">
+    <p class="left-sidebar-title">本文目录</p>
+    <nav class="left-sidebar-toc">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#路由">路由</a>
+      <ul>
+        <li><a href="#多级路由">多级路由</a></li>
+        <li><a href="#路由传参query参数">路由传参&mdash;query参数</a></li>
+        <li><a href="#路由传参params参数">路由传参&mdash;params参数</a></li>
+        <li><a href="#路由接收参数--两个方法都一样">路由接收参数 &mdash; 两个方法都一样</a></li>
+        <li><a href="#命名路由用于简化路由跳转">命名路由&ndash;用于简化路由跳转</a></li>
+      </ul>
+    </li>
+    <li><a href="#路由的props配置方便收到参数">路由的props配置&mdash;方便收到参数</a></li>
+    <li><a href="#缓存路由组件">缓存路由组件</a></li>
+    <li><a href="#编程式路由导航放弃router-link">编程式路由导航&ndash;放弃router-link</a></li>
+    <li><a href="#全局路由守卫">全局路由守卫</a>
+      <ul>
+        <li><a href="#路由独享守卫">路由独享守卫</a></li>
+        <li><a href="#组件内的路由守卫">组件内的路由守卫</a></li>
+      </ul>
+    </li>
+    <li><a href="#路由的hash和history模式的区别">路由的hash和history模式的区别</a>
+      <ul>
+        <li><a href="#1-hash模式">1. hash模式</a></li>
+        <li><a href="#2-history模式">2. history模式</a></li>
+        <li><a href="#3-两种模式对比">3. 两种模式对比</a></li>
+      </ul>
+    </li>
+    <li><a href="#如何获取页面的hash变化">如何获取页面的hash变化</a></li>
+    <li><a href="#route-和router-的区别">$route 和$router 的区别</a></li>
+    <li><a href="#vue-router跳转和locationhref有什么区别">Vue-router跳转和location.href有什么区别</a></li>
+    <li><a href="#params和query的区别">params和query的区别</a></li>
+  </ul>
+</nav>
+    </nav>
+  </div>
+</aside>
+<script>
+  document.body.classList.add("has-left-toc");
+</script>
+
+</body>
+
+</html>

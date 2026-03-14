@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  keep-alive的妙用 · 首页
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="李航">
+<meta name="description" content="新增钩子和component">
+<meta name="keywords" content="blog,developer,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="keep-alive的妙用">
+  <meta name="twitter:description" content="新增钩子和component">
+
+<meta property="og:url" content="http://localhost:1313/posts/keep-alive/">
+  <meta property="og:site_name" content="首页">
+  <meta property="og:title" content="keep-alive的妙用">
+  <meta property="og:description" content="新增钩子和component">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-09-13T10:00:00+08:00">
+    <meta property="article:modified_time" content="2025-09-13T10:00:00+08:00">
+    <meta property="article:tag" content="VUE">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/keep-alive/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+  
+    
+    <link rel="stylesheet" href="/css/custom.css" media="screen">
+  
+
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      首页
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about/">过来看看</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">学习记录</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/projects/">问题记录</a>
+            </li>
+          
+        
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/keep-alive/">
+              keep-alive的妙用
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2025-09-13T10:00:00&#43;08:00">
+                September 13, 2025
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              阅读时间：1 分钟
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/vue/">VUE</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      
+
+
+      <div class="post-content">
+        
+        <h2 id="keep-alive">
+  keep-alive
+  <a class="heading-link" href="#keep-alive">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h2>
+<p>通过Map或Object缓存组件vnode实例，渲染时直接从缓存中取</p>
+<p>缓存组件实例：避免重复销毁和创建，保留组件状态
+提升性能：适用于需要频繁切换但状态需保留的组件（如Tab页、表单填写页）</p>
+<template>
+  <keep-alive :include="['ComponentA', 'ComponentB']" :max="5">
+    <component :is="currentComponent"></component>
+  </keep-alive>
+</template>
+新增钩子（仅在被缓存的组件中触发）
+onActivated：组件被激活（插入DOM）时触发。首次加载：onCreate->onMounted->onActivated
+onDeactivated：组件被停用（移除DOM）时触发  切换离开：onDeactivated
+再次进入：onActivated
+彻底销毁：onUnmounted
+<blockquote>
+<p>1.include
+匹配组件名称（name选项），仅缓存匹配的组件 ,支持字符串、正则、数组</p>
+</blockquote>
+<blockquote>
+<p>2.exclude</p>
+<p>排除指定组件，优先级高于include</p>
+</blockquote>
+<blockquote>
+<p>3.max
+最大缓存实例数，超出时按LRU（最近最少使用）策略淘汰旧实例</p>
+<p>LUR原理：有限淘汰最久未访问的实例</p>
+</blockquote>
+<p><code>&lt;Component : is=&quot;组件名&quot;&gt; &lt;/Component&gt;</code> 用来控制显示哪个组件的</p>
+<h2 id="进阶用法">
+  进阶用法
+  <a class="heading-link" href="#%e8%bf%9b%e9%98%b6%e7%94%a8%e6%b3%95">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h2>
+<p>**“哪些路由页面需要缓存、哪些不需要”**的精细化控制</p>
+<p>通过 <code>router-view</code> 的<strong>插槽</strong>拿到当前路由组件，再结合路由 <code>meta</code> 标记</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">router</span><span class="o">-</span><span class="nx">view</span> <span class="nx">v</span><span class="o">-</span><span class="nx">slot</span><span class="o">=</span><span class="s2">&#34;{ Component }&#34;</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">&lt;</span><span class="nx">keep</span><span class="o">-</span><span class="nx">alive</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;</span><span class="nx">component</span> <span class="o">:</span><span class="nx">is</span><span class="o">=</span><span class="s2">&#34;Component&#34;</span> <span class="nx">v</span><span class="o">-</span><span class="k">if</span><span class="o">=</span><span class="s2">&#34;$route.meta.keepAlive&#34;</span> <span class="o">/&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">&lt;</span><span class="err">/keep-alive&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="o">&lt;</span><span class="nx">component</span> <span class="o">:</span><span class="nx">is</span><span class="o">=</span><span class="s2">&#34;Component&#34;</span> <span class="nx">v</span><span class="o">-</span><span class="k">if</span><span class="o">=</span><span class="s2">&#34;!$route.meta.keepAlive&#34;</span> <span class="o">/&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">/router-view&gt;</span>
+</span></span></code></pre></div><p>你可以<code>在router/index.js</code>里面配置</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="p">{</span> <span class="nx">path</span><span class="o">:</span> <span class="s1">&#39;/home&#39;</span><span class="p">,</span> <span class="nx">component</span><span class="o">:</span> <span class="nx">Home</span><span class="p">,</span> <span class="nx">meta</span><span class="o">:</span> <span class="p">{</span> <span class="nx">keepAlive</span><span class="o">:</span> <span class="kc">true</span> <span class="p">}</span> <span class="p">}</span>
+</span></span></code></pre></div><p>加 <code>v-slot=&quot;{ Component }&quot;</code> → 能 “主动” 拿到组件实例</p>
+
+      </div>
+
+
+      <footer>
+        
+
+
+        
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2024 -
+    
+    2026
+     李航 
+    ·
+    
+    技术支持 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+  
+  
+  <script src="/js/notes.js"></script>
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<aside class="left-sidebar-nav" aria-label="本文目录">
+  <div class="left-sidebar-card">
+    <p class="left-sidebar-title">本文目录</p>
+    <nav class="left-sidebar-toc">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#keep-alive">keep-alive</a></li>
+    <li><a href="#进阶用法">进阶用法</a></li>
+  </ul>
+</nav>
+    </nav>
+  </div>
+</aside>
+<script>
+  document.body.classList.add("has-left-toc");
+</script>
+
+</body>
+
+</html>
