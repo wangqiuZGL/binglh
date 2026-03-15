@@ -1,20 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>计算机网络 on 首页</title>
-    <link>https://binglh.xyz/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/</link>
-    <description>Recent content in 计算机网络 on 首页</description>
+    <title>阿里云 on 首页</title>
+    <link>https://binglh.xyz/tags/%E9%98%BF%E9%87%8C%E4%BA%91/</link>
+    <description>Recent content in 阿里云 on 首页</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 13 Mar 2025 10:00:00 +0800</lastBuildDate>
-    <atom:link href="https://binglh.xyz/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>CDN介绍</title>
-      <link>https://binglh.xyz/posts/cdn/</link>
-      <pubDate>Thu, 13 Mar 2025 10:00:00 +0800</pubDate>
-      <guid>https://binglh.xyz/posts/cdn/</guid>
-      <description>CDN的相关知识</description>
-    </item>
+    <lastBuildDate>Wed, 01 Jan 2025 10:00:00 +0800</lastBuildDate>
+    <atom:link href="https://binglh.xyz/tags/%E9%98%BF%E9%87%8C%E4%BA%91/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>使用cloudFlare配置博客</title>
       <link>https://binglh.xyz/posts/%E5%8D%9A%E5%AE%A2%E5%9F%9F%E5%90%8D%E5%AE%9A%E4%BD%8D%E6%B5%81%E7%A8%8B/</link>

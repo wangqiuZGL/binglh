@@ -3,7 +3,7 @@
 
 <head>
   <title>
-  npm vs pnpm · 首页
+  使用cloudFlare配置博客 · 首页
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,30 +13,31 @@
 
 
 <meta name="author" content="李航">
-<meta name="description" content="介绍二者的区别">
+<meta name="description" content="github和cloudflare 去搭建博客">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="npm vs pnpm">
-  <meta name="twitter:description" content="介绍二者的区别">
+  <meta name="twitter:title" content="使用cloudFlare配置博客">
+  <meta name="twitter:description" content="github和cloudflare 去搭建博客">
 
-<meta property="og:url" content="https://binglh.xyz/posts/npmpnpm/">
+<meta property="og:url" content="https://binglh.xyz/posts/%E5%8D%9A%E5%AE%A2%E5%9F%9F%E5%90%8D%E5%AE%9A%E4%BD%8D%E6%B5%81%E7%A8%8B/">
   <meta property="og:site_name" content="首页">
-  <meta property="og:title" content="npm vs pnpm">
-  <meta property="og:description" content="介绍二者的区别">
+  <meta property="og:title" content="使用cloudFlare配置博客">
+  <meta property="og:description" content="github和cloudflare 去搭建博客">
   <meta property="og:locale" content="zh_cn">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2025-03-13T10:00:00+08:00">
-    <meta property="article:modified_time" content="2025-03-13T10:00:00+08:00">
-    <meta property="article:tag" content="Node">
+    <meta property="article:published_time" content="2025-01-01T10:00:00+08:00">
+    <meta property="article:modified_time" content="2025-01-01T10:00:00+08:00">
+    <meta property="article:tag" content="计算机网络">
+    <meta property="article:tag" content="阿里云">
 
 
 
 
-<link rel="canonical" href="https://binglh.xyz/posts/npmpnpm/">
+<link rel="canonical" href="https://binglh.xyz/posts/%E5%8D%9A%E5%AE%A2%E5%9F%9F%E5%90%8D%E5%AE%9A%E4%BD%8D%E6%B5%81%E7%A8%8B/">
 
 
 <link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
@@ -149,8 +150,8 @@
       <header>
         <div class="post-title">
           <h1 class="title">
-            <a class="title-link" href="https://binglh.xyz/posts/npmpnpm/">
-              npm vs pnpm
+            <a class="title-link" href="https://binglh.xyz/posts/%E5%8D%9A%E5%AE%A2%E5%9F%9F%E5%90%8D%E5%AE%9A%E4%BD%8D%E6%B5%81%E7%A8%8B/">
+              使用cloudFlare配置博客
             </a>
           </h1>
         </div>
@@ -158,8 +159,8 @@
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2025-03-13T10:00:00&#43;08:00">
-                March 13, 2025
+              <time datetime="2025-01-01T10:00:00&#43;08:00">
+                January 1, 2025
               </time>
             </span>
             <span class="reading-time">
@@ -172,7 +173,11 @@
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
     <span class="tag">
-      <a href="/tags/node/">Node</a>
+      <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/%E9%98%BF%E9%87%8C%E4%BA%91/">阿里云</a>
     </span></div>
 
         </div>
@@ -183,46 +188,74 @@
 
       <div class="post-content">
         
-        <h2 id="pnpm和npm比较">
-  pnpm和npm比较
-  <a class="heading-link" href="#pnpm%e5%92%8cnpm%e6%af%94%e8%be%83">
+        <h2 id="大致预览">
+  大致预览
+  <a class="heading-link" href="#%e5%a4%a7%e8%87%b4%e9%a2%84%e8%a7%88">
     <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
     <span class="sr-only">链接到标题</span>
   </a>
 </h2>
-<p>pnpm 基于 <strong>内容寻址</strong> 的文件系统来存储磁盘上所有的文件 ，在项目中需要使用到依赖的时候，<strong>pnpm 只会安装一次</strong>，之后再次使用都会直接<strong>硬链接</strong>指向该依赖，极大节省磁盘空间，并且加快安装速度</p>
+<p>介绍一下我的配置信息</p>
+<p>​	<strong>域名</strong>：<code>binglh.xyz</code></p>
+<p>​	<strong>Pages 项目</strong>：<code>binglh</code></p>
+<p>需要购买阿里云域名（第一次买 1￥/年），然后进行实名认证等操作，才算注册成功</p>
+<p>我的DNS解析用到 <strong>Cloudflare Pages ，而不是Github Pages</strong></p>
+<p>托管全交给 Cloudflare</p>
+<h2 id="流程本质以github-pages为例">
+  流程本质&ndash;以GitHub Pages为例
+  <a class="heading-link" href="#%e6%b5%81%e7%a8%8b%e6%9c%ac%e8%b4%a8%e4%bb%a5github-pages%e4%b8%ba%e4%be%8b">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h2>
+<p>用户输入 <code>binglh.xyz</code> → 打开你托管在 <code>binglh.github.io</code> 的网页</p>
+<p>​	<strong>DNS 层面</strong>：让浏览器知道 <code>binglh.xyz</code> 对应哪台服务器 IP</p>
+<p>​	<strong>应用层（HTTP）</strong>：让 GitHub 服务器<strong>认识</strong>这个域名，愿意返回页面</p>
+<p>需要把域名的  <strong>NS 记录（NameServer）</strong>  改成 <strong>Cloudflare</strong></p>
 <blockquote>
-<p>即使一个包的不同版本，pnpm 也会极大程度地复用之前版本的代码，仅下载更新的几个包</p>
+<p>把域名解析权完全交给 Cloudflare<img src="/images/assets/image-20260315095844002.png" alt="image-20260315095844002" style="zoom:50%;" /></p>
 </blockquote>
-<p>npm2  依赖管理 ： 按照 安装包的<strong>依赖树</strong>结构 直接填充在本地的目录结构下。比如<code>express</code>和<code>koa</code>他们会同时依赖<code>accepts</code></p>
-<img src="/images/assets/image-20260313194958246.png" alt="image-20260313194958246" style="zoom:50%;" />
-<blockquote>
+<p>之后全世界递归 DNS 查询 <code>your.com</code> 时，都会去问 Cloudflare</p>
+<p><strong>DNS 层级结构</strong></p>
+<p>​	根 DNS → 顶级域 DNS → 权威 DNS（Cloudflare）</p>
+<p>​	你改 NS，就是在指定<strong>权威 DNS 是谁</strong>。</p>
+<p><strong>域名到IP</strong></p>
+<p>​	在 Cloudflare 给 <code>blog.binglh.xyz</code> 和 <code>www.binglh.xyz</code> 加了 <strong>CNAME 记录</strong>，指向 <code>binglh.pages.dev</code></p>
+<img src="/images/assets/image-20260315100025743.png" alt="image-20260315100025743" style="zoom:67%;" />
+<p><code>用户输入 blog.binglh.xyz</code> → <strong>DNS 解析</strong> → <strong>Cloudflare 代理</strong> → <strong>Cloudflare Pages 虚拟主机</strong> → 返回网页</p>
 <ol>
-<li>层级依赖过深</li>
-<li>相同包的相同版本会多次被下载，利用率低，占用磁盘空间大</li>
+<li><strong>浏览器 DNS 查询</strong>：先查本地缓存 /hosts，没有就向运营商递归 DNS 发起查询</li>
+<li>递归 DNS 迭代查询：
+<ul>
+<li>问根 DNS → 找到 <code>.xyz</code> 顶级域 DNS</li>
+<li>问 <code>.xyz</code> 顶级域 DNS → 找到 Cloudflare 权威 DNS</li>
+<li>问 Cloudflare 权威 DNS → 返回你的 CNAME 记录：<code>blog.binglh.xyz</code> → <code>binglh.pages.dev</code></li>
+</ul>
+</li>
+<li><strong>继续解析 CNAME</strong>：递归 DNS 再查 <code>binglh.pages.dev</code>，得到 Cloudflare Pages 服务的全球节点 IP</li>
+<li><strong>返回结果</strong>：把最终 IP 给浏览器</li>
 </ol>
+<blockquote>
+<p>✅ 核心知识点：CNAME 是 “域名别名”，相当于让一个域名 “继承” 另一个域名的 IP 解析结果。Cloudflare 会自动把 <code>pages.dev</code> 解析到最近的边缘节点。</p>
 </blockquote>
-<p>npm3 不再使用嵌套的结构了 , <strong>扁平化</strong>——<strong>扁平化依赖算法耗时长</strong></p>
-<img src="/images/assets/image-20260313195047781.png" alt="image-20260313195047781" style="zoom:50%;" />
-<p>如果是同版本的，那就都在同一级目录</p>
-<p>但是如果版本不同，npm还是会完整的下载两个不同的版本：</p>
-<p><img src="/images/assets/image-20260313195141412.png" alt="image-20260313195141412"></p>
-<p>npm5 引入 package-lock.json 机制，锁定项目的依赖结构，保证依赖的稳定性</p>
-<h2 id="pnmp的优势">
-  pnmp的优势
-  <a class="heading-link" href="#pnmp%e7%9a%84%e4%bc%98%e5%8a%bf">
+<h2 id="优势">
+  优势
+  <a class="heading-link" href="#%e4%bc%98%e5%8a%bf">
     <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
     <span class="sr-only">链接到标题</span>
   </a>
 </h2>
-<p><code>node_modules</code> 中<code>.pnpm</code>下每个包的每个文件都是来自内容可<strong>寻址存储的硬链接</strong></p>
-<blockquote>
-<p>引用的是文件在文件系统中的物理索引（inode），当移动或者删除原始文件时，硬链接不会被破坏</p>
-<p>ln file hardfile   //  file删除之后，hardfile不受影响</p>
-<p>ln -s file softfile</p>
-</blockquote>
-<p>如果有依赖不同版本的时候，pnpm也只会下载不同版本中不同的内容</p>
-<p><img src="/images/assets/image-20260313195624512.png" alt="image-20260313195624512"></p>
+<p>感觉跟CDN效果类似，这样配置博客（结合agents实现样式），博主觉得不错，不需要去租服务器以及配置CDN和域名</p>
+<h2 id="参考资料">
+  参考资料
+  <a class="heading-link" href="#%e5%8f%82%e8%80%83%e8%b5%84%e6%96%99">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h2>
+<p>如果你也想有自己的博客，不妨阅读一下这些内容：</p>
+<p><a href="https://www.yuque.com/alightsoulmate/lh0afg/krckgigwprkkb9g6#K6IFZ"  class="external-link" target="_blank" rel="noopener">https://www.yuque.com/alightsoulmate/lh0afg/krckgigwprkkb9g6#K6IFZ</a></p>
+<p>建议搭配该作者对应的b站视频教程</p>
 
       </div>
 
@@ -320,8 +353,10 @@
     <nav class="left-sidebar-toc">
       <nav id="TableOfContents">
   <ul>
-    <li><a href="#pnpm和npm比较">pnpm和npm比较</a></li>
-    <li><a href="#pnmp的优势">pnmp的优势</a></li>
+    <li><a href="#大致预览">大致预览</a></li>
+    <li><a href="#流程本质以github-pages为例">流程本质&ndash;以GitHub Pages为例</a></li>
+    <li><a href="#优势">优势</a></li>
+    <li><a href="#参考资料">参考资料</a></li>
   </ul>
 </nav>
     </nav>

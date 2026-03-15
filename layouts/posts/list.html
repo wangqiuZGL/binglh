@@ -57,7 +57,7 @@
       </div>
 
       <section class="notes-grid" aria-label="学习笔记卡片列表">
-        {{ range .Paginator.Pages }}
+        {{ range .Pages.ByDate.Reverse }}
           {{ $tags := .Params.tags | default (slice) }}
           <article class="note-card" data-note-card data-tags="{{ lower (delimit $tags "||") }}" data-search="{{ lower (printf "%s %s %s" .Title (.Summary | plainify) (delimit $tags " ")) }}">
             <a class="note-card-cover" href="{{ .Params.externalLink | default .RelPermalink }}">
@@ -92,7 +92,6 @@
         <p class="notes-grid-empty" data-notes-empty hidden>没有找到符合条件的笔记。</p>
       </section>
 
-      {{ partial "pagination.html" . }}
     </div>
   </section>
 {{ end }}

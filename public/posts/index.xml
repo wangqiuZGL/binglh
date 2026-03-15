@@ -2,46 +2,60 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>知识库 on 首页</title>
-    <link>http://localhost:1313/posts/</link>
+    <link>https://binglh.xyz/posts/</link>
     <description>Recent content in 知识库 on 首页</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <lastBuildDate>Sat, 13 Sep 2025 10:00:00 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://binglh.xyz/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>keep-alive的妙用</title>
-      <link>http://localhost:1313/posts/keep-alive/</link>
+      <link>https://binglh.xyz/posts/keep-alive/</link>
       <pubDate>Sat, 13 Sep 2025 10:00:00 +0800</pubDate>
-      <guid>http://localhost:1313/posts/keep-alive/</guid>
+      <guid>https://binglh.xyz/posts/keep-alive/</guid>
       <description>新增钩子和component</description>
     </item>
     <item>
       <title>CDN介绍</title>
-      <link>http://localhost:1313/posts/cdn/</link>
+      <link>https://binglh.xyz/posts/cdn/</link>
       <pubDate>Thu, 13 Mar 2025 10:00:00 +0800</pubDate>
-      <guid>http://localhost:1313/posts/cdn/</guid>
+      <guid>https://binglh.xyz/posts/cdn/</guid>
       <description>CDN的相关知识</description>
     </item>
     <item>
       <title>koa and express</title>
-      <link>http://localhost:1313/posts/koa/</link>
+      <link>https://binglh.xyz/posts/koa/</link>
       <pubDate>Thu, 13 Mar 2025 10:00:00 +0800</pubDate>
-      <guid>http://localhost:1313/posts/koa/</guid>
+      <guid>https://binglh.xyz/posts/koa/</guid>
       <description>介绍二者的区别</description>
     </item>
     <item>
       <title>npm vs pnpm</title>
-      <link>http://localhost:1313/posts/npmpnpm/</link>
+      <link>https://binglh.xyz/posts/npmpnpm/</link>
       <pubDate>Thu, 13 Mar 2025 10:00:00 +0800</pubDate>
-      <guid>http://localhost:1313/posts/npmpnpm/</guid>
+      <guid>https://binglh.xyz/posts/npmpnpm/</guid>
       <description>介绍二者的区别</description>
     </item>
     <item>
       <title>路由守卫</title>
-      <link>http://localhost:1313/posts/%E8%B7%AF%E7%94%B1%E5%AE%88%E5%8D%AB/</link>
+      <link>https://binglh.xyz/posts/%E8%B7%AF%E7%94%B1%E5%AE%88%E5%8D%AB/</link>
       <pubDate>Thu, 13 Feb 2025 10:00:00 +0800</pubDate>
-      <guid>http://localhost:1313/posts/%E8%B7%AF%E7%94%B1%E5%AE%88%E5%8D%AB/</guid>
+      <guid>https://binglh.xyz/posts/%E8%B7%AF%E7%94%B1%E5%AE%88%E5%8D%AB/</guid>
       <description>路由的细节</description>
+    </item>
+    <item>
+      <title>使用cloudFlare配置博客</title>
+      <link>https://binglh.xyz/posts/%E5%8D%9A%E5%AE%A2%E5%9F%9F%E5%90%8D%E5%AE%9A%E4%BD%8D%E6%B5%81%E7%A8%8B/</link>
+      <pubDate>Wed, 01 Jan 2025 10:00:00 +0800</pubDate>
+      <guid>https://binglh.xyz/posts/%E5%8D%9A%E5%AE%A2%E5%9F%9F%E5%90%8D%E5%AE%9A%E4%BD%8D%E6%B5%81%E7%A8%8B/</guid>
+      <description>github和cloudflare 去搭建博客</description>
+    </item>
+    <item>
+      <title>使用阿里云去文件上传</title>
+      <link>https://binglh.xyz/posts/%E5%A4%A7%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%8A%80%E6%9C%AF/</link>
+      <pubDate>Wed, 01 Jan 2025 10:00:00 +0800</pubDate>
+      <guid>https://binglh.xyz/posts/%E5%A4%A7%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%8A%80%E6%9C%AF/</guid>
+      <description>文件分片、断点、进度显示</description>
     </item>
   </channel>
 </rss>

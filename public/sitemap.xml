@@ -2,43 +2,55 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/posts/cdn/</loc>
+    <loc>https://binglh.xyz/posts/keep-alive/</loc>
+    <lastmod>2025-09-13T10:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://binglh.xyz/tags/</loc>
+    <lastmod>2025-09-13T10:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://binglh.xyz/tags/vue/</loc>
+    <lastmod>2025-09-13T10:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://binglh.xyz/</loc>
+    <lastmod>2025-09-13T10:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://binglh.xyz/posts/</loc>
+    <lastmod>2025-09-13T10:00:00+08:00</lastmod>
+  </url><url>
+    <loc>https://binglh.xyz/posts/cdn/</loc>
     <lastmod>2025-03-13T10:00:00+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/koa/</loc>
+    <loc>https://binglh.xyz/posts/koa/</loc>
     <lastmod>2025-03-13T10:00:00+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/node/</loc>
+    <loc>https://binglh.xyz/tags/node/</loc>
     <lastmod>2025-03-13T10:00:00+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/npmpnpm/</loc>
+    <loc>https://binglh.xyz/posts/npmpnpm/</loc>
     <lastmod>2025-03-13T10:00:00+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/</loc>
+    <loc>https://binglh.xyz/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/</loc>
     <lastmod>2025-03-13T10:00:00+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/</loc>
-    <lastmod>2025-03-13T10:00:00+08:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/</loc>
-    <lastmod>2025-03-13T10:00:00+08:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/</loc>
-    <lastmod>2025-03-13T10:00:00+08:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/about/</loc>
+    <loc>https://binglh.xyz/about/</loc>
     <lastmod>2025-03-13T00:00:00+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/vue/</loc>
-    <lastmod>2024-09-13T10:00:00+08:00</lastmod>
+    <loc>https://binglh.xyz/posts/%E8%B7%AF%E7%94%B1%E5%AE%88%E5%8D%AB/</loc>
+    <lastmod>2025-02-13T10:00:00+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/vue%E7%9A%84%E8%B7%AF%E7%94%B1%E7%AE%A1%E7%90%86/</loc>
-    <lastmod>2024-09-13T10:00:00+08:00</lastmod>
+    <loc>https://binglh.xyz/tags/%E9%98%BF%E9%87%8C%E4%BA%91/</loc>
+    <lastmod>2025-01-01T10:00:00+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/authors/</loc>
+    <loc>https://binglh.xyz/posts/%E5%8D%9A%E5%AE%A2%E5%9F%9F%E5%90%8D%E5%AE%9A%E4%BD%8D%E6%B5%81%E7%A8%8B/</loc>
+    <lastmod>2025-01-01T10:00:00+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/categories/</loc>
+    <loc>https://binglh.xyz/posts/%E5%A4%A7%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%8A%80%E6%9C%AF/</loc>
+    <lastmod>2025-01-01T10:00:00+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/series/</loc>
+    <loc>https://binglh.xyz/authors/</loc>
+  </url><url>
+    <loc>https://binglh.xyz/categories/</loc>
+  </url><url>
+    <loc>https://binglh.xyz/series/</loc>
   </url>
 </urlset>

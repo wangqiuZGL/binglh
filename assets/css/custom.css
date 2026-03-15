@@ -1,7 +1,7 @@
-/* Chinese typography preference: Kai-style serif stack */
+/* Chinese typography preference: normal sans-serif stack */
 :root {
-  --kai-font-stack: "KaiTi", "Kaiti SC", "STKaiti", "BiauKai", serif;
-  --song-font-stack: "SimSun", "Songti SC", "STSong", serif;
+  --kai-font-stack: "Microsoft YaHei", "微软雅黑", "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Source Han Sans SC", sans-serif;
+  --song-font-stack: "Microsoft YaHei", "微软雅黑", "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Source Han Sans SC", sans-serif;
   --page-gutter: clamp(1.2rem, 2.6vw, 3.8rem);
 }
 

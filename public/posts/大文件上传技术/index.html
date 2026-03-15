@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+  <title>
+  使用阿里云去文件上传 · 首页
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="李航">
+<meta name="description" content="文件分片、断点、进度显示">
+<meta name="keywords" content="blog,developer,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="使用阿里云去文件上传">
+  <meta name="twitter:description" content="文件分片、断点、进度显示">
+
+<meta property="og:url" content="https://binglh.xyz/posts/%E5%A4%A7%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%8A%80%E6%9C%AF/">
+  <meta property="og:site_name" content="首页">
+  <meta property="og:title" content="使用阿里云去文件上传">
+  <meta property="og:description" content="文件分片、断点、进度显示">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-01-01T10:00:00+08:00">
+    <meta property="article:modified_time" content="2025-01-01T10:00:00+08:00">
+    <meta property="article:tag" content="计算机网络">
+    <meta property="article:tag" content="阿里云">
+
+
+
+
+<link rel="canonical" href="https://binglh.xyz/posts/%E5%A4%A7%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%8A%80%E6%9C%AF/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.min.f6b1b35a7b02521b25338f6cf58975f9980a6c12847763fe35a48307758cd1e7.css" integrity="sha256-9rGzWnsCUhslM49s9Yl1&#43;ZgKbBKEd2P&#43;NaSDB3WM0ec=" crossorigin="anonymous" media="screen" />
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.min.a00e6364bacbc8266ad1cc81230774a1397198f8cfb7bcba29b7d6fcb54ce57f.css" integrity="sha256-oA5jZLrLyCZq0cyBIwd0oTlxmPjPt7y6KbfW/LVM5X8=" crossorigin="anonymous" media="screen" />
+  
+
+
+
+ 
+  
+    
+    <link rel="stylesheet" href="/css/custom.min.ac89926c044a99fb3171d12e6a16794364c42b9d407e957469365a36e2dfe288.css" integrity="sha256-rImSbARKmfsxcdEuahZ5Q2TEK51AfpV0aTZaNuLf4og=" crossorigin="anonymous" media="screen" />
+  
+
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="https://binglh.xyz/">
+      首页
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about/">过来看看</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">学习记录</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/projects/">问题记录</a>
+            </li>
+          
+        
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="https://binglh.xyz/posts/%E5%A4%A7%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%8A%80%E6%9C%AF/">
+              使用阿里云去文件上传
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2025-01-01T10:00:00&#43;08:00">
+                January 1, 2025
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              阅读时间：4 分钟
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/%E9%98%BF%E9%87%8C%E4%BA%91/">阿里云</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      
+
+
+      <div class="post-content">
+        
+        <h2 id="前言创建部分">
+  前言&ndash;创建部分
+  <a class="heading-link" href="#%e5%89%8d%e8%a8%80%e5%88%9b%e5%bb%ba%e9%83%a8%e5%88%86">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h2>
+<p>创建一个 bucket，一个存储文件的容器</p>
+<p><img src="/images/assets/image-20260314213300932.png" alt="image-20260314213300932"></p>
+<p>接着，我们需要给 bucket 设置跨域，这样我们才能在网页中调用 Aliyun OSS 服务器的接口：</p>
+<p><img src="/images/assets/image-20260314213528094.png" alt="image-20260314213528094"></p>
+<p><strong>基本就完成了</strong>，有余力还可以研究一下RAM</p>
+<h2 id="定义先行">
+  定义先行
+  <a class="heading-link" href="#%e5%ae%9a%e4%b9%89%e5%85%88%e8%a1%8c">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h2>
+<p><strong>对象存储（OSS/S3）≠ 本地文件夹</strong></p>
+<p>它是把文件拆成 “对象”（包含数据 + 元信息），存在分布式集群里</p>
+<ul>
+<li>优势：抗造（多副本存储）、能装（PB 级容量）、省钱（按使用量付费）</li>
+<li>场景：图片 / 视频存储、日志备份、用户文件上传（后端 er 的日常刚需）</li>
+</ul>
+<p>单文件直接上传流程图</p>
+<p><img src="/images/assets/image-20260315102808803.png" alt="image-20260315102808803"></p>
+<h2 id="大文件怎么上传">
+  大文件怎么上传？
+  <a class="heading-link" href="#%e5%a4%a7%e6%96%87%e4%bb%b6%e6%80%8e%e4%b9%88%e4%b8%8a%e4%bc%a0">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h2>
+<p>用户传个 2G 的视频，直接调用上面的代码？结果：网络一波动就断，重传又要从头来</p>
+<p>因此就需要分片上传！！</p>
+<p><img src="https://p3-xtjj-sign.byteimg.com/tos-cn-i-73owjymdk6/2282ef6a16f9427996ce99a4d4314455~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgQUFB54ix5a2m5Lmg55qE5YiY5ZOl:q75.awebp?rk3s=f64ab15b&amp;x-expires=1773614736&amp;x-signature=6DfgvOQw2Vlj%2F8d%2FAUc2N9IFVtc%3D" alt="image.png"></p>
+<p>分片：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="c1">// 10MB一片（10*1024*1024字节）
+</span></span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">chunkSize</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">*</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">chunks</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">ceil</span><span class="p">(</span><span class="nx">file</span><span class="p">.</span><span class="nx">size</span> <span class="o">/</span> <span class="nx">chunkSize</span><span class="p">);</span><span class="c1">// 向上取整
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 切第一片：file.slice(0, chunkSize)
+</span></span></span></code></pre></div><p>上传分片（携带信息）</p>
+<p>合并分片<strong>completeMultipartUpload</strong></p>
+<h2 id="前端实现">
+  前端实现
+  <a class="heading-link" href="#%e5%89%8d%e7%ab%af%e5%ae%9e%e7%8e%b0">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h2>
+<p>前端大文件核心是<code>利用 Blob.prototype.slice</code> 方法，和数组的 slice 方法相似，文件的 slice 方法可以返回<code>原文件的某个切片</code></p>
+<p>预先定义好单个切片大小，将文件切分为一个个切片，然后借助 http 的可并发性，同时上传多个切片。</p>
+<p>这样从原本传一个大文件，变成了<code>并发</code>传多个小的文件切片，可以大大减少上传时间</p>
+<h3 id="定义元素和变量">
+  定义元素和变量
+  <a class="heading-link" href="#%e5%ae%9a%e4%b9%89%e5%85%83%e7%b4%a0%e5%92%8c%e5%8f%98%e9%87%8f">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h3>
+<p>元素包括：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;file&#34;</span> <span class="na">id</span><span class="o">=</span><span class="s">&#39;fileInput&#39;</span> <span class="na">multiple</span><span class="o">=</span><span class="s">&#39;true&#39;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">button</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;uploadBtn&#34;</span> <span class="na">onclick</span><span class="o">=</span><span class="s">&#34;upload()&#34;</span><span class="p">&gt;</span>Upload<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">button</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;stopBtn&#34;</span> <span class="na">onclick</span><span class="o">=</span><span class="s">&#34;stop()&#34;</span><span class="p">&gt;</span>Stop<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">button</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;resumeBtn&#34;</span> <span class="na">onclick</span><span class="o">=</span><span class="s">&#34;resume()&#34;</span><span class="p">&gt;</span>resume<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">&lt;</span><span class="nt">h2</span> <span class="na">id</span><span class="o">=</span><span class="s">&#39;status&#39;</span><span class="p">&gt;&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span></code></pre></div><p>定义变量：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kd">let</span> <span class="nx">credentials</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span> <span class="c1">// STS凭证
+</span></span></span><span class="line"><span class="cl"><span class="kd">let</span> <span class="nx">ossClient</span><span class="p">;</span> <span class="c1">// oss客户端实例，创建需要用到accesskeyId
+</span></span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">fileInput</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;fileInput&#39;</span><span class="p">);</span> <span class="c1">// 文件选择器
+</span></span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">status</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;status&#39;</span><span class="p">);</span> <span class="c1">// 状态显示元素
+</span></span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">bucket</span> <span class="o">=</span> <span class="s1">&#39;mudontire-test&#39;</span><span class="p">;</span> <span class="c1">// bucket名称
+</span></span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">region</span> <span class="o">=</span> <span class="s1">&#39;oss-cn-shanghai&#39;</span><span class="p">;</span> <span class="c1">// oss服务区域名称
+</span></span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">partSize</span> <span class="o">=</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">;</span> <span class="c1">// 每个分片大小(byte)
+</span></span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">parallel</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span> <span class="c1">// 同时上传的分片数
+</span></span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">checkpoints</span> <span class="o">=</span> <span class="p">{};</span> <span class="c1">// 所有分片上传文件的检查点
+</span></span></span></code></pre></div><pre tabindex="0"><code>  ossClient = new OSS({
+    accessKeyId: AccessKeyId,
+    accessKeySecret: AccessKeySecret,
+    stsToken: SecurityToken,
+    bucket,
+    region
+  });
+</code></pre><h3 id="定义事件以及对应的逻辑">
+  定义事件以及对应的逻辑
+  <a class="heading-link" href="#%e5%ae%9a%e4%b9%89%e4%ba%8b%e4%bb%b6%e4%bb%a5%e5%8f%8a%e5%af%b9%e5%ba%94%e7%9a%84%e9%80%bb%e8%be%91">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h3>
+<h4 id="点击上传按钮">
+  点击上传按钮
+  <a class="heading-link" href="#%e7%82%b9%e5%87%bb%e4%b8%8a%e4%bc%a0%e6%8c%89%e9%92%ae">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h4>
+<p>​	更改状态&ndash;拿到文件&ndash;转为数组List&ndash;forEach遍历&mdash;判断是否小于分片大小{ 走普通上传逻辑、走分片上传逻辑}</p>
+<pre tabindex="0"><code class="language-jsw" data-lang="jsw">async function upload() {
+  status.innerText = &#39;Uploading&#39;;
+  const { files } = fileInput;
+  const fileList = Array.from(files);
+  const uploadTasks = fileList.forEach(file =&gt; {
+    // 如果文件大学小于分片大小，使用普通上传，否则使用分片上传
+    if (file.size &lt; partSize) {
+      commonUpload(file);
+    } else {
+      multipartUpload(file);
+    }
+  });
+}
+</code></pre><h4 id="普通上传事件">
+  普通上传事件
+  <a class="heading-link" href="#%e6%99%ae%e9%80%9a%e4%b8%8a%e4%bc%a0%e4%ba%8b%e4%bb%b6">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h4>
+<p>​	拿到OSS客户端&ndash;拿到文件名&ndash;Client.put(fileName,file)方法执行上传操作,</p>
+<p>​	该方法返回一个 <strong>Promise 对象</strong>，因此可以用 <code>.then/.catch</code> 或 <code>async/await</code> 处理结果。成功的话，执行回调</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="c1">// 普通上传
+</span></span></span><span class="line"><span class="cl"><span class="kr">async</span> <span class="kd">function</span> <span class="nx">commonUpload</span><span class="p">(</span><span class="nx">file</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">ossClient</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">await</span> <span class="nx">initOSSClient</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">fileName</span> <span class="o">=</span> <span class="nx">file</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nx">ossClient</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="nx">fileName</span><span class="p">,</span> <span class="nx">file</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Common upload </span><span class="si">${</span><span class="nx">file</span><span class="p">.</span><span class="nx">name</span><span class="si">}</span><span class="sb"> succeeded, result === `</span><span class="p">,</span> <span class="nx">result</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}).</span><span class="k">catch</span><span class="p">(</span><span class="nx">err</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Common upload </span><span class="si">${</span><span class="nx">file</span><span class="p">.</span><span class="nx">name</span><span class="si">}</span><span class="sb"> failed === `</span><span class="p">,</span> <span class="nx">err</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h4 id="分片上传">
+  分片上传
+  <a class="heading-link" href="#%e5%88%86%e7%89%87%e4%b8%8a%e4%bc%a0">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h4>
+<p>​	Client.multipartUpload(fileName,file,options )  ，其中这个<strong>options</strong>包括：</p>
+<table>
+  <thead>
+      <tr>
+          <th>配置项</th>
+          <th>类型</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>parallel</code></td>
+          <td>number</td>
+          <td>并行上传的分片数（默认 5），如设为 3 表示同时上传 3 个分片</td>
+      </tr>
+      <tr>
+          <td><code>partSize</code></td>
+          <td>number</td>
+          <td>每个分片的大小（单位：字节，默认 10MB），如 <code>1024 * 1024 * 20</code> 表示 20MB / 分片</td>
+      </tr>
+      <tr>
+          <td><code>progress</code></td>
+          <td>function</td>
+          <td>上传进度回调函数，实时返回上传进度</td>
+      </tr>
+      <tr>
+          <td>checkpoint</td>
+          <td></td>
+          <td>断点信息，用于续传（从上次失败的分片开始）</td>
+      </tr>
+      <tr>
+          <td>timeout</td>
+          <td></td>
+          <td>每个分片上传的超时时间（单位：毫秒）</td>
+      </tr>
+  </tbody>
+</table>
+<p>progress 回调函数返回的参数有：</p>
+<table>
+  <thead>
+      <tr>
+          <th>参数</th>
+          <th>来源</th>
+          <th>含义</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>p</code></td>
+          <td><strong>SDK 自动计算并传入</strong></td>
+          <td>上传进度，范围 <code>0 ~ 1</code>（0% ~ 100%）</td>
+      </tr>
+      <tr>
+          <td><code>checkpoint</code></td>
+          <td>SDK 自动传入</td>
+          <td>断点续传的检查点信息</td>
+      </tr>
+      <tr>
+          <td><code>res</code></td>
+          <td>SDK 自动传入</td>
+          <td>当前分片的响应信息</td>
+      </tr>
+      <tr>
+          <td><code>path</code></td>
+          <td>你传入的</td>
+          <td>上传的文件路径/名称</td>
+      </tr>
+  </tbody>
+</table>
+<p>这个里面包含了如下的信息：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">checkpoint</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">uploadId</span><span class="o">:</span> <span class="s2">&#34;0004B9894C1E4C4E8B7C8B9A12345678&#34;</span><span class="p">,</span>  <span class="c1">// ← OSS 生成的唯一 ID
+</span></span></span><span class="line"><span class="cl">  <span class="nx">file</span><span class="o">:</span> <span class="nx">File</span><span class="p">,</span>                                       <span class="c1">// 文件对象
+</span></span></span><span class="line"><span class="cl">  <span class="nx">name</span><span class="o">:</span> <span class="s2">&#34;example.jpg&#34;</span><span class="p">,</span>                              <span class="c1">// 文件名
+</span></span></span><span class="line"><span class="cl">  <span class="nx">partSize</span><span class="o">:</span> <span class="mi">102400</span><span class="p">,</span>                                 <span class="c1">// 分片大小
+</span></span></span><span class="line"><span class="cl">  <span class="nx">doneParts</span><span class="o">:</span> <span class="p">[</span>                                      <span class="c1">// 已上传的分片信息
+</span></span></span><span class="line"><span class="cl">    <span class="p">{</span> <span class="nx">number</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">etag</span><span class="o">:</span> <span class="s2">&#34;\&#34;ABC123\&#34;&#34;</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span> <span class="nx">number</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span> <span class="nx">etag</span><span class="o">:</span> <span class="s2">&#34;\&#34;DEF456\&#34;&#34;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">],</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// ... 其他信息
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="c1">// 分片上传
+</span></span></span><span class="line"><span class="cl"><span class="kr">async</span> <span class="kd">function</span> <span class="nx">multipartUpload</span><span class="p">(</span><span class="nx">file</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">ossClient</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">await</span> <span class="nx">initOSSClient</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">fileName</span> <span class="o">=</span> <span class="nx">file</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nx">ossClient</span><span class="p">.</span><span class="nx">multipartUpload</span><span class="p">(</span><span class="nx">fileName</span><span class="p">,</span> <span class="nx">file</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">parallel</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">partSize</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">progress</span><span class="o">:</span> <span class="nx">onMultipartUploadProgress</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 生成文件下载地址
+</span></span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="sb">`http://</span><span class="si">${</span><span class="nx">bucket</span><span class="si">}</span><span class="sb">.</span><span class="si">${</span><span class="nx">region</span><span class="si">}</span><span class="sb">.aliyuncs.com/</span><span class="si">${</span><span class="nx">fileName</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Multipart upload </span><span class="si">${</span><span class="nx">file</span><span class="p">.</span><span class="nx">name</span><span class="si">}</span><span class="sb"> succeeded, url === `</span><span class="p">,</span> <span class="nx">url</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}).</span><span class="k">catch</span><span class="p">(</span><span class="nx">err</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Multipart upload </span><span class="si">${</span><span class="nx">file</span><span class="p">.</span><span class="nx">name</span><span class="si">}</span><span class="sb"> failed === `</span><span class="p">,</span> <span class="nx">err</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h4 id="进度回调函数">
+  进度回调函数
+  <a class="heading-link" href="#%e8%bf%9b%e5%ba%a6%e5%9b%9e%e8%b0%83%e5%87%bd%e6%95%b0">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="c1">// 分片上传进度改变回调
+</span></span></span><span class="line"><span class="cl"><span class="kr">async</span> <span class="kd">function</span> <span class="nx">onMultipartUploadProgress</span><span class="p">(</span><span class="nx">progress</span><span class="p">,</span> <span class="nx">checkpoint</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">checkpoint</span><span class="p">.</span><span class="nx">file</span><span class="p">.</span><span class="nx">name</span><span class="si">}</span><span class="sb"> 上传进度 </span><span class="si">${</span><span class="nx">progress</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">checkpoints</span><span class="p">[</span><span class="nx">checkpoint</span><span class="p">.</span><span class="nx">uploadId</span><span class="p">]</span> <span class="o">=</span> <span class="nx">checkpoint</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 判断STS Token是否将要过期，过期则重新获取
+</span></span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="p">{</span> <span class="nx">Expiration</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">credentials</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">timegap</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nx">Expiration</span> <span class="o">&amp;&amp;</span> <span class="nx">moment</span><span class="p">(</span><span class="nx">Expiration</span><span class="p">).</span><span class="nx">subtract</span><span class="p">(</span><span class="nx">timegap</span><span class="p">,</span> <span class="s1">&#39;minute&#39;</span><span class="p">).</span><span class="nx">isBefore</span><span class="p">(</span><span class="nx">moment</span><span class="p">()))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`STS token will expire in </span><span class="si">${</span><span class="nx">timegap</span><span class="si">}</span><span class="sb"> minutes，uploading will pause and resume after getting new STS token`</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">ossClient</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">ossClient</span><span class="p">.</span><span class="nx">cancel</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">await</span> <span class="nx">getCredential</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">await</span> <span class="nx">resumeMultipartUpload</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h4 id="断点续传">
+  断点续传
+  <a class="heading-link" href="#%e6%96%ad%e7%82%b9%e7%bb%ad%e4%bc%a0">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h4>
+<p><strong><code>resumeMultipartUpload</code> 也是阿里云 OSS SDK 提供的方法</strong>，用于<strong>断点续传</strong>。可以用保存的 <code>checkpoint</code> 继续上传，<strong>不用从头开始</strong>。</p>
+<table>
+  <thead>
+      <tr>
+          <th>方法</th>
+          <th>所属</th>
+          <th>作用</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>resumeMultipartUpload</code></td>
+          <td><strong>OSS SDK 内置方法</strong></td>
+          <td>从断点（checkpoint）继续未完成的断点续传</td>
+      </tr>
+  </tbody>
+</table>
+<p>他需要根据保存的checkpoint信息进行续传，</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="c1">// 断点续传
+</span></span></span><span class="line"><span class="cl"><span class="kr">async</span> <span class="kd">function</span> <span class="nx">resumeMultipartUpload</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">Object</span><span class="p">.</span><span class="nx">values</span><span class="p">(</span><span class="nx">checkpoints</span><span class="p">).</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">checkpoint</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="p">{</span> <span class="nx">uploadId</span><span class="p">,</span> <span class="nx">file</span><span class="p">,</span> <span class="nx">name</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">checkpoint</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">ossClient</span><span class="p">.</span><span class="nx">multipartUpload</span><span class="p">(</span><span class="nx">uploadId</span><span class="p">,</span> <span class="nx">file</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">parallel</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">partSize</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">progress</span><span class="o">:</span> <span class="nx">onMultipartUploadProgress</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">checkpoint</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;before delete checkpoints === &#39;</span><span class="p">,</span> <span class="nx">checkpoints</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="k">delete</span> <span class="nx">checkpoints</span><span class="p">[</span><span class="nx">checkpoint</span><span class="p">.</span><span class="nx">uploadId</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;after delete checkpoints === &#39;</span><span class="p">,</span> <span class="nx">checkpoints</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="sb">`http://</span><span class="si">${</span><span class="nx">bucket</span><span class="si">}</span><span class="sb">.</span><span class="si">${</span><span class="nx">region</span><span class="si">}</span><span class="sb">.aliyuncs.com/</span><span class="si">${</span><span class="nx">name</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Resume multipart upload </span><span class="si">${</span><span class="nx">file</span><span class="p">.</span><span class="nx">name</span><span class="si">}</span><span class="sb"> succeeded, url === `</span><span class="p">,</span> <span class="nx">url</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}).</span><span class="k">catch</span><span class="p">(</span><span class="nx">err</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Resume multipart upload failed === &#39;</span><span class="p">,</span> <span class="nx">err</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">});</span>
+</span></span><span class="line"><span class="cl">  <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><pre tabindex="0"><code></code></pre><h4 id="暂停和续传按钮">
+  暂停和续传按钮
+  <a class="heading-link" href="#%e6%9a%82%e5%81%9c%e5%92%8c%e7%bb%ad%e4%bc%a0%e6%8c%89%e9%92%ae">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="c1">// 暂停上传
+</span></span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">stop</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">status</span><span class="p">.</span><span class="nx">innerText</span> <span class="o">=</span> <span class="s1">&#39;Stopping&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nx">ossClient</span><span class="p">)</span> <span class="nx">ossClient</span><span class="p">.</span><span class="nx">cancel</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 续传
+</span></span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">resume</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">status</span><span class="p">.</span><span class="nx">innerText</span> <span class="o">=</span> <span class="s1">&#39;Resuming&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nx">ossClient</span><span class="p">)</span> <span class="nx">resumeMultipartUpload</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="秒传是什么">
+  秒传是什么？
+  <a class="heading-link" href="#%e7%a7%92%e4%bc%a0%e6%98%af%e4%bb%80%e4%b9%88">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h2>
+<p>秒传的本质是：<strong>上传前先计算文件的唯一哈希（MD5/SHA1），先查 OSS 是否已有该哈希对应的文件，有则直接返回文件地址（无需上传），无则正常上传</strong>。</p>
+<p>文件哈希是唯一标识（相同文件哈希必然相同）；OSS 支持通过 <code>oss:GetObjectMeta</code> 或自定义元信息（如 <code>x-oss-meta-filehash</code>）判断文件是否存在。</p>
+<table>
+  <thead>
+      <tr>
+          <th>优化点</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>MD5 计算优化</strong></td>
+          <td>大文件只计算前 1MB + 文件大小，或分片采样</td>
+      </tr>
+      <tr>
+          <td><strong>Web Worker</strong></td>
+          <td>MD5 计算放 Web Worker，避免阻塞主线程</td>
+      </tr>
+      <tr>
+          <td><strong>本地缓存</strong></td>
+          <td>已上传文件的 MD5 存 localStorage，下次直接秒传</td>
+      </tr>
+      <tr>
+          <td><strong>OSS Callback</strong></td>
+          <td>上传成功后 OSS 主动回调服务端记录，更可靠</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="组件参数的设置">
+  组件参数的设置
+  <a class="heading-link" href="#%e7%bb%84%e4%bb%b6%e5%8f%82%e6%95%b0%e7%9a%84%e8%ae%be%e7%bd%ae">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h2>
+<p>用props传参，指定类型和默认值</p>
+<p>定义一些布尔类型，保存按钮的状态和数量（上传、暂停、恢复）、是否分片</p>
+<p>分片大小、并发数量、阿里云客户端、并发数等</p>
+<h2 id="oss临时凭证">
+  OSS临时凭证
+  <a class="heading-link" href="#oss%e4%b8%b4%e6%97%b6%e5%87%ad%e8%af%81">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h2>
+<p>如果不想让其他人访问到自己OSS里面的资源，可以设置STStoken</p>
+<p>前往 <a href="https://link.juejin.cn/?target=https%3A%2F%2Fram.console.aliyun.com"  class="external-link" target="_blank" rel="noopener">RAM 控制台</a>进行子账号和权限的配置。</p>
+<p>首先创建一个用户，并给该用户分配调用 STS 服务 AssumeRole 接口的权限，保存一下该用户的 access key 和 access key secret，创建 RAM 角色（即有权限在前端调用 aliyun-oss SDK 上传文件的用户角色）</p>
+<p>创建 RAM</p>
+<p>用户拿到凭证 accesskey</p>
+<p>策略：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;Version&#34;</span><span class="o">:</span> <span class="s2">&#34;1&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;Statement&#34;</span><span class="o">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="s2">&#34;Effect&#34;</span><span class="o">:</span> <span class="s2">&#34;Allow&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="s2">&#34;Action&#34;</span><span class="o">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;oss:PutObject&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;oss:InitiateMultipartUpload&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;oss:UploadPart&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;oss:UploadPartCopy&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;oss:CompleteMultipartUpload&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;oss:AbortMultipartUpload&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;oss:ListMultipartUploads&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;oss:ListParts&#34;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">],</span>
+</span></span><span class="line"><span class="cl">      <span class="s2">&#34;Resource&#34;</span><span class="o">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;acs:oss:*:*:mudontire-test&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;acs:oss:*:*:mudontire-test/*&#34;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><pre tabindex="0"><code>/**
+ *  @description 获取临时凭证
+ */
+async getOss() {
+  let res = await request({
+    url: &#39;/StsToken&#39;, // 获取oss临时凭证接口，根据自己配置修改
+  })
+  let isPass = {
+    pass: true,
+  }
+  if (res.status === 200) {
+    this.credentials = res.data
+  } else {
+    isPass = { ...res, pass: false }
+  }
+  return isPass
+},
+</code></pre>
+      </div>
+
+
+      <footer>
+        
+
+
+        
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2024 -
+    
+    2026
+     李航 
+    ·
+    
+    技术支持 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.min.6ae284be93d2d19dad1f02b0039508d9aab3180a12a06dcc71b0b0ef7825a317.js" integrity="sha256-auKEvpPS0Z2tHwKwA5UI2aqzGAoSoG3McbCw73gloxc="></script>
+  
+
+  
+  
+  
+  <script src="/js/notes.min.f64699143f016d659765c934a2721898ad12375f26a231691ab6b83744d7e970.js" integrity="sha256-9kaZFD8BbWWXZck0onIYmK0SN18mojFpGra4N0TX6XA="></script>
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<aside class="left-sidebar-nav" aria-label="本文目录">
+  <div class="left-sidebar-card">
+    <p class="left-sidebar-title">本文目录</p>
+    <nav class="left-sidebar-toc">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#前言创建部分">前言&ndash;创建部分</a></li>
+    <li><a href="#定义先行">定义先行</a></li>
+    <li><a href="#大文件怎么上传">大文件怎么上传？</a></li>
+    <li><a href="#前端实现">前端实现</a>
+      <ul>
+        <li><a href="#定义元素和变量">定义元素和变量</a></li>
+        <li><a href="#定义事件以及对应的逻辑">定义事件以及对应的逻辑</a></li>
+      </ul>
+    </li>
+    <li><a href="#秒传是什么">秒传是什么？</a></li>
+    <li><a href="#组件参数的设置">组件参数的设置</a></li>
+    <li><a href="#oss临时凭证">OSS临时凭证</a></li>
+  </ul>
+</nav>
+    </nav>
+  </div>
+</aside>
+<script>
+  document.body.classList.add("has-left-toc");
+</script>
+
+</body>
+
+</html>
