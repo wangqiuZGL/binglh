@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  虚拟DOM&amp;Diff算法 · 首页
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="李航">
+<meta name="description" content="文件分片、断点、进度显示">
+<meta name="keywords" content="blog,developer,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="虚拟DOM&Diff算法">
+  <meta name="twitter:description" content="文件分片、断点、进度显示">
+
+<meta property="og:url" content="http://localhost:1313/posts/diff/">
+  <meta property="og:site_name" content="首页">
+  <meta property="og:title" content="虚拟DOM&Diff算法">
+  <meta property="og:description" content="文件分片、断点、进度显示">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-01-01T10:00:00+08:00">
+    <meta property="article:modified_time" content="2025-01-01T10:00:00+08:00">
+    <meta property="article:tag" content="VUE">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/diff/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+  
+    
+    <link rel="stylesheet" href="/css/custom.css" media="screen">
+  
+
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      首页
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about/">过来看看</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">学习记录</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/projects/">问题记录</a>
+            </li>
+          
+        
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/diff/">
+              虚拟DOM&amp;Diff算法
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2025-01-01T10:00:00&#43;08:00">
+                January 1, 2025
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              阅读时间：2 分钟
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/vue/">VUE</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      
+
+
+      <div class="post-content">
+        
+        <h2 id="什么是虚拟dom">
+  什么是虚拟DOM
+  <a class="heading-link" href="#%e4%bb%80%e4%b9%88%e6%98%af%e8%99%9a%e6%8b%9fdom">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h2>
+<p>​	<strong>一个用来表示真实DOM的对象</strong></p>
+<p>​</p>
+<pre tabindex="0"><code>&lt;ul id=&#34;list&#34;&gt;
+    &lt;li class=&#34;item&#34;&gt;哈哈&lt;/li&gt;
+    &lt;li class=&#34;item&#34;&gt;呵呵&lt;/li&gt;
+    &lt;li class=&#34;item&#34;&gt;嘿嘿&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kd">let</span> <span class="nx">oldVDOM</span> <span class="o">=</span> <span class="p">{</span> <span class="c1">// 旧虚拟DOM
+</span></span></span><span class="line"><span class="cl">        <span class="nx">tagName</span><span class="o">:</span> <span class="s1">&#39;ul&#39;</span><span class="p">,</span> <span class="c1">// 标签名
+</span></span></span><span class="line"><span class="cl">        <span class="nx">props</span><span class="o">:</span> <span class="p">{</span> <span class="c1">// 标签属性
+</span></span></span><span class="line"><span class="cl">            <span class="nx">id</span><span class="o">:</span> <span class="s1">&#39;list&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">children</span><span class="o">:</span> <span class="p">[</span> <span class="c1">// 标签子节点
+</span></span></span><span class="line"><span class="cl">            <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">tagName</span><span class="o">:</span> <span class="s1">&#39;li&#39;</span><span class="p">,</span> <span class="nx">props</span><span class="o">:</span> <span class="p">{</span> <span class="kr">class</span><span class="o">:</span> <span class="s1">&#39;item&#39;</span> <span class="p">},</span> <span class="nx">children</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;哈哈&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">            <span class="p">},</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">tagName</span><span class="o">:</span> <span class="s1">&#39;li&#39;</span><span class="p">,</span> <span class="nx">props</span><span class="o">:</span> <span class="p">{</span> <span class="kr">class</span><span class="o">:</span> <span class="s1">&#39;item&#39;</span> <span class="p">},</span> <span class="nx">children</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;呵呵&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">            <span class="p">},</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">tagName</span><span class="o">:</span> <span class="s1">&#39;li&#39;</span><span class="p">,</span> <span class="nx">props</span><span class="o">:</span> <span class="p">{</span> <span class="kr">class</span><span class="o">:</span> <span class="s1">&#39;item&#39;</span> <span class="p">},</span> <span class="nx">children</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;嘿嘿&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">            <span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><p><strong>虚拟DOM算法操作真实DOM，性能高于直接操作真实DOM</strong></p>
+<h2 id="什么是diff算法---vue2">
+  什么是diff算法 &mdash;- vue2
+  <a class="heading-link" href="#%e4%bb%80%e4%b9%88%e6%98%afdiff%e7%ae%97%e6%b3%95---vue2">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h2>
+<p>diff 算法是一种通过同层的树节点进行比较的高效算法，深度优先算法。 时间复杂度:O(n)</p>
+<p>​	其有两个特点：</p>
+<p>​		•比较只会在同层级进行, 不会跨层级比较</p>
+<p>​		•在diff比较的过程中，循环从两边向中间比较</p>
+<p>流程：</p>
+<p>当数据改变时，会触发<code>setter</code>，并且通过<code>Dep.notify</code>去通知所有<code>订阅者Watcher</code>，订阅者们就会调用<code>patch方法</code>，给真实DOM打补丁，更新相应的视图。</p>
+<p>分为多种情况：</p>
+<img src="/images/assets/image-20260315174408410.png" alt="image-20260315174408410" style="zoom:67%;" />
+<p>patch方法：接收两个参数，<strong>oldVnode newVnode</strong></p>
+<p>​	如果 这俩相同（判断标注：key、标签名、input框要求type相同、是否都有data），那么继续向深层比较</p>
+<p>​		如果这两个对象 === 比完一样，那么终止</p>
+<p>​		如果节点类型一样，但是内容不一样，则用newVnode 里面的替换掉 旧的</p>
+<p>​		他们的孩子处理 ： 多了添加，少了删除，如果都有孩子，那么就要进行 <code>updateChildren</code></p>
+<p>​	如果这俩不相同，替换就行了</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">oldEl</span> <span class="o">=</span> <span class="nx">oldVnode</span><span class="p">.</span><span class="nx">el</span><span class="p">;</span> <span class="c1">//旧虚拟节点的真实DOM节点 ,为了拿到他的父节点
+</span></span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">parentEl</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">(</span><span class="nx">oldEl</span><span class="p">)</span> <span class="c1">// 拿到原本的父节点
+</span></span></span><span class="line"><span class="cl"><span class="nx">createEl</span><span class="p">(</span><span class="nx">newVnode</span><span class="p">);</span> <span class="c1">//创建新虚拟节点对应  的真实dom
+</span></span></span><span class="line"><span class="cl"><span class="k">if</span><span class="p">(</span><span class="nx">parentEl</span><span class="o">!==</span><span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">api</span><span class="p">.</span><span class="nx">insertBefore</span><span class="p">(</span><span class="nx">parentEle</span><span class="p">,</span> <span class="nx">vnode</span><span class="p">.</span><span class="nx">el</span><span class="p">,</span> <span class="nx">api</span><span class="p">.</span><span class="nx">nextSibling</span><span class="p">(</span><span class="nx">oEl</span><span class="p">))</span> <span class="c1">// 将新元素添加进父元素
+</span></span></span><span class="line"><span class="cl">    <span class="nx">api</span><span class="p">.</span><span class="nx">removeChild</span><span class="p">(</span><span class="nx">parentEle</span><span class="p">,</span> <span class="nx">oldVnode</span><span class="p">.</span><span class="nx">el</span><span class="p">)</span>  <span class="c1">// 移除以前的旧元素节点
+</span></span></span><span class="line"><span class="cl">    <span class="nx">oldVnode</span> <span class="o">=</span> <span class="kc">null</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">return</span> <span class="nx">newVnode</span>
+</span></span></code></pre></div><h3 id="updatechildren">
+  updateChildren
+  <a class="heading-link" href="#updatechildren">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h3>
+<p>对比的方法就是首尾指针法：</p>
+<p>​	新的子节点集合和旧的子节点集合，各有首尾两个指针</p>
+<p>​</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">ul</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;</span><span class="nx">li</span><span class="o">&gt;</span><span class="nx">a</span><span class="o">&lt;</span><span class="err">/li&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;</span><span class="nx">li</span><span class="o">&gt;</span><span class="nx">b</span><span class="o">&lt;</span><span class="err">/li&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;</span><span class="nx">li</span><span class="o">&gt;</span><span class="nx">c</span><span class="o">&lt;</span><span class="err">/li&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">/ul&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">修改数据后</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">ul</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;</span><span class="nx">li</span><span class="o">&gt;</span><span class="nx">b</span><span class="o">&lt;</span><span class="err">/li&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;</span><span class="nx">li</span><span class="o">&gt;</span><span class="nx">c</span><span class="o">&lt;</span><span class="err">/li&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;</span><span class="nx">li</span><span class="o">&gt;</span><span class="nx">e</span><span class="o">&lt;</span><span class="err">/li&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;</span><span class="nx">li</span><span class="o">&gt;</span><span class="nx">a</span><span class="o">&lt;</span><span class="err">/li&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;</span><span class="err">/ul&gt;</span>
+</span></span></code></pre></div><p><img src="/images/assets/image-20260315175211708.png" alt="image-20260315175211708"></p>
+<p>然后会进行互相进行比较，总共有五种比较情况：</p>
+<pre tabindex="0"><code>oldS = a, oldE = c
+newS = b, newE = a
+</code></pre><ul>
+<li>1、<code>oldS 和 newS </code>使用<code>sameVnode方法</code>进行比较，<code>sameVnode(oldS, newS)</code></li>
+<li>2、<code>oldS 和 newE </code>使用<code>sameVnode方法</code>进行比较，<code>sameVnode(oldS, newE)</code></li>
+<li>3、<code>oldE 和 newS </code>使用<code>sameVnode方法</code>进行比较，<code>sameVnode(oldE, newS)</code></li>
+<li>4、<code>oldE 和 newE </code>使用<code>sameVnode方法</code>进行比较，<code>sameVnode(oldE, newE)</code></li>
+<li>5、如果以上逻辑都匹配不到，再把所有旧子节点的 <code>key</code> 做一个映射到旧节点下标的 <code>key -&gt; index</code> 表，然后用新 <code>vnode</code> 的 <code>key</code> 去找出在旧节点中可以复用的位置。</li>
+</ul>
+<h4 id="第一步">
+  第一步
+  <a class="heading-link" href="#%e7%ac%ac%e4%b8%80%e6%ad%a5">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h4>
+<p><code>oldS 和 newE</code> 相等，需要把<code>节点a</code>移动到<code>newE</code>所对应的位置</p>
+<p><img src="/images/assets/image-20260315175354615.png" alt="image-20260315175354615"></p>
+<p>此时 <code>oldS</code>和 <code>newE</code> 移动 【只让相等的移动。S++ E&ndash;】</p>
+<h4 id="第二步">
+  第二步
+  <a class="heading-link" href="#%e7%ac%ac%e4%ba%8c%e6%ad%a5">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h4>
+<p><img src="/images/assets/image-20260315175502192.png" alt="image-20260315175502192"></p>
+<h4 id="第三步">
+  第三步
+  <a class="heading-link" href="#%e7%ac%ac%e4%b8%89%e6%ad%a5">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h4>
+<p><img src="/images/assets/image-20260315175525138.png" alt="image-20260315175525138"></p>
+<h4 id="第四步">
+  第四步
+  <a class="heading-link" href="#%e7%ac%ac%e5%9b%9b%e6%ad%a5">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h4>
+<p><code>oldS &gt; oldE</code>，则<code>oldCh</code>先遍历完成了，而<code>newCh</code>还没遍历完，说明<code>newCh比oldCh多</code>，所以需要将多出来的节点，插入到真实DOM上对应的位置上</p>
+<p><img src="/images/assets/image-20260315180536046.png" alt="image-20260315180536046"></p>
+<h2 id="vue3-diff--最长递增子序列">
+  Vue3 Diff —— 最长递增子序列
+  <a class="heading-link" href="#vue3-diff--%e6%9c%80%e9%95%bf%e9%80%92%e5%a2%9e%e5%ad%90%e5%ba%8f%e5%88%97">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h2>
+<p><strong>静态标记（PatchFlags）</strong>：编译阶段标记动态内容，diff 时只处理动态部分，跳过静态节点；</p>
+<p><strong>最长递增子序列</strong>：针对列表渲染，计算最小 DOM 移动量，减少不必要的 DOM 操作；</p>
+<p><strong>非递归流程</strong>：避免深层递归阻塞主线程，配合浏览器调度更流畅。</p>
+<p>这是 Vue3 diff 最核心的部分，针对 <code>v-for</code> 列表的对比逻辑：</p>
+<ul>
+<li>步骤 1：先做「头尾快速对比」（比如旧列表头是 a，新列表头也是 a → 直接复用，指针后移）；</li>
+<li>步骤 2：对剩余节点，用「最长递增子序列」计算出无需移动的节点；</li>
+<li>步骤 3：只移动需要调整位置的节点，或创建 / 删除新增 / 删除的节点。</li>
+</ul>
+
+      </div>
+
+
+      <footer>
+        
+
+
+        
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2024 -
+    
+    2026
+     李航 
+    ·
+    
+    技术支持 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+  
+  
+  <script src="/js/notes.js"></script>
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<aside class="left-sidebar-nav" aria-label="本文目录">
+  <div class="left-sidebar-card">
+    <p class="left-sidebar-title">本文目录</p>
+    <nav class="left-sidebar-toc">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#什么是虚拟dom">什么是虚拟DOM</a></li>
+    <li><a href="#什么是diff算法---vue2">什么是diff算法 &mdash;- vue2</a>
+      <ul>
+        <li><a href="#updatechildren">updateChildren</a></li>
+      </ul>
+    </li>
+    <li><a href="#vue3-diff--最长递增子序列">Vue3 Diff —— 最长递增子序列</a></li>
+  </ul>
+</nav>
+    </nav>
+  </div>
+</aside>
+<script>
+  document.body.classList.add("has-left-toc");
+</script>
+
+</body>
+
+</html>

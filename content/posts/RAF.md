@@ -2,7 +2,7 @@
 title = "requestAnimationFram的触发时机"
 tags = ["JS"]
 date = 2025-01-01T10:00:00+08:00
-cover = "/images/assets/boke.png"
+cover = "/images/assets/a.jpg"
 summary = "事件循环"
 +++
 

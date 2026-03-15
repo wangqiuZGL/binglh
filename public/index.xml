@@ -71,5 +71,12 @@
       <guid>http://localhost:1313/posts/%E5%A4%A7%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%8A%80%E6%9C%AF/</guid>
       <description>文件分片、断点、进度显示</description>
     </item>
+    <item>
+      <title>虚拟DOM&amp;Diff算法</title>
+      <link>http://localhost:1313/posts/diff/</link>
+      <pubDate>Wed, 01 Jan 2025 10:00:00 +0800</pubDate>
+      <guid>http://localhost:1313/posts/diff/</guid>
+      <description>文件分片、断点、进度显示</description>
+    </item>
   </channel>
 </rss>
