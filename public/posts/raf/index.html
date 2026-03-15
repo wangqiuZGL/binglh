@@ -3,7 +3,7 @@
 
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <title>
-  npm vs pnpm · 首页
+  requestAnimationFram的触发时机 · 首页
 </title>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,30 +13,30 @@
 
 
 <meta name="author" content="李航">
-<meta name="description" content="介绍二者的区别">
+<meta name="description" content="事件循环">
 <meta name="keywords" content="blog,developer,personal">
 
 
 
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="npm vs pnpm">
-  <meta name="twitter:description" content="介绍二者的区别">
+  <meta name="twitter:title" content="requestAnimationFram的触发时机">
+  <meta name="twitter:description" content="事件循环">
 
-<meta property="og:url" content="http://localhost:1313/posts/npmpnpm/">
+<meta property="og:url" content="http://localhost:1313/posts/raf/">
   <meta property="og:site_name" content="首页">
-  <meta property="og:title" content="npm vs pnpm">
-  <meta property="og:description" content="介绍二者的区别">
+  <meta property="og:title" content="requestAnimationFram的触发时机">
+  <meta property="og:description" content="事件循环">
   <meta property="og:locale" content="zh_cn">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2025-03-13T10:00:00+08:00">
-    <meta property="article:modified_time" content="2025-03-13T10:00:00+08:00">
-    <meta property="article:tag" content="Node">
+    <meta property="article:published_time" content="2025-01-01T10:00:00+08:00">
+    <meta property="article:modified_time" content="2025-01-01T10:00:00+08:00">
+    <meta property="article:tag" content="JS">
 
 
 
 
-<link rel="canonical" href="http://localhost:1313/posts/npmpnpm/">
+<link rel="canonical" href="http://localhost:1313/posts/raf/">
 
 
 <link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
@@ -149,8 +149,8 @@
       <header>
         <div class="post-title">
           <h1 class="title">
-            <a class="title-link" href="http://localhost:1313/posts/npmpnpm/">
-              npm vs pnpm
+            <a class="title-link" href="http://localhost:1313/posts/raf/">
+              requestAnimationFram的触发时机
             </a>
           </h1>
         </div>
@@ -158,8 +158,8 @@
           <div class="date">
             <span class="posted-on">
               <i class="fa-solid fa-calendar" aria-hidden="true"></i>
-              <time datetime="2025-03-13T10:00:00&#43;08:00">
-                March 13, 2025
+              <time datetime="2025-01-01T10:00:00&#43;08:00">
+                January 1, 2025
               </time>
             </span>
             <span class="reading-time">
@@ -172,7 +172,7 @@
           <div class="tags">
   <i class="fa-solid fa-tag" aria-hidden="true"></i>
     <span class="tag">
-      <a href="/tags/node/">Node</a>
+      <a href="/tags/js/">JS</a>
     </span></div>
 
         </div>
@@ -183,46 +183,58 @@
 
       <div class="post-content">
         
-        <h2 id="pnpm和npm比较">
-  pnpm和npm比较
-  <a class="heading-link" href="#pnpm%e5%92%8cnpm%e6%af%94%e8%be%83">
+        <h2 id="传统的问题">
+  传统的问题
+  <a class="heading-link" href="#%e4%bc%a0%e7%bb%9f%e7%9a%84%e9%97%ae%e9%a2%98">
     <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
     <span class="sr-only">链接到标题</span>
   </a>
 </h2>
-<p>pnpm 基于 <strong>内容寻址</strong> 的文件系统来存储磁盘上所有的文件 ，在项目中需要使用到依赖的时候，<strong>pnpm 只会安装一次</strong>，之后再次使用都会直接<strong>硬链接</strong>指向该依赖，极大节省磁盘空间，并且加快安装速度</p>
-<blockquote>
-<p>即使一个包的不同版本，pnpm 也会极大程度地复用之前版本的代码，仅下载更新的几个包</p>
-</blockquote>
-<p>npm2  依赖管理 ： 按照 安装包的<strong>依赖树</strong>结构 直接填充在本地的目录结构下。比如<code>express</code>和<code>koa</code>他们会同时依赖<code>accepts</code></p>
-<img src="/images/assets/image-20260313194958246.png" alt="image-20260313194958246" style="zoom:50%;" />
-<blockquote>
+<p>用 <code>setInterval(fn, 16)</code> 做动画（16ms 约等于 60 帧 / 秒），看似能对齐屏幕刷新率，但存在致命问题：</p>
+<p><strong>时机不准</strong>：定时器的回调执行时机由 JS 事件循环决定，即使设置 16ms，也可能因为主线程阻塞（比如有耗时任务）导致回调延迟执行，造成帧丢失、动画卡顿。</p>
+<p><strong>与屏幕刷新不同步</strong>：屏幕刷新率是固定的（比如 60Hz 对应每 16.67ms 刷新一次），但定时器无法感知屏幕的刷新节奏，可能出现 “帧撕裂”（比如屏幕刚刷新完，定时器才执行绘制，导致下一帧要等更久）。</p>
+<p><strong>无优化机制</strong>：即使页面隐藏（比如切到其他标签页），定时器仍会执行，浪费 CPU / 电池资源。</p>
+<h2 id="requestanimationframe-优势在哪">
+  requestAnimationFrame 优势在哪
+  <a class="heading-link" href="#requestanimationframe-%e4%bc%98%e5%8a%bf%e5%9c%a8%e5%93%aa">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h2>
+<p><code>requestAnimationFrame</code> (rAF) 为什么能让动画更流畅</p>
 <ol>
-<li>层级依赖过深</li>
-<li>相同包的相同版本会多次被下载，利用率低，占用磁盘空间大</li>
+<li><strong>精准对齐屏幕刷新率</strong></li>
 </ol>
-</blockquote>
-<p>npm3 不再使用嵌套的结构了 , <strong>扁平化</strong>——<strong>扁平化依赖算法耗时长</strong></p>
-<img src="/images/assets/image-20260313195047781.png" alt="image-20260313195047781" style="zoom:50%;" />
-<p>如果是同版本的，那就都在同一级目录</p>
-<p>但是如果版本不同，npm还是会完整的下载两个不同的版本：</p>
-<p><img src="/images/assets/image-20260313195141412.png" alt="image-20260313195141412"></p>
-<p>npm5 引入 package-lock.json 机制，锁定项目的依赖结构，保证依赖的稳定性</p>
-<h2 id="pnmp的优势">
-  pnmp的优势
-  <a class="heading-link" href="#pnmp%e7%9a%84%e4%bc%98%e5%8a%bf">
+<p>浏览器会在<strong>每次屏幕刷新前</strong>执行 rAF 的回调函数（比如 60Hz 屏幕每 16.67ms 执行一次），确保绘制操作刚好赶上屏幕刷新，避免 “帧撕裂” 和无效绘制。</p>
+<ul>
+<li>比如：屏幕准备刷新时，rAF 回调执行绘制逻辑，绘制结果直接被屏幕渲染，动画帧和屏幕刷新完全同步。</li>
+</ul>
+<ol start="2">
+<li><strong>由浏览器统一调度，优先级更高</strong></li>
+</ol>
+<p>rAF 的回调会被纳入浏览器的<strong>渲染流水线</strong>（布局 → 绘制 → 合成），优先级高于普通定时器：</p>
+<ul>
+<li>即使主线程有轻微阻塞，浏览器也会优先保证 rAF 回调在刷新前执行，减少帧丢失。</li>
+<li>若当前帧时间不足（比如回调里有耗时操作），浏览器会跳过该帧，避免卡顿扩散。</li>
+</ul>
+<ol start="3">
+<li><strong>自动适配刷新率 &amp; 节能优化</strong></li>
+</ol>
+<ul>
+<li>不同设备的刷新率不同（60Hz/120Hz/144Hz），rAF 会自动适配，无需手动调整时间间隔（比如 120Hz 屏幕会每 8.3ms 执行一次）。</li>
+<li>当页面隐藏（比如切标签页）或最小化时，rAF 会暂停执行，节省 CPU/GPU 资源，提升续航。</li>
+</ul>
+<h2 id="事件循环的任务分类">
+  事件循环的任务分类
+  <a class="heading-link" href="#%e4%ba%8b%e4%bb%b6%e5%be%aa%e7%8e%af%e7%9a%84%e4%bb%bb%e5%8a%a1%e5%88%86%e7%b1%bb">
     <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
     <span class="sr-only">链接到标题</span>
   </a>
 </h2>
-<p><code>node_modules</code> 中<code>.pnpm</code>下每个包的每个文件都是来自内容可<strong>寻址存储的硬链接</strong></p>
-<blockquote>
-<p>引用的是文件在文件系统中的物理索引（inode），当移动或者删除原始文件时，硬链接不会被破坏</p>
-<p>ln file hardfile   //  file删除之后，hardfile不受影响</p>
-<p>ln -s file softfile</p>
-</blockquote>
-<p>如果有依赖不同版本的时候，pnpm也只会下载不同版本中不同的内容</p>
-<p><img src="/images/assets/image-20260313195624512.png" alt="image-20260313195624512"></p>
+<p><strong>宏任务（Macrotask）</strong>：每次事件循环执行一个，包括 <code>script</code> 整体代码、<code>setTimeout/setInterval</code>、I/O、UI 交互事件、<code>setImmediate</code> 等。</p>
+<p><strong>微任务（Microtask）</strong>：宏任务执行完后，会立即清空所有微任务队列，包括 <code>Promise.then/catch/finally</code>、<code>async/await</code>、<code>queueMicrotask</code>、<code>MutationObserver</code> 等。</p>
+<p><strong>渲染阶段</strong>：微任务队列清空后，浏览器才会执行<strong>布局（Layout）→ 绘制（Paint）→ 合成（Composite）</strong> 等渲染操作。</p>
+<p>rAF 回调执行在 <strong>微任务全部执行完毕后</strong>、<strong>浏览器开始渲染前</strong>；</p>
 
       </div>
 
@@ -320,8 +332,9 @@
     <nav class="left-sidebar-toc">
       <nav id="TableOfContents">
   <ul>
-    <li><a href="#pnpm和npm比较">pnpm和npm比较</a></li>
-    <li><a href="#pnmp的优势">pnmp的优势</a></li>
+    <li><a href="#传统的问题">传统的问题</a></li>
+    <li><a href="#requestanimationframe-优势在哪">requestAnimationFrame 优势在哪</a></li>
+    <li><a href="#事件循环的任务分类">事件循环的任务分类</a></li>
   </ul>
 </nav>
     </nav>

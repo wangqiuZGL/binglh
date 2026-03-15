@@ -2,66 +2,73 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>首页</title>
-    <link>https://binglh.xyz/</link>
+    <link>http://localhost:1313/</link>
     <description>Recent content on 首页</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <lastBuildDate>Sat, 13 Sep 2025 10:00:00 +0800</lastBuildDate>
-    <atom:link href="https://binglh.xyz/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>keep-alive的妙用</title>
-      <link>https://binglh.xyz/posts/keep-alive/</link>
+      <link>http://localhost:1313/posts/keep-alive/</link>
       <pubDate>Sat, 13 Sep 2025 10:00:00 +0800</pubDate>
-      <guid>https://binglh.xyz/posts/keep-alive/</guid>
+      <guid>http://localhost:1313/posts/keep-alive/</guid>
       <description>新增钩子和component</description>
     </item>
     <item>
       <title>CDN介绍</title>
-      <link>https://binglh.xyz/posts/cdn/</link>
+      <link>http://localhost:1313/posts/cdn/</link>
       <pubDate>Thu, 13 Mar 2025 10:00:00 +0800</pubDate>
-      <guid>https://binglh.xyz/posts/cdn/</guid>
+      <guid>http://localhost:1313/posts/cdn/</guid>
       <description>CDN的相关知识</description>
     </item>
     <item>
       <title>koa and express</title>
-      <link>https://binglh.xyz/posts/koa/</link>
+      <link>http://localhost:1313/posts/koa/</link>
       <pubDate>Thu, 13 Mar 2025 10:00:00 +0800</pubDate>
-      <guid>https://binglh.xyz/posts/koa/</guid>
+      <guid>http://localhost:1313/posts/koa/</guid>
       <description>介绍二者的区别</description>
     </item>
     <item>
       <title>npm vs pnpm</title>
-      <link>https://binglh.xyz/posts/npmpnpm/</link>
+      <link>http://localhost:1313/posts/npmpnpm/</link>
       <pubDate>Thu, 13 Mar 2025 10:00:00 +0800</pubDate>
-      <guid>https://binglh.xyz/posts/npmpnpm/</guid>
+      <guid>http://localhost:1313/posts/npmpnpm/</guid>
       <description>介绍二者的区别</description>
     </item>
     <item>
       <title>关于</title>
-      <link>https://binglh.xyz/about/</link>
+      <link>http://localhost:1313/about/</link>
       <pubDate>Thu, 13 Mar 2025 00:00:00 +0800</pubDate>
-      <guid>https://binglh.xyz/about/</guid>
-      <description>&lt;p&gt;你好，我是李航。&lt;/p&gt;&#xA;&lt;h2 id=&#34;技术栈&#34;&gt;&#xA;  技术栈&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#%e6%8a%80%e6%9c%af%e6%a0%88&#34;&gt;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;链接到标题&#34;&gt;&lt;/i&gt;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;链接到标题&lt;/span&gt;&#xA;  &lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;前端：Vue 3、Element Plus、ECharts、Axios、Pinia&lt;/li&gt;&#xA;&lt;li&gt;后端：Spring Boot、MyBatis、MySQL、Redis&lt;/li&gt;&#xA;&lt;li&gt;算法与工程：Python、YOLOv11&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;项目经历&#34;&gt;&#xA;  项目经历&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#%e9%a1%b9%e7%9b%ae%e7%bb%8f%e5%8e%86&#34;&gt;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;链接到标题&#34;&gt;&lt;/i&gt;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;链接到标题&lt;/span&gt;&#xA;  &lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;h3 id=&#34;远洋渔船保障系统管理后台全栈开发&#34;&gt;&#xA;  远洋渔船保障系统管理后台（全栈开发）&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#%e8%bf%9c%e6%b4%8b%e6%b8%94%e8%88%b9%e4%bf%9d%e9%9a%9c%e7%b3%bb%e7%bb%9f%e7%ae%a1%e7%90%86%e5%90%8e%e5%8f%b0%e5%85%a8%e6%a0%88%e5%bc%80%e5%8f%91&#34;&gt;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;链接到标题&#34;&gt;&lt;/i&gt;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;链接到标题&lt;/span&gt;&#xA;  &lt;/a&gt;&#xA;&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;时间：2025-09 ~ 2025-11&lt;/strong&gt;&lt;br&gt;&#xA;&lt;strong&gt;角色：全栈开发&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;项目概述：团队承接的远洋渔船保障人员训练管理后台，覆盖训练看板、人员管理、学习资源管理等核心模块，支持教练制定训练计划与学习资源布置。&lt;/p&gt;&#xA;&lt;p&gt;个人职责与成果：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;负责学习资源管理模块，设计并实现网格式目录管理页面与颜色标记交互，提升资源分类与查找效率。&lt;/li&gt;&#xA;&lt;li&gt;实现文件批量上传、上传进度展示、大文件分片上传与断点续传，显著增强大体积资料上传稳定性。&lt;/li&gt;&#xA;&lt;li&gt;基于 ECharts 封装可复用可视化组件，并集成多种文档格式预览能力，提升训练数据与资源展示效果。&lt;/li&gt;&#xA;&lt;li&gt;使用 Pinia 实现角色权限控制，结合路由守卫完成权限验证与登录状态检查，保障系统访问安全。&lt;/li&gt;&#xA;&lt;li&gt;引入 CDN 加速静态资源，优化首屏加载性能与页面响应速度。&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;技术栈：&lt;code&gt;Vue 3 + ECharts + Axios + Pinia + Spring Boot + MyBatis + MySQL + Redis&lt;/code&gt;&lt;/p&gt;&#xA;&lt;p&gt;项目代码地址：&#xA;&lt;a href=&#34;https://github.com/wangqiuZGL/Git_ChuanBo_Optimize&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://github.com/wangqiuZGL/Git_ChuanBo_Optimize&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;演示图片：&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://ttpz-ec.oss-cn-shanghai.aliyuncs.com/document/%E9%A1%B9%E7%9B%AE%E4%BA%8C-%E5%85%B6%E4%BB%96%E5%8A%9F%E8%83%BD.png&#34; alt=&#34;远洋渔船保障系统演示图&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://binglh.xyz/images/demo2_img.png&#34; alt=&#34;文件上传&#34;&gt;&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h3 id=&#34;中国铁塔篡改检测系统前端开发算法服务协作&#34;&gt;&#xA;  中国铁塔篡改检测系统（前端开发/算法服务协作）&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#%e4%b8%ad%e5%9b%bd%e9%93%81%e5%a1%94%e7%af%a1%e6%94%b9%e6%a3%80%e6%b5%8b%e7%b3%bb%e7%bb%9f%e5%89%8d%e7%ab%af%e5%bc%80%e5%8f%91%e7%ae%97%e6%b3%95%e6%9c%8d%e5%8a%a1%e5%8d%8f%e4%bd%9c&#34;&gt;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;链接到标题&#34;&gt;&lt;/i&gt;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;链接到标题&lt;/span&gt;&#xA;  &lt;/a&gt;&#xA;&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;时间：2025-02 ~ 2025-08&lt;/strong&gt;&lt;br&gt;&#xA;&lt;strong&gt;角色：前端开发 / 算法服务协作&lt;/strong&gt;&lt;/p&gt;</description>
+      <guid>http://localhost:1313/about/</guid>
+      <description>&lt;p&gt;你好，我是李航。&lt;/p&gt;&#xA;&lt;h2 id=&#34;技术栈&#34;&gt;&#xA;  技术栈&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#%e6%8a%80%e6%9c%af%e6%a0%88&#34;&gt;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;链接到标题&#34;&gt;&lt;/i&gt;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;链接到标题&lt;/span&gt;&#xA;  &lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;前端：Vue 3、Element Plus、ECharts、Axios、Pinia&lt;/li&gt;&#xA;&lt;li&gt;后端：Spring Boot、MyBatis、MySQL、Redis&lt;/li&gt;&#xA;&lt;li&gt;算法与工程：Python、YOLOv11&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;项目经历&#34;&gt;&#xA;  项目经历&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#%e9%a1%b9%e7%9b%ae%e7%bb%8f%e5%8e%86&#34;&gt;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;链接到标题&#34;&gt;&lt;/i&gt;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;链接到标题&lt;/span&gt;&#xA;  &lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;h3 id=&#34;远洋渔船保障系统管理后台全栈开发&#34;&gt;&#xA;  远洋渔船保障系统管理后台（全栈开发）&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#%e8%bf%9c%e6%b4%8b%e6%b8%94%e8%88%b9%e4%bf%9d%e9%9a%9c%e7%b3%bb%e7%bb%9f%e7%ae%a1%e7%90%86%e5%90%8e%e5%8f%b0%e5%85%a8%e6%a0%88%e5%bc%80%e5%8f%91&#34;&gt;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;链接到标题&#34;&gt;&lt;/i&gt;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;链接到标题&lt;/span&gt;&#xA;  &lt;/a&gt;&#xA;&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;时间：2025-09 ~ 2025-11&lt;/strong&gt;&lt;br&gt;&#xA;&lt;strong&gt;角色：全栈开发&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;项目概述：团队承接的远洋渔船保障人员训练管理后台，覆盖训练看板、人员管理、学习资源管理等核心模块，支持教练制定训练计划与学习资源布置。&lt;/p&gt;&#xA;&lt;p&gt;个人职责与成果：&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;负责学习资源管理模块，设计并实现网格式目录管理页面与颜色标记交互，提升资源分类与查找效率。&lt;/li&gt;&#xA;&lt;li&gt;实现文件批量上传、上传进度展示、大文件分片上传与断点续传，显著增强大体积资料上传稳定性。&lt;/li&gt;&#xA;&lt;li&gt;基于 ECharts 封装可复用可视化组件，并集成多种文档格式预览能力，提升训练数据与资源展示效果。&lt;/li&gt;&#xA;&lt;li&gt;使用 Pinia 实现角色权限控制，结合路由守卫完成权限验证与登录状态检查，保障系统访问安全。&lt;/li&gt;&#xA;&lt;li&gt;引入 CDN 加速静态资源，优化首屏加载性能与页面响应速度。&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;技术栈：&lt;code&gt;Vue 3 + ECharts + Axios + Pinia + Spring Boot + MyBatis + MySQL + Redis&lt;/code&gt;&lt;/p&gt;&#xA;&lt;p&gt;项目代码地址：&#xA;&lt;a href=&#34;https://github.com/wangqiuZGL/Git_ChuanBo_Optimize&#34;  class=&#34;external-link&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;https://github.com/wangqiuZGL/Git_ChuanBo_Optimize&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;演示图片：&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://ttpz-ec.oss-cn-shanghai.aliyuncs.com/document/%E9%A1%B9%E7%9B%AE%E4%BA%8C-%E5%85%B6%E4%BB%96%E5%8A%9F%E8%83%BD.png&#34; alt=&#34;远洋渔船保障系统演示图&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/demo2_img.png&#34; alt=&#34;文件上传&#34;&gt;&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h3 id=&#34;中国铁塔篡改检测系统前端开发算法服务协作&#34;&gt;&#xA;  中国铁塔篡改检测系统（前端开发/算法服务协作）&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#%e4%b8%ad%e5%9b%bd%e9%93%81%e5%a1%94%e7%af%a1%e6%94%b9%e6%a3%80%e6%b5%8b%e7%b3%bb%e7%bb%9f%e5%89%8d%e7%ab%af%e5%bc%80%e5%8f%91%e7%ae%97%e6%b3%95%e6%9c%8d%e5%8a%a1%e5%8d%8f%e4%bd%9c&#34;&gt;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;链接到标题&#34;&gt;&lt;/i&gt;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;链接到标题&lt;/span&gt;&#xA;  &lt;/a&gt;&#xA;&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;时间：2025-02 ~ 2025-08&lt;/strong&gt;&lt;br&gt;&#xA;&lt;strong&gt;角色：前端开发 / 算法服务协作&lt;/strong&gt;&lt;/p&gt;</description>
     </item>
     <item>
       <title>路由守卫</title>
-      <link>https://binglh.xyz/posts/%E8%B7%AF%E7%94%B1%E5%AE%88%E5%8D%AB/</link>
+      <link>http://localhost:1313/posts/%E8%B7%AF%E7%94%B1%E5%AE%88%E5%8D%AB/</link>
       <pubDate>Thu, 13 Feb 2025 10:00:00 +0800</pubDate>
-      <guid>https://binglh.xyz/posts/%E8%B7%AF%E7%94%B1%E5%AE%88%E5%8D%AB/</guid>
+      <guid>http://localhost:1313/posts/%E8%B7%AF%E7%94%B1%E5%AE%88%E5%8D%AB/</guid>
       <description>路由的细节</description>
     </item>
     <item>
-      <title>使用cloudFlare配置博客</title>
-      <link>https://binglh.xyz/posts/%E5%8D%9A%E5%AE%A2%E5%9F%9F%E5%90%8D%E5%AE%9A%E4%BD%8D%E6%B5%81%E7%A8%8B/</link>
+      <title>requestAnimationFram的触发时机</title>
+      <link>http://localhost:1313/posts/raf/</link>
       <pubDate>Wed, 01 Jan 2025 10:00:00 +0800</pubDate>
-      <guid>https://binglh.xyz/posts/%E5%8D%9A%E5%AE%A2%E5%9F%9F%E5%90%8D%E5%AE%9A%E4%BD%8D%E6%B5%81%E7%A8%8B/</guid>
+      <guid>http://localhost:1313/posts/raf/</guid>
+      <description>事件循环</description>
+    </item>
+    <item>
+      <title>使用cloudFlare配置博客</title>
+      <link>http://localhost:1313/posts/%E5%8D%9A%E5%AE%A2%E5%9F%9F%E5%90%8D%E5%AE%9A%E4%BD%8D%E6%B5%81%E7%A8%8B/</link>
+      <pubDate>Wed, 01 Jan 2025 10:00:00 +0800</pubDate>
+      <guid>http://localhost:1313/posts/%E5%8D%9A%E5%AE%A2%E5%9F%9F%E5%90%8D%E5%AE%9A%E4%BD%8D%E6%B5%81%E7%A8%8B/</guid>
       <description>github和cloudflare 去搭建博客</description>
     </item>
     <item>
       <title>使用阿里云去文件上传</title>
-      <link>https://binglh.xyz/posts/%E5%A4%A7%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%8A%80%E6%9C%AF/</link>
+      <link>http://localhost:1313/posts/%E5%A4%A7%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%8A%80%E6%9C%AF/</link>
       <pubDate>Wed, 01 Jan 2025 10:00:00 +0800</pubDate>
-      <guid>https://binglh.xyz/posts/%E5%A4%A7%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%8A%80%E6%9C%AF/</guid>
+      <guid>http://localhost:1313/posts/%E5%A4%A7%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%8A%80%E6%9C%AF/</guid>
       <description>文件分片、断点、进度显示</description>
     </item>
   </channel>
