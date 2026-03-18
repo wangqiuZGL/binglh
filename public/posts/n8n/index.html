@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  workflow搭建尝试 · 首页
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="李航">
+<meta name="description" content="n8n平台">
+<meta name="keywords" content="blog,developer,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="workflow搭建尝试">
+  <meta name="twitter:description" content="n8n平台">
+
+<meta property="og:url" content="http://localhost:1313/posts/n8n/">
+  <meta property="og:site_name" content="首页">
+  <meta property="og:title" content="workflow搭建尝试">
+  <meta property="og:description" content="n8n平台">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-02-01T10:00:00+08:00">
+    <meta property="article:modified_time" content="2026-02-01T10:00:00+08:00">
+    <meta property="article:tag" content="Agent">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/n8n/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+  
+    
+    <link rel="stylesheet" href="/css/custom.css" media="screen">
+  
+
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      首页
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about/">过来看看</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">学习记录</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/projects/">问题记录</a>
+            </li>
+          
+        
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/n8n/">
+              workflow搭建尝试
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2026-02-01T10:00:00&#43;08:00">
+                February 1, 2026
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              阅读时间：1 分钟
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/agent/">Agent</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      
+
+
+      <div class="post-content">
+        
+        <h2 id="n8n部署">
+  n8n部署
+  <a class="heading-link" href="#n8n%e9%83%a8%e7%bd%b2">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h2>
+<p>推荐下载docker桌面应用</p>
+<p>在命令行输入两行命令：</p>
+<pre tabindex="0"><code>docker volume create n8n_data
+
+
+docker run -it --rm --name n8n -p 5678:5678 -v n8n_data:/home/node/.n8n docker.n8n.io/n8nio/n8n
+</code></pre><img src="/images/assets/image-20260317184542371.png" alt="image-20260317184542371" style="zoom:50%;" />
+<p>进入</p>
+<img src="/images/assets/image-20260317184750089.png" alt="image-20260317184750089" style="zoom:50%;" />
+<p>配置成社区节点：</p>
+<img src="/images/assets/image-20260317185004041.png" alt="image-20260317185004041" style="zoom:50%;" />
+<h2 id="创建工作流">
+  创建工作流
+  <a class="heading-link" href="#%e5%88%9b%e5%bb%ba%e5%b7%a5%e4%bd%9c%e6%b5%81">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h2>
+<p>有很多种触发方式</p>
+<img src="/images/assets/image-20260317185301922.png" alt="image-20260317185301922" style="zoom:50%;" />
+<p>可以选择聊天触发</p>
+<p>然后打开open chat 发送你好</p>
+<img src="/images/assets/image-20260317185509651.png" alt="image-20260317185509651" style="zoom:50%;" />
+<p>创建一个判断标签，然后双击进去，可以把chatInput拖进去，判断里面是否为String，再加上正则表达式</p>
+<img src="/images/assets/image-20260317185728982.png" alt="image-20260317185728982" style="zoom:50%;" />
+<p>判断里面是否含有链接,<strong>问豆包</strong>：判断字符串里面有链接的正则表达式即可，点一下Execute step</p>
+<p>接下来做条件为true时的情况，首先要添加一个AI agent</p>
+<h3 id="配置聊天模型">
+  配置聊天模型
+  <a class="heading-link" href="#%e9%85%8d%e7%bd%ae%e8%81%8a%e5%a4%a9%e6%a8%a1%e5%9e%8b">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h3>
+<img src="/images/assets/image-20260317191643091.png" alt="image-20260317191643091" style="zoom:50%;" />
+<p>我这里使用的是gpt-4.1</p>
+<h3 id="配置提示词和系统提示词">
+  配置提示词和系统提示词
+  <a class="heading-link" href="#%e9%85%8d%e7%bd%ae%e6%8f%90%e7%a4%ba%e8%af%8d%e5%92%8c%e7%b3%bb%e7%bb%9f%e6%8f%90%e7%a4%ba%e8%af%8d">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h3>
+<img src="/images/assets/image-20260317191611224.png" alt="image-20260317191611224" style="zoom:50%;" />
+<h3 id="添加你需要的mcp工具">
+  添加你需要的mcp工具
+  <a class="heading-link" href="#%e6%b7%bb%e5%8a%a0%e4%bd%a0%e9%9c%80%e8%a6%81%e7%9a%84mcp%e5%b7%a5%e5%85%b7">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h3>
+<p>在agent下面的tool里面点加号，搜mcp，然后添加 mcp client</p>
+<p>在这里注册服务的api key：https://www.firecrawl.dev/app/api-keys</p>
+<p>具体操作配置 <a href="https://github.com/modelcontextprotocol/servers?tab=readme-ov-file"  class="external-link" target="_blank" rel="noopener">https://github.com/modelcontextprotocol/servers?tab=readme-ov-file</a> 查看这里面有说明</p>
+<pre tabindex="0"><code>例如：
+{
+  &#34;mcpServers&#34;: {
+    &#34;firecrawl-mcp&#34;: {
+      &#34;command&#34;: &#34;npx&#34;,
+      &#34;args&#34;: [&#34;-y&#34;, &#34;firecrawl-mcp&#34;],
+      &#34;env&#34;: {
+        &#34;FIRECRAWL_API_KEY&#34;: &#34;YOUR-API-KEY&#34;
+      }
+    }
+  }
+}
+</code></pre><img src="/images/assets/image-20260317192108073.png" alt="image-20260317192108073" style="zoom:50%;" />
+<p>从 AI 工具中获取名为 <code>toolname</code> 的值</p>
+<img src="/images/assets/image-20260317192759753.png" alt="image-20260317192759753" style="zoom:50%;" />
+<p>接着申请另一个工具 联网搜索</p>
+<p><a href="https://app.tavily.com/home"  class="external-link" target="_blank" rel="noopener">https://app.tavily.com/home</a></p>
+<p><a href="https://github.com/tavily-ai/tavily-mcp"  class="external-link" target="_blank" rel="noopener">https://github.com/tavily-ai/tavily-mcp</a></p>
+<p><img src="/images/assets/image-20260317194835989.png" alt="image-20260317194835989"></p>
+<p>配置完成，然后聊天即可</p>
+
+      </div>
+
+
+      <footer>
+        
+
+
+        
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2024 -
+    
+    2026
+     李航 
+    ·
+    
+    技术支持 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+  
+  
+  <script src="/js/notes.js"></script>
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<aside class="left-sidebar-nav" aria-label="本文目录">
+  <div class="left-sidebar-card">
+    <p class="left-sidebar-title">本文目录</p>
+    <nav class="left-sidebar-toc">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#n8n部署">n8n部署</a></li>
+    <li><a href="#创建工作流">创建工作流</a>
+      <ul>
+        <li><a href="#配置聊天模型">配置聊天模型</a></li>
+        <li><a href="#配置提示词和系统提示词">配置提示词和系统提示词</a></li>
+        <li><a href="#添加你需要的mcp工具">添加你需要的mcp工具</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </nav>
+  </div>
+</aside>
+<script>
+  document.body.classList.add("has-left-toc");
+</script>
+
+</body>
+
+</html>

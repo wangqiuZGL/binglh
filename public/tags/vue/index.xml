@@ -22,5 +22,12 @@
       <guid>https://binglh.xyz/posts/%E8%B7%AF%E7%94%B1%E5%AE%88%E5%8D%AB/</guid>
       <description>路由的细节</description>
     </item>
+    <item>
+      <title>虚拟DOM&amp;Diff算法</title>
+      <link>https://binglh.xyz/posts/diff/</link>
+      <pubDate>Wed, 01 Jan 2025 10:00:00 +0800</pubDate>
+      <guid>https://binglh.xyz/posts/diff/</guid>
+      <description>文件分片、断点、进度显示</description>
+    </item>
   </channel>
 </rss>

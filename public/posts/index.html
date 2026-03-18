@@ -156,10 +156,37 @@
             
               
               
-                <li class="notes-topic-item" data-topic-item data-topic="vue" data-topic-label="VUE">
+                <li class="notes-topic-item" data-topic-item data-topic="node" data-topic-label="Node">
                   <details class="notes-topic-panel" open>
-                    <summary class="notes-topic-summary" data-topic-trigger data-topic="vue" data-topic-label="VUE">
-                      <span class="notes-topic-link">VUE</span>
+                    <summary class="notes-topic-summary" data-topic-trigger data-topic="node" data-topic-label="Node">
+                      <span class="notes-topic-link">Node</span>
+                      <span class="notes-topic-count">3</span>
+                    </summary>
+                    <ul class="notes-topic-notes">
+                      
+                        <li data-topic-note="webpack的基础使用方法 webpack 和 vite 的区别">
+                          <a href="/posts/vite/">webpack的基础使用方法</a>
+                        </li>
+                      
+                        <li data-topic-note="koa and express 介绍二者的区别">
+                          <a href="/posts/koa/">koa and express</a>
+                        </li>
+                      
+                        <li data-topic-note="npm vs pnpm 介绍二者的区别">
+                          <a href="/posts/npmpnpm/">npm vs pnpm</a>
+                        </li>
+                      
+                    </ul>
+                  </details>
+                </li>
+              
+            
+              
+              
+                <li class="notes-topic-item" data-topic-item data-topic="vue" data-topic-label="Vue">
+                  <details class="notes-topic-panel" open>
+                    <summary class="notes-topic-summary" data-topic-trigger data-topic="vue" data-topic-label="Vue">
+                      <span class="notes-topic-link">Vue</span>
                       <span class="notes-topic-count">3</span>
                     </summary>
                     <ul class="notes-topic-notes">
@@ -184,7 +211,7 @@
               
               
                 <li class="notes-topic-item" data-topic-item data-topic="计算机网络" data-topic-label="计算机网络">
-                  <details class="notes-topic-panel" open>
+                  <details class="notes-topic-panel" >
                     <summary class="notes-topic-summary" data-topic-trigger data-topic="计算机网络" data-topic-label="计算机网络">
                       <span class="notes-topic-link">计算机网络</span>
                       <span class="notes-topic-count">3</span>
@@ -210,20 +237,20 @@
             
               
               
-                <li class="notes-topic-item" data-topic-item data-topic="node" data-topic-label="Node">
+                <li class="notes-topic-item" data-topic-item data-topic="agent" data-topic-label="Agent">
                   <details class="notes-topic-panel" >
-                    <summary class="notes-topic-summary" data-topic-trigger data-topic="node" data-topic-label="Node">
-                      <span class="notes-topic-link">Node</span>
+                    <summary class="notes-topic-summary" data-topic-trigger data-topic="agent" data-topic-label="Agent">
+                      <span class="notes-topic-link">Agent</span>
                       <span class="notes-topic-count">2</span>
                     </summary>
                     <ul class="notes-topic-notes">
                       
-                        <li data-topic-note="koa and express 介绍二者的区别">
-                          <a href="/posts/koa/">koa and express</a>
+                        <li data-topic-note="workflow搭建尝试 n8n平台">
+                          <a href="/posts/n8n/">workflow搭建尝试</a>
                         </li>
                       
-                        <li data-topic-note="npm vs pnpm 介绍二者的区别">
-                          <a href="/posts/npmpnpm/">npm vs pnpm</a>
+                        <li data-topic-note="搞懂大模型定义词含义 mcp skill llm">
+                          <a href="/posts/mcp%E5%92%8Cfunctioncalling/">搞懂大模型定义词含义</a>
                         </li>
                       
                     </ul>
@@ -247,6 +274,31 @@
                       
                         <li data-topic-note="使用阿里云去文件上传 文件分片、断点、进度显示">
                           <a href="/posts/%E5%A4%A7%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%8A%80%E6%9C%AF/">使用阿里云去文件上传</a>
+                        </li>
+                      
+                    </ul>
+                  </details>
+                </li>
+              
+            
+              
+              
+                <li class="notes-topic-item" data-topic-item data-topic="css" data-topic-label="CSS">
+                  <details class="notes-topic-panel" >
+                    <summary class="notes-topic-summary" data-topic-trigger data-topic="css" data-topic-label="CSS">
+                      <span class="notes-topic-link">CSS</span>
+                      <span class="notes-topic-count">1</span>
+                    </summary>
+                    <ul class="notes-topic-notes">
+                      
+                        <li data-topic-note="css和tailcss  css介绍 链接到标题 css样式单位 链接到标题 绝对单位和相对单位
+类型 特点 常见单位 绝对单位 尺寸固定，不随环境变化 px、pt、cm、mm、in 相对单位 尺寸随参考物变化 rem、em、vw/vh、%、ch px（像素）—— 最基础的绝对单位 链接到标题 ​	含义：屏幕上的最小显示单元（1px = 屏幕 1 个像素点）
+​	tailwindcss 中 1 个单位 = 4px（比如 px-4 对应 padding-left/right: 16px）
+rem（根元素相对单位）—— 适配不同屏幕的核 链接到标题 ​	相对于根元素（&amp;lt;html&amp;gt;）的 font-size 计算（1rem = html 的 font-size 值）
+​	‌font-size是css（层叠样式表）中用于设置文本字体大小的核心属性，具有继承性
+/* 根元素设置基准 */ html { font-size: 16px; /* 1rem = 16px */ } /* 小屏幕适配 */ @media (max-width: 768px) { html { font-size: 14px; /* 1rem = 14px，全局尺寸自动缩小 */ } } /* 使用 rem */ .title { font-size: 1.25rem; /* 1.25*16 = 20px */ margin-bottom: 0.75rem; /* 0.75*16 = 12px */ } em（父元素相对单位）—— 局部适配 链接到标题 含义：相对于当前元素 / 父元素的 font-size 计算（优先级：当前元素 font-size &amp;gt; 父元素 font-size）
+">
+                          <a href="/posts/tailwindcss/">CSS和TailCSS</a>
                         </li>
                       
                     </ul>
@@ -293,6 +345,113 @@
       </div>
 
       <section class="notes-grid" aria-label="学习笔记卡片列表">
+        
+          
+          <article class="note-card" data-note-card data-tags="node" data-search="webpack的基础使用方法 webpack 和 vite 的区别 node">
+            <a class="note-card-cover" href="/posts/vite/">
+              
+              
+                
+                  <img src="/images/assets/webpack.png" alt="webpack的基础使用方法" loading="lazy">
+                
+              
+            </a>
+
+            <div class="note-card-body">
+              <a class="note-card-title" href="/posts/vite/">webpack的基础使用方法</a>
+              <p class="note-card-meta">March 1, 2026</p>
+              <p class="note-card-summary">webpack 和 vite 的区别</p>
+              
+                <div class="note-card-tags">
+                  
+                    <span class="note-card-tag">Node</span>
+                  
+                </div>
+              
+            </div>
+          </article>
+        
+          
+          <article class="note-card" data-note-card data-tags="css" data-search="css和tailcss  css介绍 链接到标题 css样式单位 链接到标题 绝对单位和相对单位
+类型 特点 常见单位 绝对单位 尺寸固定，不随环境变化 px、pt、cm、mm、in 相对单位 尺寸随参考物变化 rem、em、vw/vh、%、ch px（像素）—— 最基础的绝对单位 链接到标题 ​	含义：屏幕上的最小显示单元（1px = 屏幕 1 个像素点）
+​	tailwindcss 中 1 个单位 = 4px（比如 px-4 对应 padding-left/right: 16px）
+rem（根元素相对单位）—— 适配不同屏幕的核 链接到标题 ​	相对于根元素（&amp;lt;html&amp;gt;）的 font-size 计算（1rem = html 的 font-size 值）
+​	‌font-size是css（层叠样式表）中用于设置文本字体大小的核心属性，具有继承性
+/* 根元素设置基准 */ html { font-size: 16px; /* 1rem = 16px */ } /* 小屏幕适配 */ @media (max-width: 768px) { html { font-size: 14px; /* 1rem = 14px，全局尺寸自动缩小 */ } } /* 使用 rem */ .title { font-size: 1.25rem; /* 1.25*16 = 20px */ margin-bottom: 0.75rem; /* 0.75*16 = 12px */ } em（父元素相对单位）—— 局部适配 链接到标题 含义：相对于当前元素 / 父元素的 font-size 计算（优先级：当前元素 font-size &amp;gt; 父元素 font-size）
+ css">
+            <a class="note-card-cover" href="/posts/tailwindcss/">
+              
+              
+                
+                  <img src="/images/assets/tailwind.png" alt="CSS和TailCSS" loading="lazy">
+                
+              
+            </a>
+
+            <div class="note-card-body">
+              <a class="note-card-title" href="/posts/tailwindcss/">CSS和TailCSS</a>
+              <p class="note-card-meta">March 1, 2026</p>
+              <p class="note-card-summary"> CSS介绍 链接到标题 CSS样式单位 链接到标题 绝对单位和相对单位
+类型 特点 常见单位 绝对单位 尺寸固定，不随环境变化 px、pt、cm、mm、in 相对单位 尺寸随参考物变化 …</p>
+              
+                <div class="note-card-tags">
+                  
+                    <span class="note-card-tag">CSS</span>
+                  
+                </div>
+              
+            </div>
+          </article>
+        
+          
+          <article class="note-card" data-note-card data-tags="agent" data-search="搞懂大模型定义词含义 mcp skill llm agent">
+            <a class="note-card-cover" href="/posts/mcp%E5%92%8Cfunctioncalling/">
+              
+              
+                
+                  <img src="https://p9-xtjj-sign.byteimg.com/tos-cn-i-73owjymdk6/e6c7a55d79a34af28e5e185de2792b89~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgTHN4Xw==:q75.awebp?rk3s=f64ab15b&amp;x-expires=1774405202&amp;x-signature=y1pVaTZNpCynn7KkxAKwhlosXkk%3D" alt="搞懂大模型定义词含义" loading="lazy">
+                
+              
+            </a>
+
+            <div class="note-card-body">
+              <a class="note-card-title" href="/posts/mcp%E5%92%8Cfunctioncalling/">搞懂大模型定义词含义</a>
+              <p class="note-card-meta">February 1, 2026</p>
+              <p class="note-card-summary">MCP SKILL LLM</p>
+              
+                <div class="note-card-tags">
+                  
+                    <span class="note-card-tag">Agent</span>
+                  
+                </div>
+              
+            </div>
+          </article>
+        
+          
+          <article class="note-card" data-note-card data-tags="agent" data-search="workflow搭建尝试 n8n平台 agent">
+            <a class="note-card-cover" href="/posts/n8n/">
+              
+              
+                
+                  <img src="https://p3-xtjj-sign.byteimg.com/tos-cn-i-73owjymdk6/8539f625e4da4e1e98cbaa12fec6c2bb~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg5ZCO56uv5bCP6IKl6IKg:q75.awebp?rk3s=f64ab15b&amp;x-expires=1774405442&amp;x-signature=5R7BGBiqzUIE06jXVQGb0UYarHE%3D" alt="workflow搭建尝试" loading="lazy">
+                
+              
+            </a>
+
+            <div class="note-card-body">
+              <a class="note-card-title" href="/posts/n8n/">workflow搭建尝试</a>
+              <p class="note-card-meta">February 1, 2026</p>
+              <p class="note-card-summary">n8n平台</p>
+              
+                <div class="note-card-tags">
+                  
+                    <span class="note-card-tag">Agent</span>
+                  
+                </div>
+              
+            </div>
+          </article>
         
           
           <article class="note-card" data-note-card data-tags="vue" data-search="keep-alive的妙用 新增钩子和component vue">

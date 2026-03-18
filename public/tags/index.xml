@@ -6,8 +6,29 @@
     <description>Recent content in Tags on 首页</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 13 Sep 2025 10:00:00 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 01 Mar 2026 10:00:00 +0800</lastBuildDate>
     <atom:link href="https://binglh.xyz/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CSS</title>
+      <link>https://binglh.xyz/tags/css/</link>
+      <pubDate>Sun, 01 Mar 2026 10:00:00 +0800</pubDate>
+      <guid>https://binglh.xyz/tags/css/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Node</title>
+      <link>https://binglh.xyz/tags/node/</link>
+      <pubDate>Sun, 01 Mar 2026 10:00:00 +0800</pubDate>
+      <guid>https://binglh.xyz/tags/node/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Agent</title>
+      <link>https://binglh.xyz/tags/agent/</link>
+      <pubDate>Sun, 01 Feb 2026 10:00:00 +0800</pubDate>
+      <guid>https://binglh.xyz/tags/agent/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Vue</title>
       <link>https://binglh.xyz/tags/vue/</link>
@@ -16,17 +37,17 @@
       <description></description>
     </item>
     <item>
-      <title>Node</title>
-      <link>https://binglh.xyz/tags/node/</link>
-      <pubDate>Thu, 13 Mar 2025 10:00:00 +0800</pubDate>
-      <guid>https://binglh.xyz/tags/node/</guid>
-      <description></description>
-    </item>
-    <item>
       <title>计算机网络</title>
       <link>https://binglh.xyz/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/</link>
       <pubDate>Thu, 13 Mar 2025 10:00:00 +0800</pubDate>
       <guid>https://binglh.xyz/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>JS</title>
+      <link>https://binglh.xyz/tags/js/</link>
+      <pubDate>Wed, 01 Jan 2025 10:00:00 +0800</pubDate>
+      <guid>https://binglh.xyz/tags/js/</guid>
       <description></description>
     </item>
     <item>

@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  搞懂大模型定义词含义 · 首页
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="李航">
+<meta name="description" content="MCP SKILL LLM">
+<meta name="keywords" content="blog,developer,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="搞懂大模型定义词含义">
+  <meta name="twitter:description" content="MCP SKILL LLM">
+
+<meta property="og:url" content="http://localhost:1313/posts/mcp%E5%92%8Cfunctioncalling/">
+  <meta property="og:site_name" content="首页">
+  <meta property="og:title" content="搞懂大模型定义词含义">
+  <meta property="og:description" content="MCP SKILL LLM">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-02-01T10:00:00+08:00">
+    <meta property="article:modified_time" content="2026-02-01T10:00:00+08:00">
+    <meta property="article:tag" content="Agent">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/mcp%E5%92%8Cfunctioncalling/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+  
+    
+    <link rel="stylesheet" href="/css/custom.css" media="screen">
+  
+
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      首页
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about/">过来看看</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">学习记录</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/projects/">问题记录</a>
+            </li>
+          
+        
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/mcp%E5%92%8Cfunctioncalling/">
+              搞懂大模型定义词含义
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2026-02-01T10:00:00&#43;08:00">
+                February 1, 2026
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              阅读时间：1 分钟
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/agent/">Agent</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      
+
+
+      <div class="post-content">
+        
+        <h2 id="llm大语言模型">
+  LLM大语言模型
+  <a class="heading-link" href="#llm%e5%a4%a7%e8%af%ad%e8%a8%80%e6%a8%a1%e5%9e%8b">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h2>
+<p>​	对话（只能一问一答）</p>
+<h3 id="context-上下文">
+  context 上下文
+  <a class="heading-link" href="#context-%e4%b8%8a%e4%b8%8b%e6%96%87">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h3>
+<p>​	背景信息</p>
+<h3 id="prompt">
+  prompt
+  <a class="heading-link" href="#prompt">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h3>
+<p>​	提示词</p>
+<h3 id="memory">
+  memory
+  <a class="heading-link" href="#memory">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h3>
+<p>每次沟通前，可以把历史对话放到context里面，然后再提出问题</p>
+<p>memory还可以再次调用LLM对历史对话进行总结</p>
+<h2 id="agent">
+  Agent
+  <a class="heading-link" href="#agent">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h2>
+<p>LLM 对于网上的资料信息，需要提示关键词和位置才能获取【但是我们告诉他在哪里找又不智能】</p>
+<p>因此就需要一个程序，帮助我们上网查询，再跟LLM沟通，然后处理LLM的结果再给用户</p>
+<img src="/images/assets/image-20260317163836903.png" alt="image-20260317163836903" style="zoom:50%;" />
+<h3 id="rag-检索向量生成">
+  RAG-检索向量生成
+  <a class="heading-link" href="#rag-%e6%a3%80%e7%b4%a2%e5%90%91%e9%87%8f%e7%94%9f%e6%88%90">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h3>
+<p>agent可以上网搜索，也可以搜索本地文档和数据库，这时要使用向量数据库RAG，来吧相近的片段找出来</p>
+<p>联网搜索的叫web search</p>
+<h2 id="function-calling">
+  Function Calling
+  <a class="heading-link" href="#function-calling">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h2>
+<p>如果agent和LLM用自然语言沟通，很复杂，要有大量的判断，以及slice</p>
+<p>因此需要一种固定格式,类似于前后端的接口通信</p>
+<img src="/images/assets/image-20260317164245169.png" alt="image-20260317164245169" style="zoom:50%;" />
+<h2 id="mcp--agent功能解耦">
+  MCP- agent功能解耦
+  <a class="heading-link" href="#mcp--agent%e5%8a%9f%e8%83%bd%e8%a7%a3%e8%80%a6">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h2>
+<p>将一些 tools/list  方法返回工具列表， tools/call返回具体的方法</p>
+<p>模型上下文协议，提供各种程序的程序集，Agent成一个传话筒  ，agent和工具服务之间的约定</p>
+<img src="/images/assets/image-20260317164457466.png" alt="image-20260317164457466" style="zoom:50%;" />
+<h2 id="和agent通信的类型">
+  和agent通信的类型
+  <a class="heading-link" href="#%e5%92%8cagent%e9%80%9a%e4%bf%a1%e7%9a%84%e7%b1%bb%e5%9e%8b">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h2>
+<p>命令行窗口的形式：CLI  IFlow\ CodeX \Claude Code</p>
+<p>编程程序： cursor Trae</p>
+<p>桌面助手：Clawdbot、openclaw</p>
+<h2 id="langchain">
+  LangChain
+  <a class="heading-link" href="#langchain">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h2>
+<p>例如将 文件 提取 翻译 保存为 MD，直接让Agent做他会浪费token</p>
+<p>完全可以写成脚本<strong>py</strong>，自动完成，中间的翻译让大模型完成</p>
+<p>他的低代码方式叫：workFlow</p>
+<h2 id="skill---渐进式批漏和按需加载">
+  Skill - 渐进式批漏和按需加载
+  <a class="heading-link" href="#skill---%e6%b8%90%e8%bf%9b%e5%bc%8f%e6%89%b9%e6%bc%8f%e5%92%8c%e6%8c%89%e9%9c%80%e5%8a%a0%e8%bd%bd">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h2>
+<p>文件可以是各种形式，保存的形式也可能各种各样，每次都判断一下也很费劲</p>
+<img src="/images/assets/image-20260317165200697.png" alt="image-20260317165200697" style="zoom:50%;" />
+<p>因此可以在和智能体沟通时都提前让他读一下skill.md文件，里面说明了各种脚本的作用</p>
+<p>一些比较简单的程序都直接嵌入到Agent里面了（内化在里面了）</p>
+
+      </div>
+
+
+      <footer>
+        
+
+
+        
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2024 -
+    
+    2026
+     李航 
+    ·
+    
+    技术支持 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+  
+  
+  <script src="/js/notes.js"></script>
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<aside class="left-sidebar-nav" aria-label="本文目录">
+  <div class="left-sidebar-card">
+    <p class="left-sidebar-title">本文目录</p>
+    <nav class="left-sidebar-toc">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#llm大语言模型">LLM大语言模型</a>
+      <ul>
+        <li><a href="#context-上下文">context 上下文</a></li>
+        <li><a href="#prompt">prompt</a></li>
+        <li><a href="#memory">memory</a></li>
+      </ul>
+    </li>
+    <li><a href="#agent">Agent</a>
+      <ul>
+        <li><a href="#rag-检索向量生成">RAG-检索向量生成</a></li>
+      </ul>
+    </li>
+    <li><a href="#function-calling">Function Calling</a></li>
+    <li><a href="#mcp--agent功能解耦">MCP- agent功能解耦</a></li>
+    <li><a href="#和agent通信的类型">和agent通信的类型</a></li>
+    <li><a href="#langchain">LangChain</a></li>
+    <li><a href="#skill---渐进式批漏和按需加载">Skill - 渐进式批漏和按需加载</a></li>
+  </ul>
+</nav>
+    </nav>
+  </div>
+</aside>
+<script>
+  document.body.classList.add("has-left-toc");
+</script>
+
+</body>
+
+</html>
