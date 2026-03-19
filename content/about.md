@@ -1,20 +1,21 @@
 +++
-title = "关于"
-date = 2025-03-13T00:00:00+08:00
+title = "个人项目展示"
+date = 2026-03-13T00:00:00+08:00
 draft = false
 +++
 
-你好，我是李航。
+
 
 ## 技术栈
 
 - 前端：Vue 3、Element Plus、ECharts、Axios、Pinia
 - 后端：Spring Boot、MyBatis、MySQL、Redis
-- 算法与工程：Python、YOLOv11
+- AI小帮手：coze、n8n、openclaw、cursor、trae、codex
 
 ## 项目经历
 
-### 远洋渔船保障系统管理后台（全栈开发）
+
+### 一、远洋渔船保障系统管理后台（全栈开发）
 
 **时间：2025-09 ~ 2025-11**  
 **角色：全栈开发**
@@ -29,7 +30,6 @@ draft = false
 4. 使用 Pinia 实现角色权限控制，结合路由守卫完成权限验证与登录状态检查，保障系统访问安全。
 5. 引入 CDN 加速静态资源，优化首屏加载性能与页面响应速度。
 
-技术栈：`Vue 3 + ECharts + Axios + Pinia + Spring Boot + MyBatis + MySQL + Redis`
 
 项目代码地址：
 <https://github.com/wangqiuZGL/Git_ChuanBo_Optimize>
@@ -42,7 +42,7 @@ draft = false
 
 ---
 
-### 中国铁塔篡改检测系统（前端开发/算法服务协作）
+### 二、中国铁塔篡改检测系统（前端开发/算法服务协作）
 
 **时间：2025-02 ~ 2025-08**  
 **角色：前端开发 / 算法服务协作**
@@ -57,7 +57,6 @@ draft = false
 4. 基于 CSS 变量实现主题切换方案，提升界面一致性与可维护性。
 5. 负责数据库与接口实现，并参与项目在铁塔公司服务器的部署落地。
 
-技术栈：`Vue 3 + Element Plus + Axios + Pinia + Python + YOLOv11`
 
 项目代码地址：
 <https://codeup.aliyun.com/64b529cfc3226d3f2e4f78c8/Git_TieTa_25_Code.git>
@@ -76,6 +75,52 @@ draft = false
 </video>
 
 
+
+### 三、京山桥米数字化大屏项目-重构（全栈开发）
+
+**时间：2025-04 ~ 2025-05**  
+**角色：全栈开发**
+
+项目概述：将京山桥米大屏系统部分数据采用api获取更新，大屏各项统计数据性能优化、每日变化趋势、预警阈值，后端搭建日志管理系统平台，捕获信息失败的具体信息。本人主要负责前端代码bug修复，以及后端逻辑实现，保证数据正常显示
+
+
+项目网址：
+<http://jsqmdp.znglzx.com/>
+
+
+大屏展示：
+
+![jsqm](/images/assets/jsqm.png)
+
+日志系统：
+
+![rz](/images/assets/glpt.png)
+
+---
+
+### 四、AI对话助手（当前项目）
+
+**时间：2026-03 ~ 2026-03**  
+**角色：前端开发开发**
+
+项目概述：面向 AI 问答场景开发智能对话平台，利用AI工具（如：Google stitch 、Codex等)协助开发，支持历史消息加载、流式回复、输入与发送体验优化、Markdown/代码块展示、主题同步和移动端适配，重点提升聊天交互流畅度与技术内容阅读体验，当前正在积极学习 coze，mcp,skills 提效。
+
+
+项目代码仓库：
+<https://github.com/wangqiuZGL/AI_chat.git/>
+
+演示图片：
+
+1.0版本
+
+![00](/images/assets/ai00.png)
+
+
+1.1版本
+
+![00](/images/assets/ai01.png)
+
+---
 
 
 ## 教育经历

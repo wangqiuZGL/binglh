@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Node on 首页</title>
-    <link>https://binglh.xyz/tags/node/</link>
+    <link>http://localhost:1313/tags/node/</link>
     <description>Recent content in Node on 首页</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <lastBuildDate>Sun, 01 Mar 2026 10:00:00 +0800</lastBuildDate>
-    <atom:link href="https://binglh.xyz/tags/node/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/tags/node/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>webpack的基础使用方法</title>
-      <link>https://binglh.xyz/posts/vite/</link>
+      <link>http://localhost:1313/posts/vite/</link>
       <pubDate>Sun, 01 Mar 2026 10:00:00 +0800</pubDate>
-      <guid>https://binglh.xyz/posts/vite/</guid>
+      <guid>http://localhost:1313/posts/vite/</guid>
       <description>webpack 和 vite 的区别</description>
     </item>
     <item>
       <title>koa and express</title>
-      <link>https://binglh.xyz/posts/koa/</link>
+      <link>http://localhost:1313/posts/koa/</link>
       <pubDate>Thu, 13 Mar 2025 10:00:00 +0800</pubDate>
-      <guid>https://binglh.xyz/posts/koa/</guid>
+      <guid>http://localhost:1313/posts/koa/</guid>
       <description>介绍二者的区别</description>
     </item>
     <item>
       <title>npm vs pnpm</title>
-      <link>https://binglh.xyz/posts/npmpnpm/</link>
+      <link>http://localhost:1313/posts/npmpnpm/</link>
       <pubDate>Thu, 13 Mar 2025 10:00:00 +0800</pubDate>
-      <guid>https://binglh.xyz/posts/npmpnpm/</guid>
+      <guid>http://localhost:1313/posts/npmpnpm/</guid>
       <description>介绍二者的区别</description>
     </item>
   </channel>
