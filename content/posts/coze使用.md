@@ -2,7 +2,7 @@
 title = "coze基础用法"
 tags = ["Agent"]
 date = 2026-02-01T10:00:00+08:00
-cover = "/imagesassets/coze.png"
+cover = "/images/assets/coze.png"
 summary = "coze感觉比n8n好用一些"
 +++
 
@@ -19,7 +19,7 @@ summary = "coze感觉比n8n好用一些"
 
 
 
-![image-20260318214738643](/imagesassets/image-20260318214738643.png)
+![image-20260318214738643](/images/assets/image-20260318214738643.png)
 
 
 
@@ -31,7 +31,7 @@ summary = "coze感觉比n8n好用一些"
 
 先从知识库中检索相关文档，讲检索到的文档与原始问题一起输入LLM,LLM基于检索内容生成最终答案
 
-![image-20260318215154403](/imagesassets/image-20260318215154403.png)
+![image-20260318215154403](/images/assets/image-20260318215154403.png)
 
 
 
@@ -43,7 +43,7 @@ summary = "coze感觉比n8n好用一些"
 
 ​	保证上传文档的准确性、命名规范
 
-<img src="/imagesassets/image-20260318215616757.png" alt="image-20260318215616757" style="zoom:50%;" />
+<img src="/images/assets/image-20260318215616757.png" alt="image-20260318215616757" style="zoom:50%;" />
 
 文档切片：
 
@@ -96,15 +96,15 @@ LLM---->Client
 
 一个插件其实是一堆工具的集合
 
-<img src="/imagesassets/image-20260319154056966.png" alt="image-20260319154056966" style="zoom:50%;" />
+<img src="/images/assets/image-20260319154056966.png" alt="image-20260319154056966" style="zoom:50%;" />
 
 你可以在里面定义很多的工具
 
 要指定输入和输出
 
-<img src="/imagesassets/image-20260319154117544.png" alt="image-20260319154117544" style="zoom:50%;" />
+<img src="/images/assets/image-20260319154117544.png" alt="image-20260319154117544" style="zoom:50%;" />
 
-![image-20260319154822199](/imagesassets/image-20260319154822199.png)
+![image-20260319154822199](/images/assets/image-20260319154822199.png)
 
 
 
@@ -202,7 +202,7 @@ def handler(args: Args):
         }
 ```
 
-![image-20260319161735912](/imagesassets/image-20260319161735912.png)
+![image-20260319161735912](/images/assets/image-20260319161735912.png)
 
 
 
@@ -220,7 +220,7 @@ def handler(args: Args):
 
 两种类型： workflow 、 对话流 chatflow
 
-![image-20260319163031641](/imagesassets/image-20260319163031641.png)
+![image-20260319163031641](/images/assets/image-20260319163031641.png)
 
 
 
@@ -250,7 +250,7 @@ def handler(args: Args):
 
 ## 对话助手
 
-![image-20260319163650140](/imagesassets/image-20260319163650140.png)
+![image-20260319163650140](/images/assets/image-20260319163650140.png)
 
 
 
@@ -258,7 +258,7 @@ def handler(args: Args):
 
 添加一个跨境电商对话流
 
-![image-20260319163758840](/imagesassets/image-20260319163758840.png)
+![image-20260319163758840](/images/assets/image-20260319163758840.png)
 
 
 
@@ -270,15 +270,15 @@ def handler(args: Args):
 
 创建一个插件，专门用来判断的
 
-![image-20260319164802701](/imagesassets/image-20260319164802701.png)
+![image-20260319164802701](/images/assets/image-20260319164802701.png)
 
 
 
 发布之后，到工作流中导入，并且指定输入、输出
 
-![image-20260319164823398](/imagesassets/image-20260319164823398.png)
+![image-20260319164823398](/images/assets/image-20260319164823398.png)
 
-![image-20260319164938506](/imagesassets/image-20260319164938506.png)
+![image-20260319164938506](/images/assets/image-20260319164938506.png)
 
 
 
@@ -292,25 +292,25 @@ def handler(args: Args):
 
 - 实现方式：添加**《选择器》**节点
 
-<img src="/imagesassets/image-20260319223141781.png" alt="image-20260319223141781" style="zoom: 67%;" />
+<img src="/images/assets/image-20260319223141781.png" alt="image-20260319223141781" style="zoom: 67%;" />
 
 如果是 相关问题，才会到知识库的检索
 
 ### 知识库检索
 
-![image-20260319224119135](/imagesassets/image-20260319224119135.png)
+![image-20260319224119135](/images/assets/image-20260319224119135.png)
 
-![image-20260319224313376](/imagesassets/image-20260319224313376.png)
+![image-20260319224313376](/images/assets/image-20260319224313376.png)
 
 ### 判断是否可以检测出结果
 
 使用选择器
 
-![image-20260319224726550](/imagesassets/image-20260319224726550.png)
+![image-20260319224726550](/images/assets/image-20260319224726550.png)
 
-<img src="/imagesassets/image-20260319224808349.png" alt="image-20260319224808349" style="zoom:50%;" />
+<img src="/images/assets/image-20260319224808349.png" alt="image-20260319224808349" style="zoom:50%;" />
 
-![image-20260319225002848](/imagesassets/image-20260319225002848.png)
+![image-20260319225002848](/images/assets/image-20260319225002848.png)
 
 
 
@@ -352,6 +352,6 @@ Rag大模型 输入：original_query , outputList , 输出为自带的output
 
 结束：直接输出三种清空的结果
 
-![image-20260320110527470](/imagesassets/image-20260320110527470.png)
+![image-20260320110527470](/images/assets/image-20260320110527470.png)
 
 发布即可
