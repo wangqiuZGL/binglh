@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  SSE的基本流程 · 首页
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="李航">
+<meta name="description" content="抓包、服务器向客户端通信">
+<meta name="keywords" content="blog,developer,personal">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="SSE的基本流程">
+  <meta name="twitter:description" content="抓包、服务器向客户端通信">
+
+<meta property="og:url" content="http://localhost:1313/posts/sse/">
+  <meta property="og:site_name" content="首页">
+  <meta property="og:title" content="SSE的基本流程">
+  <meta property="og:description" content="抓包、服务器向客户端通信">
+  <meta property="og:locale" content="zh_cn">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-03-13T10:00:00+08:00">
+    <meta property="article:modified_time" content="2026-03-13T10:00:00+08:00">
+    <meta property="article:tag" content="Node">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/sse/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+  
+    
+    <link rel="stylesheet" href="/css/custom.css" media="screen">
+  
+
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/images/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/images/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/images/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      首页
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about/">项目演示</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">学习记录</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/projects/">问题记录</a>
+            </li>
+          
+        
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/sse/">
+              SSE的基本流程
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2026-03-13T10:00:00&#43;08:00">
+                March 13, 2026
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              阅读时间：4 分钟
+            </span>
+          </div>
+          
+          
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/node/">Node</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      
+
+
+      <div class="post-content">
+        
+        <h2 id="认识sse">
+  认识SSE
+  <a class="heading-link" href="#%e8%ae%a4%e8%af%86sse">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h2>
+<h3 id="服务端流程">
+  服务端流程
+  <a class="heading-link" href="#%e6%9c%8d%e5%8a%a1%e7%ab%af%e6%b5%81%e7%a8%8b">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h3>
+<ol>
+<li>开启一个 HTTP服务。</li>
+<li>定义一个 GET接口。</li>
+<li>设置 Content-Type 为 <code>text/event-stream; charset=utf-8</code>。</li>
+<li>服务端每次响应就会往前端发一个消息，调用 end 结束响应就会断开（这种方式的断开，前端会主动重连)。</li>
+</ol>
+<blockquote>
+<p>这里使用 express 。</p>
+<p>注意：</p>
+<p><strong>浏览器出于安全性的考虑而做出的限制</strong>，AJAX 只能向自己的服务器（同源下）发送请求。如果两个页面拥有相同的协议、域名和端口，那么这两个页面就属于同一个源，其中只要有一个不相同，就是不同源</p>
+<p>**CORS：**全称为 <code>Cross-origin resource sharing</code>，即跨域资源共享，它允许浏览器向跨域服务器发送 <code>AJAX</code> 请求，克服了 <code>AJAX</code> 只能同源使用的限制。</p>
+<p>在服务端：</p>
+<pre tabindex="0"><code>Node 服务器端设置响应头示例代码如下：
+app.use((req, res, next) =&gt; {
+  res.header(&#39;Access-Control-Allow-Origin&#39;, &#39;*&#39;);（允许所有域名访问）
+  res.header(&#39;Access-Control-Allow-Methods&#39;, &#39;GET, POST&#39;);（允许的请求方法）
+  Access-Control-Allow-Headers: Content-Type（允许的请求头）
+  next();
+})
+</code></pre><p>同源政策是浏览器给予AJAX技术的限制，服务器端是不存在同源政策限制</p>
+<p><code>cors</code> 中间件的本质是：<strong>自动给后端响应头中添加 CORS 相关的字段</strong>，告诉浏览器 “这个后端允许指定的前端</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&#34;express&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">cors</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&#34;cors&#34;</span><span class="p">);</span><span class="c1">// 解决跨域问题
+</span></span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 2. 启用 cors 中间件（最简单的配置：允许所有域名访问）
+</span></span></span><span class="line"><span class="cl"><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">cors</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;李&#34;</span><span class="p">,</span> <span class="s2">&#34;航&#34;</span><span class="p">,</span> <span class="s2">&#34;爱&#34;</span><span class="p">,</span> <span class="s2">&#34;用&#34;</span><span class="p">,</span> <span class="s2">&#34;P&#34;</span><span class="p">,</span> <span class="s2">&#34;D&#34;</span><span class="p">,</span> <span class="s2">&#34;D&#34;</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s2">&#34;/api/sse&#34;</span><span class="p">,</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// #1 设置响应头
+</span></span></span><span class="line"><span class="cl">  <span class="nx">res</span><span class="p">.</span><span class="nx">writeHead</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;Content-Type&#34;</span><span class="o">:</span> <span class="s2">&#34;text/event-stream; charset=utf-8&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">});</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">let</span> <span class="nx">counter</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// #2 每 1000 秒给前端发送 arr 里的一个字，前端逐步拼接
+</span></span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">intervalId</span> <span class="o">=</span> <span class="nx">setInterval</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// #3 以 data: 开头（这样才会触发前端的 onmessage 事件），\n\n → 固定，表示“本条消息结束”
+</span></span></span><span class="line"><span class="cl">    <span class="nx">res</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s2">&#34;data:&#34;</span> <span class="o">+</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">counter</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&#34;\n\n&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">counter</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">counter</span> <span class="o">&gt;=</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">clearInterval</span><span class="p">(</span><span class="nx">intervalId</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 发布订阅者模式
+</span></span></span><span class="line"><span class="cl">  <span class="nx">res</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&#34;close&#34;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;客户端断开连接&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">clearInterval</span><span class="p">(</span><span class="nx">intervalId</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">res</span><span class="p">.</span><span class="nx">end</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;http://localhost:3000&#34;</span><span class="p">));</span>
+</span></span></code></pre></div><p>这里面可以学到的 res 和 req 的方法</p>
+<table>
+  <thead>
+      <tr>
+          <th>对象</th>
+          <th>方法 / 属性</th>
+          <th>作用说明</th>
+          <th>代码中的具体应用场景</th>
+          <th>注意事项</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>req</td>
+          <td>method</td>
+          <td>获取 HTTP 请求方法（如 GET/POST）</td>
+          <td>未直接使用，但可用于判断请求类型</td>
+          <td>-</td>
+      </tr>
+      <tr>
+          <td>req</td>
+          <td>url</td>
+          <td>获取请求的 URL 路径</td>
+          <td>未直接使用，可用于路由匹配 / 日志记录</td>
+          <td>-</td>
+      </tr>
+      <tr>
+          <td>req</td>
+          <td>query</td>
+          <td>获取 GET 请求的查询参数（如 <code>/api/sse?speed=1000</code> 中的 speed）</td>
+          <td>未直接使用，可扩展用于接收前端自定义发送速度</td>
+          <td>-</td>
+      </tr>
+      <tr>
+          <td>req</td>
+          <td>headers</td>
+          <td>获取客户端请求头信息（如 User-Agent、Accept 等）</td>
+          <td>未直接使用，可用于验证客户端身份 / 权限</td>
+          <td>-</td>
+      </tr>
+      <tr>
+          <td>res</td>
+          <td>writeHead(status, headers)</td>
+          <td>设置 HTTP 响应状态码和响应头（一次性设置多个头）</td>
+          <td>设置 SSE 核心头：<code>text/event-stream; charset=utf-8</code></td>
+          <td>1. 状态码 200 表示成功；2. 必须包含 SSE 协议的 Content-Type</td>
+      </tr>
+      <tr>
+          <td>res</td>
+          <td>write(chunk)</td>
+          <td>向响应流写入数据（非结束），支持持续发送数据</td>
+          <td>按 <code>data: 内容\n\n</code> 格式发送数组中的单个字符</td>
+          <td>1. 数据格式必须符合 SSE 协议（data: 开头 + \n\n 结尾）；2. 支持多次调用</td>
+      </tr>
+      <tr>
+          <td>res</td>
+          <td>on(&ldquo;close&rdquo;, callback)</td>
+          <td>监听响应流关闭事件（客户端断开连接时触发）</td>
+          <td>客户端断开时清理定时器、结束响应</td>
+          <td>必须清理定时器，否则会导致服务器内存泄漏</td>
+      </tr>
+      <tr>
+          <td>res</td>
+          <td>end([data])</td>
+          <td>结束响应流（告诉客户端响应完成）</td>
+          <td>1. 数据发送完毕后调用；2. 客户端断开时调用</td>
+          <td>1. SSE 场景中不能提前调用（否则中断数据发送）；2. 是 HTTP 响应的收尾操作</td>
+      </tr>
+      <tr>
+          <td>res</td>
+          <td>setHeader(key, value)</td>
+          <td>单独设置某个响应头（cors 中间件底层调用）</td>
+          <td>cors 自动设置 <code>Access-Control-Allow-Origin: *</code></td>
+          <td>跨域场景必须设置，否则前端无法接收 SSE 数据</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="前端流程">
+  前端流程
+  <a class="heading-link" href="#%e5%89%8d%e7%ab%af%e6%b5%81%e7%a8%8b">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h3>
+<ol>
+<li>传入接口地址，创建 EventSource 对象。</li>
+<li>通过 <strong>onmessage 可以监听消息，onopen 监听连接上的那一刻</strong></li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">      <span class="kr">const</span> <span class="nx">msgEl</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&#34;msg&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="kr">const</span> <span class="nx">eventSource</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">EventSource</span><span class="p">(</span><span class="s2">&#34;http://127.0.0.1:3000/api/sse&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="nx">eventSource</span><span class="p">.</span><span class="nx">onopen</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;open&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="nx">eventSource</span><span class="p">.</span><span class="nx">onmessage</span> <span class="o">=</span> <span class="p">(</span><span class="nx">valueText</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">msgEl</span><span class="p">.</span><span class="nx">textContent</span> <span class="o">+=</span> <span class="nx">valueText</span><span class="p">.</span><span class="nx">data</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="nx">eventSource</span><span class="p">.</span><span class="nx">onerror</span> <span class="o">=</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;例如访问了一个不存在的端口：&#34;</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="c1">// 组件卸载的时候关闭连接
+</span></span></span><span class="line"><span class="cl">      <span class="kr">const</span> <span class="nx">closeConnection</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">eventSource</span><span class="p">.</span><span class="nx">close</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;close&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="nb">document</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&#34;closeBtn&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s2">&#34;click&#34;</span><span class="p">,</span> <span class="nx">closeConnection</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">&lt;</span><span class="err">/script&gt;</span>
+</span></span></code></pre></div><h3 id="注意点">
+  注意点！！
+  <a class="heading-link" href="#%e6%b3%a8%e6%84%8f%e7%82%b9">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h3>
+<ol>
+<li>接口侧必须严格的按照 data: 内容部分 /n/n 格式写入，否则前端无法触发 onmessage（但是这是针对浏览器自带的 EventSource，我们可以自定义 SSE 客户端对象，来定义自己的协议）</li>
+<li>服务端用 res.end() 把这条连接关掉（“断开”）后，浏览器的 EventSource 会认为这是“意外断线”，过几秒会自动再发起一次请求，重新连上同一个 /api/sse</li>
+<li>前端也是一样，一旦 close，除非重新创建一个新实例进行重连</li>
+</ol>
+<h2 id="event定义">
+  event定义
+  <a class="heading-link" href="#event%e5%ae%9a%e4%b9%89">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h2>
+<p>同一个接口可以通过不同 event 来定义承载各种不同的功能，做到最大程度复用</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="c1">// index.js
+</span></span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">EVENT_TYPES</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">a</span><span class="o">:</span> <span class="p">{</span> <span class="nx">event</span><span class="o">:</span> <span class="s2">&#34;未读消息&#34;</span><span class="p">,</span> <span class="nx">data</span><span class="o">:</span> <span class="s2">&#34;你有一条未读消息&#34;</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">b</span><span class="o">:</span> <span class="p">{</span> <span class="nx">event</span><span class="o">:</span> <span class="s2">&#34;订单更新&#34;</span><span class="p">,</span> <span class="nx">data</span><span class="o">:</span> <span class="s2">&#34;订单 #10086 已发货&#34;</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">c</span><span class="o">:</span> <span class="p">{</span> <span class="nx">event</span><span class="o">:</span> <span class="s2">&#34;系统通知&#34;</span><span class="p">,</span> <span class="nx">data</span><span class="o">:</span> <span class="s2">&#34;系统将于今晚 22:00 维护&#34;</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">intervalId</span> <span class="o">=</span> <span class="nx">setInterval</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">key</span> <span class="o">=</span> <span class="nx">eventKeys</span><span class="p">[</span><span class="nx">tick</span> <span class="o">%</span> <span class="nx">eventKeys</span><span class="p">.</span><span class="nx">length</span><span class="p">];</span> <span class="c1">// 循环发送事件，tick 为 0 时发送 a 事件，tick 为 1 时发送 b 事件，tick 为 2 时发送 c 事件，以此类推
+</span></span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="p">{</span> <span class="nx">event</span><span class="p">,</span> <span class="nx">data</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">EVENT_TYPES</span><span class="p">[</span><span class="nx">key</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 先写 event 类型，再写 data，\n\n 表示本条消息结束
+</span></span></span><span class="line"><span class="cl">    <span class="nx">res</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="sb">`event: </span><span class="si">${</span><span class="nx">event</span><span class="si">}</span><span class="sb">\n`</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">res</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="sb">`data: </span><span class="si">${</span><span class="nx">data</span><span class="si">}</span><span class="sb">\n\n`</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">tick</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span> <span class="mi">2000</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//前端 通过addEventListener 来使用
+</span></span></span><span class="line"><span class="cl"><span class="nx">eventSource</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">&#39;未读消息&#39;</span><span class="p">,(</span><span class="nx">e</span><span class="p">)=&gt;{</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// e.data
+</span></span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span></code></pre></div><p>SSE 有固定的文本格式，核心是「事件类型 + 数据 + 结束符」，代码里的关键逻辑：<code>event: 类型\n data: 内容\n\n</code> 的格式</p>
+<p>客户端访问 <code>/api/sse</code> 时，服务器创建长连接</p>
+<p>客户端断开（比如点「断开连接」按钮），服务器触发 <code>res.on(&quot;close&quot;)</code>，清理定时器</p>
+<p>前端一定要记得eventSource一定要关闭 <code>eventSource.close();</code></p>
+<h2 id="fetch--readablestream">
+  Fetch + ReadableStream
+  <a class="heading-link" href="#fetch--readablestream">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h2>
+<p>如果希望服务端数据不要一次性的发过来</p>
+<p>用 <code>fetch</code> 发请求，然后读取响应流，手动解析 SSE 格式。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">url</span> <span class="o">=</span> <span class="s1">&#39;http://localhost:3000/getData&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 数据的流获取
+</span></span></span><span class="line"><span class="cl"><span class="kr">async</span> <span class="kd">function</span> <span class="nx">getResponse</span><span class="p">(</span><span class="nx">content</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">resp</span> <span class="o">=</span> <span class="kr">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">method</span><span class="o">:</span><span class="s1">&#39;post&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">header</span><span class="o">:</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="s1">&#39;Content-Type&#39;</span><span class="o">:</span><span class="s1">&#39;application/json&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">body</span><span class="o">:</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span><span class="nx">content</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">)}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">reader</span> <span class="o">=</span> <span class="nx">resp</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">getReader</span><span class="p">()</span> <span class="c1">// 获取 ReadableStream 的 reader 对象
+</span></span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">decoder</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TextDecoder</span><span class="p">()</span> <span class="c1">// 创建一个 TextDecoder 实例，用于将二进制数据转换为字符串
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 通过 reader.read() 方法读取数据流中的数据块，直到流结束
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 返回一个包含 down 和 value 属性的对象，
+</span></span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="p">{</span><span class="nx">down</span><span class="p">,</span><span class="nx">value</span><span class="p">}</span> <span class="o">=</span><span class="kr">await</span> <span class="nx">reader</span><span class="p">.</span><span class="nx">read</span><span class="p">()</span> <span class="c1">// 继续读取下一个数据块
+</span></span></span><span class="line"><span class="cl"><span class="c1">// down 表示是否已经读取到流的末尾，value 是当前读取到的数据块
+</span></span></span><span class="line"><span class="cl"><span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="nx">down</span><span class="p">){</span> <span class="c1">// 通过 down 属性判断是否已经读取到流的末尾
+</span></span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="p">{</span><span class="nx">down</span><span class="p">,</span><span class="nx">value</span><span class="p">}</span> <span class="o">=</span><span class="kr">await</span> <span class="nx">reader</span><span class="p">.</span><span class="nx">read</span><span class="p">()</span> <span class="c1">// 继续读取下一个数据块
+</span></span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">txt</span> <span class="o">=</span> <span class="nx">decoder</span><span class="p">.</span><span class="nx">decode</span><span class="p">(</span><span class="nx">valuwe</span><span class="p">)</span> <span class="c1">// 将读取到的数据块转换为字符串
+</span></span></span><span class="line"><span class="cl">  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">txt</span><span class="p">)</span> <span class="c1">// 输出当前读取到的字符串
+</span></span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h2 id="通过-cookie-携带-toke">
+  通过 Cookie 携带 Toke
+  <a class="heading-link" href="#%e9%80%9a%e8%bf%87-cookie-%e6%90%ba%e5%b8%a6-toke">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h2>
+<p><code>EventSource</code> 原生不支持自定义请求头，无法直接传 <code>Authorization</code>。而 Cookie 会被浏览器<strong>自动携带</strong>到同域/跨域（配置后）请求中，包括 SSE 连接，因此是最简单的方案。</p>
+<p>使用 <code>fetch</code> 实现 SSE 时，加上 <code>credentials: &quot;include&quot;</code>：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">res</span> <span class="o">=</span> <span class="kr">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">method</span><span class="o">:</span> <span class="s2">&#34;GET&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">credentials</span><span class="o">:</span> <span class="s2">&#34;include&#34;</span><span class="p">,</span> <span class="c1">// 关键：告诉浏览器携带 cookie
+</span></span></span><span class="line"><span class="cl">  <span class="nx">signal</span><span class="o">:</span> <span class="nx">controller</span><span class="p">.</span><span class="nx">signal</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></div><blockquote>
+<p>如果用的是原生 <code>EventSource</code>，写法为：</p>
+<pre tabindex="0"><code>const es = new EventSource(&#34;/api/sse&#34;, { withCredentials: true });
+</code></pre></blockquote>
+<p>后端配置的cors</p>
+<p>​	作用是让后端允许前端跨域请求并支持携带 Cookie</p>
+<pre tabindex="0"><code>app.use(cors({
+  origin: true,       // 自动回显请求来源，等同于指定具体域名
+  credentials: true,  // 允许跨域携带 cookie
+}));
+</code></pre><p><strong>规定：<strong>如果前端请求的 <code>credentials</code> 是 <code>include</code>（要带 Cookie），后端的 <code>Access-Control-Allow-Origin</code> 必须是</strong>具体的域名</strong>（比如 <code>http://localhost:5173</code>），不能是通配符 <code>*</code>。</p>
+<table>
+  <thead>
+      <tr>
+          <th>配置方式</th>
+          <th>适用场景</th>
+          <th>能否跨域带 Cookie</th>
+          <th>灵活性</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>origin: &quot;*&quot;</code></td>
+          <td>不需要带 Cookie 的公开接口（比如查天气）</td>
+          <td>❌ 不能</td>
+          <td>最高（所有域名）</td>
+      </tr>
+      <tr>
+          <td><code>origin: &quot;http://localhost:5173&quot;</code></td>
+          <td>固定前端域名的场景</td>
+          <td>✅ 能</td>
+          <td>最低（只能 5173）</td>
+      </tr>
+      <tr>
+          <td><code>origin: true</code></td>
+          <td>多前端域名、需要带 Cookie 的场景</td>
+          <td>✅ 能</td>
+          <td>中等（自动匹配）</td>
+      </tr>
+  </tbody>
+</table>
+<p><code>origin: true</code> 是 <code>cors</code> 中间件的便捷配置，<strong>动态匹配请求的 Origin 并返回具体域名</strong>，而非通配符；</p>
+<h2 id="fetch和eventsource的区别">
+  fetch和eventSource的区别
+  <a class="heading-link" href="#fetch%e5%92%8ceventsource%e7%9a%84%e5%8c%ba%e5%88%ab">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h2>
+<p><code>EventSource</code> 是浏览器原生为 SSE 设计的<strong>高层封装 API</strong>，而 <code>fetch + ReadableStream</code> 是基于底层 API 手动实现 SSE 协议解析。</p>
+<table>
+  <thead>
+      <tr>
+          <th>维度</th>
+          <th>fetch + ReadableStream（你的写法）</th>
+          <th>EventSource</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>协议解析</strong></td>
+          <td>手动解析 <code>data:</code> 前缀、拆分行、处理流式数据</td>
+          <td>自动解析 SSE 协议（<code>data:</code>/<code>event:</code>/<code>id:</code>/<code>retry:</code>）</td>
+      </tr>
+      <tr>
+          <td><strong>请求方法</strong></td>
+          <td>支持 GET/POST 等任意方法</td>
+          <td><strong>仅支持 GET 方法</strong>（无法发送 POST 请求）</td>
+      </tr>
+      <tr>
+          <td><strong>自定义请求头</strong></td>
+          <td>支持任意请求头（如 token、Content-Type）</td>
+          <td>仅支持少量简单请求头（如 Accept、Cache-Control），自定义头（如 token）可能被浏览器拦截</td>
+      </tr>
+      <tr>
+          <td><strong>重连机制</strong></td>
+          <td>需手动实现（断连后要自己重新发起请求）</td>
+          <td>内置自动重连（默认 3 秒重试，可通过服务端 <code>retry:</code> 指令修改）</td>
+      </tr>
+      <tr>
+          <td><strong>事件分类</strong></td>
+          <td>需手动解析 <code>event:</code> 字段区分事件类型</td>
+          <td>自动按 <code>event:</code> 字段触发对应事件（如 <code>es.addEventListener('custom', callback)</code>）</td>
+      </tr>
+      <tr>
+          <td><strong>错误处理</strong></td>
+          <td>需手动捕获 AbortError / 网络错误</td>
+          <td>内置 <code>onerror</code> 事件，自动区分连接状态（CONNECTING/OPEN/CLOSED）</td>
+      </tr>
+      <tr>
+          <td><strong>兼容性</strong></td>
+          <td>依赖 ReadableStream（现代浏览器支持）</td>
+          <td>兼容性更广（IE 除外，老浏览器也支持）</td>
+      </tr>
+      <tr>
+          <td><strong>取消请求</strong></td>
+          <td>用 AbortController 手动中止</td>
+          <td>调用 <code>close()</code> 方法即可，底层自动处理</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="whistle-代理">
+  Whistle 代理
+  <a class="heading-link" href="#whistle-%e4%bb%a3%e7%90%86">
+    <i class="fa-solid fa-link" aria-hidden="true" title="链接到标题"></i>
+    <span class="sr-only">链接到标题</span>
+  </a>
+</h2>
+<p>Whistle 是基于 Node.js 的<strong>跨平台 Web 调试代理工具</strong>，核心是<strong>拦截、查看、修改 HTTP/HTTPS/WebSocket 请求与响应</strong></p>
+<p>启动后在本地（默认 <code>127.0.0.1:8899</code>）跑一个代理服务器，所有经过它的请求都会被<strong>捕获、解析、可修改</strong></p>
+<p>浏览器 / 设备 → 配置代理（SwitchyOmega） → 把请求发给 Whistle（<code>127.0.0.1:8899</code>）</p>
+<p>Whistle 按规则处理：转发、修改、Mock、替换、注入等</p>
+<p>Whistle 把处理后的请求发给目标服务器</p>
+<p>服务器返回响应 → Whistle 再次处理 → 返回给浏览器 / 设备</p>
+<p>全程在 Whistle 面板（<code>http://127.0.0.1:8899</code>）可查看请求详情、日志、规则</p>
+<p><img src="/images/assets/image-20260322175434761.png" alt="image-20260322175434761"></p>
+<p>在这里常用：</p>
+<pre tabindex="0"><code># 把 www.baidu.com 指向本地 3000 端口
+www.baidu.com 127.0.0.1:3000
+# 泛域名：所有 .test.com 指向本地
+*.test.com 127.0.0.1:8080
+
+# 把线上 /api 转发到本地服务
+https://example.com/api http://127.0.0.1:3000/api
+# 正则匹配：所有 /api/v1/* 转发
+/^https?:\/\/example\.com\/api\/v1/ http://127.0.0.1:4000
+
+# 接口返回固定 JSON
+https://example.com/api/user { &#34;name&#34;: &#34;test&#34;, &#34;age&#34;: 20 }
+# 接口返回本地文件
+https://example.com/api/list file:///Users/xxx/mock/list.json
+
+# 替换线上 JS 为本地文件
+https://example.com/js/app.js file:///Users/xxx/dev/app.js
+# 替换图片
+https://example.com/img/logo.png file:///Users/xxx/dev/logo.png
+
+# 拦截并打印 WebSocket 消息
+wss://example.com/ws log://
+</code></pre><p>*  resCors://*         作用：给<strong>所有响应</strong>自动加上跨域头：Access-Control-Allow-Origin: *</p>
+
+      </div>
+
+
+      <footer>
+        
+
+
+        
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+      2024 -
+    
+    2026
+     李航 
+    ·
+    
+    技术支持 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+  
+  
+  <script src="/js/notes.js"></script>
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+<aside class="left-sidebar-nav" aria-label="本文目录">
+  <div class="left-sidebar-card">
+    <p class="left-sidebar-title">本文目录</p>
+    <nav class="left-sidebar-toc">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#认识sse">认识SSE</a>
+      <ul>
+        <li><a href="#服务端流程">服务端流程</a></li>
+        <li><a href="#前端流程">前端流程</a></li>
+        <li><a href="#注意点">注意点！！</a></li>
+      </ul>
+    </li>
+    <li><a href="#event定义">event定义</a></li>
+    <li><a href="#fetch--readablestream">Fetch + ReadableStream</a></li>
+    <li><a href="#通过-cookie-携带-toke">通过 Cookie 携带 Toke</a></li>
+    <li><a href="#fetch和eventsource的区别">fetch和eventSource的区别</a></li>
+    <li><a href="#whistle-代理">Whistle 代理</a></li>
+  </ul>
+</nav>
+    </nav>
+  </div>
+</aside>
+<script>
+  document.body.classList.add("has-left-toc");
+</script>
+
+</body>
+
+</html>

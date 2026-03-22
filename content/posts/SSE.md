@@ -3,7 +3,7 @@
 title = "SSE的基本流程"
 tags = ["node"]
 date = 2026-03-13T10:00:00+08:00
-cover = "[/images/covers/index.jpg](https://image.baidu.com/search/detail?adpicid=0&b_applid=8465542813508653779&bdtype=0&commodity=&copyright=&cs=2964771655%2C2180115639&di=7609719975837696001&fr=click-pic&fromurl=http%253A%252F%252Fblog.csdn.net%252Fqq_16242613%252Farticle%252Fdetails%252F153916090&gsm=1e&hd=&height=0&hot=&ic=&ie=utf-8&imgformat=&imgratio=&imgspn=0&is=0%2C0&isImgSet=&latest=&lid=c32278ae0000632c&lm=&objurl=https%253A%252F%252Fi-blog.csdnimg.cn%252Fdirect%252F261551140f6949558a78039890ec7849.png&os=1509977931%2C3640547249&pd=image_content&pi=0&pn=9&rn=1&simid=2964771655%2C2180115639&tn=baiduimagedetail&width=0&word=SSE&z=)"
+cover = "/images/assets/sse.png"
 summary = "抓包、服务器向客户端通信"
 +++
 
