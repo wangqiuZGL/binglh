@@ -350,7 +350,7 @@ Rag大模型 输入：original_query , outputList , 输出为自带的output
 
 
 
-结束：直接输出三种清空的结果
+结束：直接输出三种情况的结果
 
 ![image-20260320110527470](/images/assets/image-20260320110527470.png)
 
